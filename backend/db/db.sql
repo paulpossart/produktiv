@@ -1,0 +1,20 @@
+CREATE SCHEMA produktiv
+
+CREATE TABLE produktiv.users (
+id UUID PRIMARY KEY,
+username VARCHAR(30) UNIQUE,
+password_hash TEXT,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE produktiv.tasks (
+id SERIAL PRIMARY KEY,
+user_id UUID NOT NULL REFERENCES crud_auth.users(id),
+title VARCHAR(30),
+description VARCHAR(500),
+priority INTEGER,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
