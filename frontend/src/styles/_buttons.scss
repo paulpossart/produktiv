@@ -1,0 +1,70 @@
+
+
+%button {
+    cursor: pointer;
+    line-height: 1.5;
+    padding: 0.25em 0.75em;
+
+    outline: none;
+    border: none;
+    border: solid 2px;
+    text-decoration: none;
+    border-radius: 15px;
+    transform: scale(1);
+
+    transition: color 0.25s ease-in-out,
+        transform 0.25s ease-in-out,
+        border-color 0.5s ease-in-out,
+        transform 0.2s ease-in-out,
+        background-color 0.2s ease-in-out;
+
+    &:active {
+        transform: scale(0.8);
+    }
+
+}
+
+.btn1 {
+    @extend %button;
+    color: var(--body);
+    background-color: var(--btn1BgCol);
+    border-color: var(--body);
+
+
+    &:hover {
+        border-color: var(--main);
+        color: var(--btn1BgCol);
+        background-color: var(--body);
+
+    }
+}
+
+.btn2 {
+    @extend %button;
+    color: white;
+    background-color: #666;
+    border-color: var(--body);
+
+
+    &:hover {
+        border-color: var(--body);
+        color: #666;
+        background-color: white;
+
+    }
+}
+
+.btn3 {
+    @extend %button;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: var(--body);
+
+
+    &:hover {
+        border-color: var(--body);
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+
+    }
+}
