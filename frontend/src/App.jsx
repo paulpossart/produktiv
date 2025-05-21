@@ -14,9 +14,13 @@ import './app.module.scss';
 
 
 function App() {
-  const {user} = useAuth();
+  const { user, isLoading } = useAuth();
 
   console.log(user)
+
+  if (isLoading) {
+    return <p>loading</p>;
+  }
 
   return (
     <Router>

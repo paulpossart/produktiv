@@ -12,13 +12,13 @@ function AuthProvider({ children }) {
         const fetchUser = async () => {
             try {
                 const data = await callGetUser();
-
-                if (data.success) setUser(data.user);
-                else {setUser(null);}
+                if (data && data.userData) setUser(data.user);
+                else setUser(null);
             } catch (err) {
-                console.log(err)
+                console.log('fetchUser error');
+                setUser(null);
             } finally {
-                setIsLoading(false)
+                setIsLoading(false);
             }
         };
         fetchUser();

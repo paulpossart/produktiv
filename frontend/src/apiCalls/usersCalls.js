@@ -1,37 +1,37 @@
 const callCreateUser = async (newUsername, newPassword) => {
-    try {
-        const response = await fetch('/api/users', {
-            method: 'POST',
-            body: JSON.stringify({
-                newUsername,
-                newPassword
-            }),
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include'
-        });
-        if (!response.ok) throw new Error('callCreateUser error');
 
-        const data = await response.json();
-        return data;
-    } catch (err) {
-        console.log(err);
-    }
+    const response = await fetch('/api/users', {
+        method: 'POST',
+        body: JSON.stringify({
+            newUsername,
+            newPassword
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+    return data;
 };
 
 const callGetUser = async () => {
-    try {
-        const response = await fetch('/api/users', {
-            method: 'GET',
-            credentials: 'include'
-        });
+    const response = await fetch('/api/users', {
+        method: 'GET',
+        credentials: 'include'
+    });
 
-        if (!response.ok) throw new Error('callGetUser error');
+    const data = await response.json();
 
-        const data = await response.json();
+    if (!response.ok) {
+        return null
+    };
+
+    if (data.userData) {
         return data;
-    } catch (err) {
-        console.log(err);
     }
+
+    return null;
 }
 
 export { callCreateUser, callGetUser };

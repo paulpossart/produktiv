@@ -15,7 +15,9 @@ const signIn = async (req, res, next) => {
 
         if (result.rows.length === 0) {
             return res.status(401).json({
-                message: 'invalid username or password'
+                userData: false,
+                message: 'Invalid username or password',
+                user: null
             });
         };
 
@@ -24,7 +26,9 @@ const signIn = async (req, res, next) => {
 
         if (!isMatch) {
             return res.status(401).json({
-                message: 'invalid username or password'
+                userData: false,
+                message: 'Invalid username or password',
+                user: null
             });
         };
 
@@ -45,9 +49,13 @@ const signIn = async (req, res, next) => {
                 maxAge: 7 * 24 * 60 * 60 * 1000
             })
             .status(200).json({
-                username: user.username,
-                created_at: user.created_at
-            })
+                userData: true,
+                message: 'Sign in successful',
+                user: {
+                    username: user.username,
+                    created_at: user.created_at
+                }
+            });
 
     } catch (err) {
         next(err);
@@ -66,7 +74,7 @@ const signOut = (req, res) => {
             secure: isProd(),
             sameSite: 'Strict'
         })
-        .sendStatus(200);
+        .sendStatus(204);
 };
 
 const verifyUser = (req, res, next) => {
@@ -76,24 +84,29 @@ const verifyUser = (req, res, next) => {
     const accessToken = req.cookies.accessToken;
     const refreshToken = req.cookies.refreshToken;
 
-    if (!refreshToken && !accessToken) return res.status(200).json({
-        success: false,
-        message: 'no tokens'
-    });
+    if (!refreshToken && !accessToken) {
+        return res.status(200).json({
+            userData: false,
+            message: 'No tokens available',
+            user: null
+        });
+    };
 
     if (!refreshToken) {
         return res.status(401).json({
-            success: false, 
-            message: 'No refresh token available'
+            userData: false,
+            message: 'No refresh token available',
+            user: null
         });
-    }
+    };
 
     if (!accessToken) {
         return jwt.verify(refreshToken, refreshTokenSecret, (err, payload) => {
             if (err) {
                 return res.status(401).json({
-                    success: false,
-                    message: 'Invalid refresh token'
+                    userData: false,
+                    message: 'Invalid refresh token',
+                    user: null
                 });
             };
 
@@ -114,8 +127,9 @@ const verifyUser = (req, res, next) => {
     jwt.verify(accessToken, accessTokenSecret, (err, payload) => {
         if (err) {
             return res.status(403).json({
-                success: false,
-                message: 'Invalid token'
+                userData: false,
+                message: 'Invalid access token',
+                user: null
             })
         }
         req.userId = payload.sub;

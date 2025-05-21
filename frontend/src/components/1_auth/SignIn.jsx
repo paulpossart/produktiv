@@ -5,20 +5,24 @@ import { useAuth } from '../../context/AuthContext';
 import { callSignIn } from '../../apiCalls/authCalls';
 
 
-function SignIn({ setView }) {
+function SignIn({ setView, setAuthError }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { setUser } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const user = await callSignIn(username, password);
-
-        if (user) setUser(user);
-        else setUser(null);
-
-        setUsername('');
-        setPassword('');
+        try {
+            const data = await callSignIn(username, password);
+            if (data && data.userData) setUser(data.user);
+            else setUser(null);
+        } catch (err) {
+            setAuthError(err.message);
+            setUser(null);
+        } finally {
+            setUsername('');
+            setPassword('');
+        }
     };
 
     return (
