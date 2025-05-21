@@ -1,0 +1,28 @@
+body.dark {
+  --body: rgb(12, 12, 20);
+  --div1: rgba(0, 0, 0, 0);
+  --div2: rgb(32, 32, 40);
+  --textInput: rgba(0, 0, 0, 0);
+  --shadow: none;
+  --btn1BgCol:rgb(255, 255, 0);
+}
+
+body.light {
+  --body: rgb(240, 240, 248);
+  --div1: rgba(255, 255, 255, 1);
+  --div2: rgb(240, 240, 248);
+  --textInput: rgba(255, 255, 255, 1);
+  --shadow: 0 6px 12px grey;
+  --btn1BgCol: rgb(0, 180, 255);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
