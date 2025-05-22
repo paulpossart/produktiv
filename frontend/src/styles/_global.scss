@@ -14,6 +14,19 @@ $borderColor: rgb(136, 136, 136);
     align-items: center;
 }
 
+@mixin flexRow($space: center) {
+    display: flex;
+    flex-direction: row;
+    justify-content: $space;
+    align-items: center;
+}
+
+@mixin duk {
+    width: 45px;
+    border: solid black 3px;
+    border-radius: 50%;
+}
+
 %border {
     border: solid, $borderColor 4px;
     border-radius: 8px;

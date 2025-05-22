@@ -5,10 +5,21 @@ body.dark {
   --div: rgba(0, 0, 0, 0);
   --divShadow: none;
 
- // --taskHead: rgb(102, 102, 102);
+  // --taskHead: rgb(102, 102, 102);
   --taskBody: rgb(32, 32, 40);
 
   --textInput: black;
+
+  --headOverlay: linear-gradient(90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 25%,
+      rgba(0, 0, 0, 0.5) 75%,
+      rgba(0, 0, 0, 0.1) 100%);
+
+  --titleColor: white;
+  --titleShadow: black;
+  --titleSpanColor: black;
+  --titleSpanShadow: yellow;
 
   --btn1: rgb(255, 255, 0);
   --btn1Hover: rgb(225, 225, 0);
@@ -21,10 +32,21 @@ body.light {
   --div: white;
   --divShadow: 0 6px 12px grey;
 
- // --taskHead: rgb(102, 102, 102);
+  // --taskHead: rgb(102, 102, 102);
   --taskBody: rgb(240, 240, 248);
 
   --textInput: white;
+
+  --headOverlay: linear-gradient(90deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 25%,
+      rgba(255, 255, 255, 0.5) 75%,
+      rgba(255, 255, 255, 0.1) 100%);
+
+  --titleColor: black;
+  --titleShadow: white;
+  --titleSpanColor: yellow;
+  --titleSpanShadow: black;
 
   --btn1: rgb(0, 180, 255);
   --btn1Hover: rgb(0, 150, 225);
@@ -53,8 +75,12 @@ body {
     family: 'Roboto';
     size: 1.6rem
   }
-  background-color: var(--main);
-  color: var(--alt);
+
+ // background-color: var(--main);
+  //color: var(--alt);
   text-align: center;
   line-height: 1.5;
+
+ // transition: background-color 1s ease-in-out,
+ // color 1s ease-in-out
 }

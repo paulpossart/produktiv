@@ -1,0 +1,72 @@
+@use '../../styles/buttons';
+@use '../../styles/modal';
+@use '../../styles/global' as *;
+
+.head {
+    position: relative;
+    background-image: url('../../assets/duk-img.jpg');
+    background-size: cover;
+    background-position: center;
+
+    padding: 1rem;
+    @extend %border;
+    z-index: -2;
+
+    display: grid;
+    grid-template-areas: 'duk title burger';
+    grid-template-columns: 25% 50% 25%;
+
+    /*
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    */
+
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background: var(--headOverlay);
+        border-radius: 4px;
+
+        z-index: -1;
+    }
+
+    .duk {
+        grid-area: duk;
+        @include duk;
+        width: 50px;
+    }
+
+    .title {
+        grid-area: title;
+
+        color: var(--titleColor);
+        text-shadow: 1px 1px 0 var(--titleShadow),
+            -1px 1px 0 var(--titleShadow),
+            1px -1px 0 var(--titleShadow),
+            -1px -1px 0 var(--titleShadow);
+
+        span {
+            color: var(--titleSpanColor);
+            text-shadow: 1px 1px 0 var(--titleSpanShadow),
+                -1px 1px 0 var(--titleSpanShadow),
+                1px -1px 0 var(--titleSpanShadow),
+                -1px -1px 0 var(--titleSpanShadow);
+        }
+
+        font: {
+            family: $title;
+            size: 2.5rem;
+            weight: 500;
+        }
+
+        @include flexRow;
+    }
+
+    .burger {
+        grid-area: burger;
+        @include flexRow;
+
+    }
+}
