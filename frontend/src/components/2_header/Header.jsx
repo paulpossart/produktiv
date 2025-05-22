@@ -1,6 +1,21 @@
-function Header() {
+import Sidebar from '../3_sidebar/Sidebar';
+import duk from '../../assets/duk-yel.svg';
+import styles from './header.module.scss';
+import { useTheme } from '../../context/ThemeContext';
+
+
+
+function Header({className}) {
+    const {theme} = useTheme();
+
     return (
-        <p>header</p>
+        <div className={`${className} ${styles.head}`}>
+            <div className={`${styles.overlay} ${theme === 'dark' ? styles.darkOn : styles.darkOff}`}></div>
+            <div className={`${styles.overlay} ${theme === 'light' ? styles.lightOn : styles.lightOff}`}></div>
+            <img className={styles.duk} src={duk} />
+            <p className={styles.title}>pro&nbsp;·&nbsp;<span>duk</span>&nbsp;·&nbsp;tiv</p>
+            <Sidebar className={styles.sidebar} />
+        </div>
     );
 };
 

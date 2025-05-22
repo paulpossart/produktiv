@@ -44,9 +44,7 @@
                 @include flexCol;
 
                 & img {
-                    width: 45px;
-                    border: solid black 3px;
-                    border-radius: 50%;
+                   @include duk;
                 }
 
                 .form {

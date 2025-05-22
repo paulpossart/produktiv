@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -10,9 +9,6 @@ import AuthPage from './components/1_auth/AuthPage';
 import Tasks from './components/4_tasks/tasks';
 import NotFound from './components/1_auth/NotFound';
 import { useAuth } from './context/AuthContext';
-
-import './app.module.scss';
-
 
 function App() {
   const { user, isLoading } = useAuth();

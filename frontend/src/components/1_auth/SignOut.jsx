@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { callSignOut } from '../../apiCalls/authCalls';
 import { useAuth } from '../../context/AuthContext';
+import styles from './auth.module.scss';
 
 function SignOut() {
     const navigate = useNavigate();
@@ -13,8 +14,10 @@ function SignOut() {
     };
 
     return (
-        <button type='button' onClick={handleSignOut}>Sign Out</button>
+        <button type='button' className={styles.btn2} onClick={handleSignOut}>Sign Out</button>
     );
 };
 
 export default SignOut;
+
+ <button>Sign Out</button>

@@ -1,0 +1,31 @@
+@use './styles/buttons';
+@use './styles/modal';
+@use './styles/global' as *;
+
+.root {
+    position: relative;
+    inset: 0;
+    display: grid;
+    grid-template-areas: 'header' 'outlet';
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    padding: 10px;
+    gap: 10px;
+
+    background-color: var(--main);
+    color: var(--alt);
+    z-index: 0;
+    transition:
+        background-color 1s ease-in-out,
+        color 1s ease-in-out;
+
+    .header {
+        grid-area: header;
+        z-index: 10;
+    }
+
+    .outlet {
+        grid-area: outlet;
+        z-index: 1;
+    }
+}
