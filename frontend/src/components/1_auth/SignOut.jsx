@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 
 function SignOut() {
     const navigate = useNavigate();
-    const {user, setUser} = useAuth();
+    const {setUser} = useAuth();
 
     const handleSignOut = async () => {
         await callSignOut();

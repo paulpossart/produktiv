@@ -1,17 +1,6 @@
-@use '../../styles/colors' as c;
 @use '../../styles/buttons';
-
-@mixin flexCol($space: space-around) {
-    display: flex;
-    flex-direction: column;
-    justify-content: $space;
-    align-items: center;
-}
-
-%border {
-    border: solid, c.$border 4px;
-    border-radius: 8px;
-}
+@use '../../styles/modal';
+@use '../../styles/global' as *;
 
 .backgroundImg {
     position: relative;
@@ -22,6 +11,8 @@
     background-size: cover;
     z-index: 1;
 
+    @include flexCol(center);
+
     &::after {
         content: "";
         position: absolute;
@@ -31,12 +22,9 @@
     }
 
     .authForm {
-        background-color: rgb(12, 12, 20);
-        width: clamp(10em, 50vw, 20em);
-        height: clamp(15em, 60vh, 80%);
-        margin: 0 auto;
-        position: relative;
-        top: 10%;
+        background-color: var(--main);
+        width: 250px;
+        height: 400px;
         z-index: 10;
         text-align: center;
         z-index: 3;
@@ -57,7 +45,8 @@
 
                 & img {
                     width: 45px;
-                    padding-bottom: 10px;
+                    border: solid black 3px;
+                    border-radius: 50%;
                 }
 
                 .form {
@@ -67,10 +56,28 @@
                     @include flexCol;
 
                     & input {
-                        max-width: 90%
+                        max-width: 90%;
+                        background-color: var(--textInput);
+                        color: var(--alt);
+                        border: solid $mainGrey 1px;
+                        border-radius: 8px;
+                        padding: 0.4em;
+                        font-family: $body;
                     }
                 }
             }
         }
+    }
+
+    .notFound {
+        background-color: var(--main);
+        width: 250px;
+        height: 200px;
+        padding: 2rem;
+        z-index: 10;
+        text-align: center;
+
+        @extend %border;
+        @include flexCol;
     }
 }
