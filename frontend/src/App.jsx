@@ -8,6 +8,7 @@ import {
 import Root from './Root';
 import AuthPage from './components/1_auth/AuthPage';
 import Tasks from './components/4_tasks/tasks';
+import NotFound from './components/1_auth/NotFound';
 import { useAuth } from './context/AuthContext';
 
 import './app.module.scss';
@@ -40,6 +41,8 @@ function App() {
           <Route path='/' element={<Tasks />} />
           <Route index element={<Tasks />} />
         </Route>
+
+        <Route path='*' element={<NotFound />} />
 
       </Routes>
     </Router>

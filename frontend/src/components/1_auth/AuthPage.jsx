@@ -10,16 +10,19 @@ function AuthPage() {
 
     function ErrorModal() {
         return (
-            <div style={{ color: 'white', zIndex: '100', position: 'absolute' }}>
-                <p>{authError}</p>
-                <button onClick={()=>setAuthError(null)}>ok</button>
-            </div>
+            <>
+                <div className={styles.modalOverlay}></div>
+                <div className={styles.modal}>
+                    <p>{authError}</p>
+                    <button className={styles.btn1} onClick={() => setAuthError(null)}>OK</button>
+                </div>
+            </>
         )
     }
 
     return (
         <div className={styles.backgroundImg}>
-            {authError && <ErrorModal  />}
+            {authError && <ErrorModal />}
             <div className={styles.authForm}>
                 <div className={styles.viewContainer}>
                     {view === 'sign-in'

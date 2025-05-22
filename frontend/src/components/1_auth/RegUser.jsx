@@ -13,14 +13,15 @@ function RegUser({ setView, setAuthError }) {
     const safeRegex = /^[^<>{};\\]*$/;
 
     const handleChangeUsername = (e) => {
+        const bannedRegEx = '< > { } ; \\';
         const value = e.target.value;
         setNewUsername(value);
 
         if (value.length > 30) {
-            setError('Usernames should be between 1 - 30 characters');
+            setError('Username should be between 1 - 30 characters');
         } else if (!safeRegex.test(newUsername)) {
             setError(
-                `Usernames cannot contain the following characters: ${safeRegex}`
+                `Username cannot contain the following characters: ${bannedRegEx}`
             );
         } else setError(null)
     };
@@ -30,7 +31,7 @@ function RegUser({ setView, setAuthError }) {
         setNewPassword(value);
 
         if (value.length > 30) {
-            setError('Password should be between 1 - 30 characters');
+            setError('Password should be between 6 - 30 characters');
         } else setError(null)
     };
 
@@ -39,12 +40,12 @@ function RegUser({ setView, setAuthError }) {
         setError('');
 
         if (!newUsername.trim() || newUsername.length > 30) {
-            setError('Usernames should be between 1 - 30 characters');
+            setError('Username should be between 1 - 30 characters');
             return;
         };
 
         if (!newPassword || newPassword.length < 6 || newPassword.length > 30) {
-            setError('Passwords should be between 1 - 30 characters');
+            setError('Password should be between 6 - 30 characters');
             return;
         };
 
@@ -71,7 +72,6 @@ function RegUser({ setView, setAuthError }) {
     return (
         <div className={styles.formContainer}>
             <img src={duk} />
-            {error && <p style={{ color: 'white' }}>{error}</p>}
             <form className={styles.form} onSubmit={handleSubmit} >
                 <input
                     type='text'
@@ -79,6 +79,8 @@ function RegUser({ setView, setAuthError }) {
                     onChange={handleChangeUsername}
                     placeholder='new username'
                 />
+                
+                {error && <p>{error}</p>}
                 <input
                     type='password'
                     value={newPassword}
@@ -92,4 +94,4 @@ function RegUser({ setView, setAuthError }) {
     );
 };
 
-export default RegUser;
+export default RegUser; 

@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+$title: 'Saira Semi Condensed', sans-serif;
+$body: 'Roboto', sans-serif;
+
+$mainGrey: rgb(102, 102, 102);
+$mainGreyHover: rgb(72, 72, 72);
+$borderColor: rgb(136, 136, 136);
+
+@mixin flexCol($space: space-around) {
+    display: flex;
+    flex-direction: column;
+    justify-content: $space;
+    align-items: center;
+}
+
+%border {
+    border: solid, $borderColor 4px;
+    border-radius: 8px;
+}
