@@ -21,6 +21,14 @@ $borderColor: rgb(136, 136, 136);
     align-items: center;
 }
 
+@mixin headerGradient($col) {
+    background: linear-gradient(90deg,
+            rgba($col, $col, $col, 1) 0%,
+            rgba($col, $col, $col, 1) 25%,
+            rgba($col, $col, $col, 0.5) 75%,
+            rgba($col, $col, $col, 0.1) 100%);
+}
+
 @mixin duk {
     width: 45px;
     border: solid black 3px;

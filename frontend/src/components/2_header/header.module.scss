@@ -13,7 +13,7 @@
     z-index: -2;
 
     display: grid;
-    grid-template-areas: 'duk title burger';
+    grid-template-areas: 'duk title sidebar';
     grid-template-columns: 25% 50% 25%;
 
     /*
@@ -26,10 +26,31 @@
     .overlay {
         position: absolute;
         inset: 0;
-        background: var(--headOverlay);
+        //background: var(--headOverlay);
         border-radius: 4px;
 
         z-index: -1;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .darkOn {
+        @include headerGradient(0);
+        opacity: 1;
+    }
+
+    .darkOff {
+        @include headerGradient(0);
+        opacity: 0;
+    }
+
+    .lightOn {
+        @include headerGradient(255);
+        opacity: 1;
+    }
+
+    .lightOff {
+        @include headerGradient(255);
+        opacity: 0;
     }
 
     .duk {
@@ -47,12 +68,20 @@
             1px -1px 0 var(--titleShadow),
             -1px -1px 0 var(--titleShadow);
 
+        transition:
+            text-shadow 1s ease-in-out,
+            color 1s ease-in-out;
+
         span {
             color: var(--titleSpanColor);
             text-shadow: 1px 1px 0 var(--titleSpanShadow),
                 -1px 1px 0 var(--titleSpanShadow),
                 1px -1px 0 var(--titleSpanShadow),
                 -1px -1px 0 var(--titleSpanShadow);
+
+            transition:
+                text-shadow 1s ease-in-out,
+                color 1s ease-in-out;
         }
 
         font: {
@@ -64,9 +93,7 @@
         @include flexRow;
     }
 
-    .burger {
-        grid-area: burger;
-        @include flexRow;
-
+    .sidebar {
+        grid-area: sidebar;
     }
 }

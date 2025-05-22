@@ -19,3 +19,5 @@ function SignOut() {
 };
 
 export default SignOut;
+
+ <button>Sign Out</button>
