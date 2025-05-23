@@ -1,0 +1,44 @@
+@use '../../styles/buttons';
+@use '../../styles/modal';
+@use '../../styles/global' as *;
+
+.main {
+    position: relative;
+    background-color: var(--div);
+    @extend %border;
+    border-radius: 25px;
+    padding: 0.5rem;
+    cursor: pointer;
+    @include flexRow(space-between);
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+
+    transition: background-color 1s ease-in-out;
+
+    .slider {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        @extend %border;
+        border-radius: 50%;
+        height: 102%;
+        width: 52%;
+        transition: left 1s ease-in-out;
+    }
+
+    .dark {
+        left: 50%;
+    }
+
+    .light {
+        left: -1%;
+    }
+
+    .sun,
+    .moon {
+        width: 25px;
+        color: var(--alt);
+        transition: color 10s ease-in-out;
+    }
+}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Burger from './Burger';
 import SignOut from '../1_auth/SignOut';
+import ThemeBtn from './ThemBtn';
 import { useTheme } from '../../context/ThemeContext';
 import styles from './sidebar.module.scss';
 
@@ -23,8 +24,10 @@ function Sidebar({ className }) {
                 ? styles.sidebarOpen : styles.sidebarClosed}`}>
                 <div></div>
 
-                <button className={styles.btn1}
-                    onClick={() => setTheme(theme === "light" ? "dark" : "light")}>Theme</button>
+                <div onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+                    <ThemeBtn/>
+                </div>
+
                 <button className={styles.btn1}>Account</button>
                 <SignOut className={styles.btn2} />
 
