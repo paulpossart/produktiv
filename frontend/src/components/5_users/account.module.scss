@@ -1,0 +1,66 @@
+@use '../../styles/buttons';
+@use '../../styles/modal';
+@use '../../styles/global' as *;
+
+.account {
+    @include flexCol;
+    @extend %border;
+    height: 340px;
+    width: 300px;
+    margin: 0 auto;
+    padding: 2rem 0;
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background-color: var(--div);
+    box-shadow: var(--divShadow);
+
+    transition: background-color 1s ease-in-out;
+
+    .text {
+        height: 20%;
+    }
+
+    .btnContainer {
+        @include flexCol;
+        height: 70%;
+    }
+}
+
+.updateUser {
+    position: absolute;
+    height: 200px;
+    width: 230px;
+
+    & form {
+        height: 100%;
+        width: 100%;
+        @include flexCol(space-between);
+
+        & input {
+            margin: 1rem;
+            background-color: var(--textInput);
+            color: var(--alt);
+            border: solid $mainGrey 1px;
+            border-radius: 8px;
+            padding: 0.4em;
+            font-family: $body;
+        }
+
+        .updateBtns {
+            width: 100%;
+            @include flexRow(space-between);
+        }
+    }
+}
+
+.deleteUser {
+    width: 220px;
+
+    .delBtns {
+        width: 100%;
+        @include flexRow(space-between);
+    }
+}

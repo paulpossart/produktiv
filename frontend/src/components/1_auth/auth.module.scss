@@ -23,6 +23,7 @@
 
     .authForm {
         background-color: var(--main);
+        //color: var(--alt);
         width: 250px;
         height: 400px;
         z-index: 10;
@@ -43,12 +44,14 @@
 
                 @include flexCol;
 
-                & img {
-                   @include duk;
+
+                .duk {
+                    width: 45px;
+                    height: 45px;
                 }
 
                 .form {
-                    height: 100%;
+                    height: 80%;
                     width: 100%;
 
                     @include flexCol;

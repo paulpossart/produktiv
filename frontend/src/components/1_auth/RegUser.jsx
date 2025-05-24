@@ -2,28 +2,29 @@ import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { callCreateUser } from '../../apiCalls/usersCalls';
 import styles from './auth.module.scss'
-import duk from '../../assets/duk-yel.svg';
+import Duk from '../6_ui/Duk';
 
 function RegUser({ setView, setAuthError }) {
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
-    const [error, setError] = useState(null);
+    const [regError, setRegError] = useState(null);
     const { setUser } = useAuth();
 
     const safeRegex = /^[^<>{};\\]*$/;
+    const bannedRegEx = '< > { } ; \\';
 
     const handleChangeUsername = (e) => {
-        const bannedRegEx = '< > { } ; \\';
+
         const value = e.target.value;
         setNewUsername(value);
 
         if (value.length > 30) {
-            setError('Username should be between 1 - 30 characters');
+            setRegError('Username should be between 1 - 30 characters');
         } else if (!safeRegex.test(newUsername)) {
-            setError(
+            setRegError(
                 `Username cannot contain the following characters: ${bannedRegEx}`
             );
-        } else setError(null)
+        } else setRegError(null)
     };
 
     const handleChangePassword = (e) => {
@@ -31,27 +32,27 @@ function RegUser({ setView, setAuthError }) {
         setNewPassword(value);
 
         if (value.length > 30) {
-            setError('Password should be between 6 - 30 characters');
-        } else setError(null)
+            setRegError('Password should be between 6 - 30 characters');
+        } else setRegError(null)
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
+        setAuthError(null);
 
         if (!newUsername.trim() || newUsername.length > 30) {
-            setError('Username should be between 1 - 30 characters');
+            setAuthError('Username should be between 1 - 30 characters');
             return;
         };
 
         if (!newPassword || newPassword.length < 6 || newPassword.length > 30) {
-            setError('Password should be between 6 - 30 characters');
+            setAuthError('Password should be between 6 - 30 characters');
             return;
         };
 
         if (!safeRegex.test(newUsername)) {
-            setError(
-                `Usernames cannot contain the following characters: ${safeRegex}`
+            setAuthError(
+                `Usernames cannot contain the following characters: ${bannedRegEx}`
             );
             return;
         };
@@ -71,7 +72,9 @@ function RegUser({ setView, setAuthError }) {
 
     return (
         <div className={styles.formContainer}>
-            <img src={duk} />
+            <div>
+                <Duk className={styles.duk} />
+            </div>
             <form className={styles.form} onSubmit={handleSubmit} >
                 <input
                     type='text'
@@ -79,8 +82,9 @@ function RegUser({ setView, setAuthError }) {
                     onChange={handleChangeUsername}
                     placeholder='new username'
                 />
-                
-                {error && <p>{error}</p>}
+
+                {regError && <p>{regError}</p>}
+
                 <input
                     type='password'
                     value={newPassword}

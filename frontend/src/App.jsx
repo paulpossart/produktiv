@@ -6,15 +6,14 @@ import {
 } from 'react-router-dom';
 import Root from './Root';
 import AuthPage from './components/1_auth/AuthPage';
-import Tasks from './components/4_tasks/tasks';
 import NotFound from './components/1_auth/NotFound';
+import Tasks from './components/4_tasks/tasks';
+import Account from './components/5_users/Account';
 import { useAuth } from './context/AuthContext';
 
 function App() {
   const { user, isLoading } = useAuth();
-
-  console.log(user)
-
+  
   if (isLoading) {
     return <p>loading</p>;
   }
@@ -23,19 +22,19 @@ function App() {
     <Router>
       <Routes>
 
-        <Route path='/auth'
-          element={
-            !user ? <AuthPage /> : <Navigate to='/' />
-          }
+        <Route
+          path='/auth'
+          element={!user ? <AuthPage /> : <Navigate to='/' />}
         />
 
         <Route
-          element={
-            user ? <Root /> : <Navigate to='/auth' />
-          }
+          path='/'
+          element={user ? <Root /> : <Navigate to='/auth' />}
         >
-          <Route path='/' element={<Tasks />} />
+
           <Route index element={<Tasks />} />
+          <Route path='settings' element={<Account />} />
+
         </Route>
 
         <Route path='*' element={<NotFound />} />

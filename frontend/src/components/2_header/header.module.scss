@@ -16,17 +16,12 @@
     grid-template-areas: 'duk title sidebar';
     grid-template-columns: 25% 50% 25%;
 
-    /*
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    */
+    box-shadow: var(--divShadow);
 
 
     .overlay {
         position: absolute;
         inset: 0;
-        //background: var(--headOverlay);
         border-radius: 4px;
 
         z-index: -1;
@@ -55,8 +50,6 @@
 
     .duk {
         grid-area: duk;
-        @include duk;
-        width: 50px;
     }
 
     .title {

@@ -36,9 +36,11 @@
     color: black;
     background-color: var(--btn1);
 
-    &:hover {
-        border-color: var(--btn1Hover);
-        background-color: var(--btn1Hover);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            border-color: var(--btn1Hover);
+            background-color: var(--btn1Hover);
+        }
     }
 }
 
@@ -48,9 +50,12 @@
     background-color: $mainGrey;
     border-color: var(--main);
 
-    &:hover {
-        border-color: $mainGreyHover;
-        background-color: $mainGreyHover;
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            border-color: $mainGreyHover;
+            background-color: $mainGreyHover;
+        }
     }
 }
 
@@ -60,11 +65,11 @@
     background-color: rgba(0, 0, 0, 0);
     border-color: var(--main);
 
-
-    &:hover {
-        border-color: var(--main);
-        color: white;
-        background-color: rgba(0, 0, 0, 0.5);
-
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            border-color: var(--main);
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
     }
 }
