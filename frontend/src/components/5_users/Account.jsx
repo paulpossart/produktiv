@@ -5,6 +5,7 @@ import UpdateUser from './UpdateUser';
 import DeleteUser from './DeleteUser';
 import styles from './account.module.scss';
 import { useModal } from '../../context/ModalContext';
+import homeIcon from '../../assets/home-btn.svg';
 
 import Duk from '../6_ui/Duk';
 
@@ -30,9 +31,9 @@ function Account() {
             </div>
 
             <div className={styles.btnContainer}>
-                <button className={styles.btn2} onClick={() => setModalContent(<UpdateUser/>)}>Change Username and Password</button>
-                <button className={styles.btn2} onClick={() => setModalContent(<DeleteUser/>)}>Delete User</button>
-                <Link className={styles.btn1} style={{}} to='/'>Tasks</Link>
+                <button style={{width: '90%', borderRadius: '12px'}} className={styles.btn2} onClick={() => setModalContent(<UpdateUser/>)}>Change Username <br /> and Password</button>
+                <button style={{width: '90%', borderRadius: '12px'}} className={styles.btn2} onClick={() => setModalContent(<DeleteUser/>)}>Delete User</button>
+                <Link className={styles.btn1} style={{borderRadius: '50%'}} to='/'> <img style={{width: '40px'}} src={homeIcon} /></Link>
             </div>
 
         </div>

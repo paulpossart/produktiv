@@ -26,6 +26,7 @@
     .btnContainer {
         @include flexCol;
         height: 70%;
+        min-width: 90%;
     }
 }
 

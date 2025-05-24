@@ -7,21 +7,15 @@ const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
 
 const isProd = () => process.env.NODE_ENV === 'production';
 
-const isValidUsername = (input) => {
-    return (
-        typeof input === 'string' &&
-        input.trim() &&
-        validator.matches(input, safeRegex) &&
-        validator.isLength(input, { min: 1, max: 30 })
-    );
-};
-
-const isValidPassword = (input) => {
-    return (
-        typeof input === 'string' &&
-        validator.isLength(input, { min: 6, max: 30 })
-    );
-};
+const isValidInput = (type, input, min, max) => {
+    if (typeof input !== 'string' || !validator.isLength(input, { min, max })) return false;
+    if (type === 'password' || type === 'description') return true;
+    if (!input.trim()) return false;
+    if (type === 'title') return true;
+    if (!validator.matches(input, safeRegex)) return false;
+    if (type === 'username') return true;
+    return false;
+}
 
 const signAccessToken = (payload) => {
     return jwt.sign(payload, accessTokenSecret, {
@@ -37,8 +31,7 @@ const signRefreshToken = (payload) => {
 
 export {
     isProd,
-    isValidUsername,
-    isValidPassword,
     signAccessToken,
-    signRefreshToken
+    signRefreshToken,
+    isValidInput
 };
