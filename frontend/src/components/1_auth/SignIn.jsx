@@ -3,7 +3,7 @@ import styles from './auth.module.scss';
 import duk from '../../assets/duk-yel.svg';
 import { useAuth } from '../../context/AuthContext';
 import { callSignIn } from '../../apiCalls/authCalls';
-
+import Duk from '../6_ui/Duk';
 
 function SignIn({ setView, setAuthError }) {
     const [username, setUsername] = useState('');
@@ -27,7 +27,9 @@ function SignIn({ setView, setAuthError }) {
 
     return (
         <div className={styles.formContainer}>
-            <img src={duk} />
+            <div>
+                <Duk className={styles.duk} />
+            </div>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <input
                     type='text'

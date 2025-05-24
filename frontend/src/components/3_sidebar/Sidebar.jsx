@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Burger from './Burger';
 import SignOut from '../1_auth/SignOut';
+import ThemeBtn from './ThemBtn';
 import { useTheme } from '../../context/ThemeContext';
 import styles from './sidebar.module.scss';
 
@@ -21,11 +23,15 @@ function Sidebar({ className }) {
 
             <div className={`${styles.sidebar} ${isOpen
                 ? styles.sidebarOpen : styles.sidebarClosed}`}>
-                <div></div>
+                
+                <br />
 
-                <button className={styles.btn1}
-                    onClick={() => setTheme(theme === "light" ? "dark" : "light")}>Theme</button>
-                <button className={styles.btn1}>Account</button>
+                <div onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+                    <ThemeBtn />
+                </div>
+
+                <Link onClick={() => setIsOpen(false)} className={styles.btn1} to='settings'>Account</Link>
+
                 <SignOut className={styles.btn2} />
 
             </div>

@@ -12,15 +12,19 @@
         position: fixed;
         inset: 0;
         z-index: 1000;
-        transition: background-color 1s ease-in-out;
+        transition: 
+            background-color 1s ease-in-out,
+            visibility 1s ease-in-out;
     }
 
     .overlayOpen {
         background-color: rgba(0, 0, 0, 0.8);
+        visibility: visible;
     }
 
     .overlayClosed {
         background-color: rgba(0, 0, 0, 0);
+        visibility: hidden;
     }
 
 
