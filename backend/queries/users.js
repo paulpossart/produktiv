@@ -3,8 +3,7 @@ import bcrypt from 'bcrypt';
 import pool from '../db/config.js';
 import {
     isProd,
-    isValidUsername,
-    isValidPassword,
+    isValidInput,
     signAccessToken,
     signRefreshToken
 } from './helperFunctions.js';
@@ -13,10 +12,13 @@ const createUser = async (req, res, next) => {
     const id = uuid4();
     const { newUsername, newPassword } = req.body;
 
-    if (!isValidUsername(newUsername) || !isValidPassword(newPassword)) {
+    if (
+        !isValidInput('username', newUsername, 1, 30)
+        || !isValidInput('passwordd', newPassword, 6, 30)
+    ) {
         return res.status(400).json({
             userData: false,
-            message: 'invalid username or password',
+            message: 'invalid username or password ',
             user: null
         })
     };
@@ -108,7 +110,10 @@ const updateUser = async (req, res, next) => {
     const userId = req.userId;
     const { updatedUsername, updatedPassword } = req.body;
 
-    if (!isValidUsername(updatedUsername) || !isValidPassword(updatedPassword)) {
+    if (
+        !isValidInput('username', updatedUsername, 1, 30)
+        || !isValidInput('passwordd', updatedPassword, 6, 30)
+    ) {
         return res.status(400).json({
             success: false,
             message: 'invalid username or password',

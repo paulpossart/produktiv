@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 
 import usersRouter from  './routers/usersRouter.js';
 import authRouter from './routers/authRouter.js';
+import tasksRouter from './routers/tasksRouter.js';
 
 import { isProd } from './queries/helperFunctions.js';
 
@@ -27,6 +28,7 @@ app.get('/', (req, res) => res.json({backend: 'running'}));
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/tasks', tasksRouter);
 
 app.use((err, req, res, next) => {
     const status =  err.status || 500;

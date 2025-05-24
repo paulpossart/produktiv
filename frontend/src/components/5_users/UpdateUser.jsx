@@ -97,7 +97,7 @@ function UpdateUser({ setIsUpdateUser }) {
                 )
             } else {
                 setModalContent(
-                    modalMessage(data.message || 'an error occured')
+                    modalMessage('an error occured')
                 )
             }
 

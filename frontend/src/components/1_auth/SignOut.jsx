@@ -14,7 +14,7 @@ function SignOut() {
     };
 
     return (
-        <button type='button' className={styles.btn2} onClick={handleSignOut}>Sign Out</button>
+        <button type='button' style={{whiteSpace: 'nowrap'}} className={styles.btn2} onClick={handleSignOut}>Sign Out</button>
     );
 };
 

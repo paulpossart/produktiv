@@ -1,0 +1,77 @@
+@use '../../styles/buttons';
+@use '../../styles/global' as *;
+
+.div {
+    @extend %border;
+    padding: 1rem;
+    width: 100%;
+    min-height: 150px;
+    @include flexCol;
+
+    box-shadow: var(--divShadow);
+
+    & button {
+        height: 100%;
+        width: 80%;
+        margin: 0 auto;
+        border-radius: 12px;
+        padding: 1rem 2rem;
+
+        @include flexRow(space-between);
+
+        & img {
+            background-color: var(--btn1);
+            padding: 0.5rem;
+            border-radius: 50%;
+
+            @media (hover: hover) and (pointer: fine) {
+                &:hover {
+                    border-color: var(--btn1Hover);
+                    background-color: var(--btn1Hover);
+                }
+            }
+        }
+    }
+}
+
+.newTask {
+    height: 280px;
+    width: 300px;
+
+
+    & form {
+        height: 100%;
+        width: 90%;
+        @include flexCol;
+
+        & input {
+            margin: 1rem;
+            background-color: var(--textInput);
+            color: var(--alt);
+            border: solid $mainGrey 1px;
+            border-radius: 8px;
+            padding: 0.4em;
+            font-family: $body;
+            width: 100%;
+        }
+
+        & textarea {
+            margin: 1rem;
+            background-color: var(--textInput);
+            color: var(--alt);
+            border: solid $mainGrey 1px;
+            border-radius: 8px;
+            padding: 0.4em;
+            font-family: $body;
+            height: 100px;
+            width: 100%;
+        }
+
+        & .taskBtns {
+            width: 100%;
+            @include flexRow(flex-end);
+            gap: 10px;
+
+        }
+    }
+}
