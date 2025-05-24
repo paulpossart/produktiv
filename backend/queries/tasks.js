@@ -1,7 +1,7 @@
 import { isValidInput } from './helperFunctions.js';
 import pool from '../db/config.js';
 
-const createTask = async (req, res, next) => {
+const createTasks = async (req, res, next) => {
     const userId = req.userId;
     const { title, description, prevId } = req.body;
     let newPriority = 100;
@@ -48,4 +48,21 @@ const createTask = async (req, res, next) => {
     }
 };
 
-export {createTask};
+const getTasks = async (req, res, next) => {
+    const userId = req.userId;
+
+    try {
+        const result = await pool.query(
+            `SELECT id, title, description, priority
+            FROM produktiv.tasks
+            WHERE user_id = $1
+            ORDER BY priority DESC`,
+            [userId]
+        );
+        res.status(200).json(result.rows);
+    } catch (err) {
+        next(err);
+    }
+};
+
+export {createTasks, getTasks};

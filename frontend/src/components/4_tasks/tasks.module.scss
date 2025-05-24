@@ -3,19 +3,29 @@
 
 .div {
     @extend %border;
-    padding: 1rem;
+    //padding-top: 1rem;
     width: 100%;
     min-height: 150px;
     @include flexCol;
 
+
+
+    background-color: var(--div);
+
     box-shadow: var(--divShadow);
 
+    max-height: 100vh;
+    // overflow-Y: auto;
+
+    padding: 0;
+    margin: 0;
+
     & button {
-        height: 100%;
-        width: 80%;
-        margin: 0 auto;
-        border-radius: 12px;
-        padding: 1rem 2rem;
+        //height: 100%;
+       // width: 80%;
+       // margin: 0 auto;
+       // border-radius: 12px;
+       // padding: 1rem 2rem;
 
         @include flexRow(space-between);
 
@@ -37,6 +47,8 @@
 .newTask {
     height: 280px;
     width: 300px;
+
+
 
 
     & form {
@@ -72,6 +84,125 @@
             @include flexRow(flex-end);
             gap: 10px;
 
+        }
+    }
+}
+
+.tasksDiv {
+    //@extend %border;
+    width: 100%;
+    max-width: 90vw;
+    overflow-X: hidden;
+
+
+
+
+    .li {
+        @extend %border;
+        border-color: $mainGrey;
+        margin: 1rem;
+        box-shadow: var(--divShadow);
+        max-width: 100%;
+        min-height: 150px;
+
+        background-color: var(--taskBody);
+
+        .head {
+            //@extend %border;
+            background-color: $mainGrey;
+            padding: 0.25rem;
+            margin: 0;
+            max-width: 100%;
+
+            display: grid;
+            grid-template-areas: 'priority title expand';
+            grid-template-columns: 20% 60% 20%;
+
+            .priority {
+                grid-area: priority;
+                @include flexCol;
+                height: 100%;
+                width: 100%;
+            }
+
+            .title {
+                grid-area: title;
+
+                @include flexRow(center);
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                width: 100%;
+                // overflow-x: scroll;
+
+                overflow-wrap: anywhere;
+                white-space: normal;
+                font-size: clamp(12px, 5vw, 18px);
+
+
+            }
+
+            .expand {
+                grid-area: expand;
+                @include flexCol(center);
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .taskBody {
+            display: grid;
+            grid-template-areas: 'description buttons';
+            grid-template-columns: 70% 30%;
+            height: 100%;
+
+
+            .descBox {
+                grid-area: description;
+                height: auto;
+                width: 100%;
+                overflow-y: auto;
+                margin: 1rem;
+
+                .desc {
+                    //@extend %border;
+                    background-color: var(--taskBody);
+                    max-width: 100%;
+                    height: 100%;
+                    text-align: left;
+                    padding: 1rem;
+                    background-color: var(--textInput);
+
+
+                    border: solid $mainGrey 1px;
+                    border-radius: 8px;
+
+                    font-family: $body;
+
+
+                    overflow-wrap: anywhere;
+                    white-space: normal;
+                    font-size: clamp(8px, 3.5vw, 18px);
+
+                    transition: background-color 1s ease-in-out;
+
+                }
+            }
+
+            .btnCont {
+                grid-area: buttons;
+                width: 100%;
+                //height: 100%;
+                margin: 5px;
+
+                @include flexCol(space-around);
+                & button {
+                    //height: 30px;
+                    //text-align: center;
+                    
+                    //padding: 1rem;
+                }
+            }
         }
     }
 }

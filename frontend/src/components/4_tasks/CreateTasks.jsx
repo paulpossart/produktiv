@@ -1,20 +1,18 @@
 import { useState } from 'react';
-import { callCreateTask } from '../../apiCalls/tasksCalls';
+import { callCreateTasks } from '../../apiCalls/tasksCalls';
 import Modal from '../6_ui/Modal';
 import { useModal } from '../../context/ModalContext';
 import styles from './tasks.module.scss';
 
-function CreateTask({fetchTasks, prevTask }) {
+function CreateTasks({fetchTasks, prevTask }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    //const [inputError, setInputError] = useState('');
     const { setModalContent } = useModal();
 
     const prevId = prevTask ? prevTask.id : 0;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(title, description)
 
         if (!title.trim()) {
             setModalContent(
@@ -33,7 +31,7 @@ function CreateTask({fetchTasks, prevTask }) {
         }
 
         try {
-            const data = await callCreateTask(title, description, prevId);
+            const data = await callCreateTasks(title, description, prevId);
             if (data && data.success) {
                 setModalContent(
                     <>
@@ -65,7 +63,7 @@ function CreateTask({fetchTasks, prevTask }) {
         } finally {
             setTitle('');
             setDescription('');
-            //fetchTasks
+            fetchTasks();
         }
     };
 
@@ -94,4 +92,4 @@ function CreateTask({fetchTasks, prevTask }) {
     );
 };
 
-export default CreateTask;
+export default CreateTasks;
