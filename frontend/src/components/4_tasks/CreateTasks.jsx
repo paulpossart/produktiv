@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { callCreateTasks } from '../../apiCalls/tasksCalls';
-import Modal from '../6_ui/Modal';
+import Modal from '../6_utils/modal/Modal';
 import { useModal } from '../../context/ModalContext';
 import styles from './tasks.module.scss';
 
@@ -20,7 +20,7 @@ function CreateTasks({fetchTasks, prevTask }) {
                     <p>Title cannot be empty</p>
                     <button
                         className={styles.btn1}
-                        onClick={() => setModalContent(<CreateTask />)}
+                        onClick={() => setModalContent(<CreateTasks />)}
                     >
                         OK
                     </button>

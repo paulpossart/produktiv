@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import CreateTasks from './CreateTasks';
 import GetTasks from './GetTasks';
-import Modal from '../6_ui/Modal';
+import Modal from '../6_utils/modal/Modal';
 import { useModal } from '../../context/ModalContext';
 import plus from '../../assets/plus-sign.svg';
 import styles from './tasks.module.scss';

@@ -7,10 +7,9 @@ import styles from './account.module.scss';
 import { useModal } from '../../context/ModalContext';
 import homeIcon from '../../assets/home-btn.svg';
 
-import Duk from '../6_ui/Duk';
 
 function Account() {
-    const [isUpdateUser, setIsUpdateUser] = useState(false);
+  
     const { user } = useAuth();
     const { setModalContent } = useModal();
 
@@ -23,7 +22,7 @@ function Account() {
 
     return (
         <div className={styles.account}>
-            {isUpdateUser && <UpdateUser setIsUpdateUser={setIsUpdateUser} />}
+            
 
             <div className={styles.text}>
                 <h2>{username}</h2>

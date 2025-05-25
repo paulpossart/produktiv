@@ -1,14 +1,19 @@
-import { useState } from 'react';
 import styles from './auth.module.scss';
-import duk from '../../assets/duk-yel.svg';
-import { useAuth } from '../../context/AuthContext';
-import { callSignIn } from '../../apiCalls/authCalls';
-import Duk from '../6_ui/Duk';
 
-function SignIn({ setView, setAuthError }) {
+import Duk from '../6_utils/duk/Duk';
+import dukStyles from '../6_utils/duk/duk.module.scss';
+
+import { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { useModal } from '../../context/ModalContext';
+import { setModal } from '../6_utils/helperFunctions';
+import { callSignIn } from '../../apiCalls/authCalls';
+
+function SignIn({ setView }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { setUser } = useAuth();
+    const { setModalContent } = useModal();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,7 +22,7 @@ function SignIn({ setView, setAuthError }) {
             if (data && data.userData) setUser(data.user);
             else setUser(null);
         } catch (err) {
-            setAuthError(err.message);
+            setModal({setModalContent: setModalContent, message: err.message});
             setUser(null);
         } finally {
             setUsername('');
@@ -28,7 +33,7 @@ function SignIn({ setView, setAuthError }) {
     return (
         <div className={styles.formContainer}>
             <div>
-                <Duk className={styles.duk} />
+                <Duk className={dukStyles.auth} />
             </div>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <input

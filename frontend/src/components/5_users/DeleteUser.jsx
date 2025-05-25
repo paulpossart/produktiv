@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Modal from '../6_ui/Modal';
+import Modal from '../6_utils/modal/Modal';
 import { useModal } from '../../context/ModalContext';
 import { useAuth } from '../../context/AuthContext';
 import styles from './account.module.scss';
