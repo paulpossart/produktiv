@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { callCreateTasks } from '../../apiCalls/tasksCalls';
 import Modal from '../6_utils/modal/Modal';
+import { setModal } from '../6_utils/helperFunctions';
 import { useModal } from '../../context/ModalContext';
 import styles from './tasks.module.scss';
 
-function CreateTasks({fetchTasks, prevTask }) {
+function CreateTasks({ fetchTasks, prevTask }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const { setModalContent } = useModal();
@@ -15,51 +16,27 @@ function CreateTasks({fetchTasks, prevTask }) {
         e.preventDefault();
 
         if (!title.trim()) {
-            setModalContent(
-                <>
-                    <p>Title cannot be empty</p>
-                    <button
-                        className={styles.btn1}
-                        onClick={() => setModalContent(<CreateTasks />)}
-                    >
-                        OK
-                    </button>
-                </>
-            );
-
+            setModal({
+                setModalContent: setModalContent,
+                message: 'title cannot be empty',
+                content: <CreateTasks />
+            });
             return;
         }
 
         try {
             const data = await callCreateTasks(title, description, prevId);
             if (data && data.success) {
-                setModalContent(
-                    <>
-                        <p>{data.message}</p>
-                        <button
-                           className={styles.btn1}
-                            onClick={() => setModalContent(null)}
-                        >
-                            OK
-                        </button>
-                    </>
-                );
-            } else {
-                setModalContent(
-                    <>
-                        <p>an error occured</p>
-                        <button
-                           className={styles.btn1}
-                            onClick={() => setModalContent(null)}
-                        >
-                            OK
-                        </button>
-                    </>
-                );
+                setModal({
+                    setModalContent: setModalContent,
+                    message: data.message
+                });
             }
-
         } catch (err) {
-            setModalContent(err.message)
+            setModal({
+                    setModalContent: setModalContent,
+                    message: err.message
+                });
         } finally {
             setTitle('');
             setDescription('');
@@ -68,7 +45,7 @@ function CreateTasks({fetchTasks, prevTask }) {
     };
 
     return (
-        <Modal className={styles.newTask}>
+        <div className={styles.newTask}>
             <form onSubmit={handleSubmit}>
                 <input
                     type='text'
@@ -83,12 +60,12 @@ function CreateTasks({fetchTasks, prevTask }) {
                     placeholder='description'
                 />
                 <div className={styles.taskBtns}>
-                    <button className={styles.btn2} type='button' onClick={()=>setModalContent(null)}>Cancel</button>
+                    <button className={styles.btn2} type='button' onClick={() => setModalContent(null)}>Cancel</button>
                     <button className={styles.btn1} type='submit'>Add</button>
                 </div>
 
             </form>
-        </Modal>
+        </div>
     );
 };
 

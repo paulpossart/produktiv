@@ -3,6 +3,7 @@ import { useAuth } from '../../context/AuthContext';
 import CreateTasks from './CreateTasks';
 import GetTasks from './GetTasks';
 import Modal from '../6_utils/modal/Modal';
+import { setModal } from '../6_utils/helperFunctions';
 import { useModal } from '../../context/ModalContext';
 import plus from '../../assets/plus-sign.svg';
 import styles from './tasks.module.scss';
@@ -26,23 +27,30 @@ function Tasks() {
         }
     }
 
-    const addTask = () => setModalContent(<CreateTasks fetchTasks={fetchTasks} />);
+    const addTask = () => {
+        setModal({
+            setModalContent: setModalContent,
+            btn: false,
+            message: <CreateTasks fetchTasks={fetchTasks} />
+        });
+    }
 
     return (
-        <>
-            <div className={styles.div}>
+        <div className={styles.homeDiv}>
+            <div className={styles.welcome}>
                 <p>Welcome {username}!</p>
-                <button className={styles.btn2} onClick={addTask}>Add Task <img style={{ width: '30px' }} src={plus} /></button>
+                <button className={styles.btn2} onClick={addTask}>Add Task <img src={plus} /></button>
             </div>
 
-            <div className={styles.div} style={{ margin: '1rem 0' }}>
-                {fetchError && fetchError}
-                <GetTasks
-                    fetchTasks={fetchTasks}
-                    tasks={tasks}
-                />
+            <div className={styles.tasksContainer}>
+                {fetchError
+                    ? fetchError
+                    : <GetTasks
+                        fetchTasks={fetchTasks}
+                        tasks={tasks}
+                    />}
             </div>
-        </>
+        </div>
     );
 };
 

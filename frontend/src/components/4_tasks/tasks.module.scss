@@ -1,35 +1,27 @@
 @use '../../styles/buttons';
 @use '../../styles/global' as *;
 
-.div {
+.homeDiv {
+    width: 350px;
+    margin: 0 auto;
+}
+
+.welcome {
     @extend %border;
-    //padding-top: 1rem;
-    width: 100%;
-    min-height: 150px;
     @include flexCol;
 
-
-
+    width: 100%;
+    min-height: 150px;
     background-color: var(--div);
-
     box-shadow: var(--divShadow);
 
-    max-height: 100vh;
-    // overflow-Y: auto;
-
-    padding: 0;
-    margin: 0;
-
     & button {
-        //height: 100%;
-       // width: 80%;
-       // margin: 0 auto;
-       // border-radius: 12px;
-       // padding: 1rem 2rem;
-
         @include flexRow(space-between);
 
+        width: 70%;
+
         & img {
+            width: 30px;
             background-color: var(--btn1);
             padding: 0.5rem;
             border-radius: 50%;
@@ -45,11 +37,9 @@
 }
 
 .newTask {
-    height: 280px;
-    width: 300px;
+    @include flexRow;
 
-
-
+    width: 280px;
 
     & form {
         height: 100%;
@@ -88,31 +78,30 @@
     }
 }
 
-.tasksDiv {
-    //@extend %border;
+.tasksContainer {
+    @extend %border;
     width: 100%;
-    max-width: 90vw;
-    overflow-X: hidden;
+    max-height: 95vh;
+    overflow-y: auto;
+    margin-top: 10px;
+}
 
-
-
-
+.tasksDiv {
     .li {
         @extend %border;
         border-color: $mainGrey;
         margin: 1rem;
         box-shadow: var(--divShadow);
-        max-width: 100%;
-        min-height: 150px;
-
         background-color: var(--taskBody);
+        transition: background-color 1s ease-in-out;
 
         .head {
-            //@extend %border;
             background-color: $mainGrey;
-            padding: 0.25rem;
+            padding: 0.5rem;
             margin: 0;
             max-width: 100%;
+            color: white;
+
 
             display: grid;
             grid-template-areas: 'priority title expand';
@@ -121,88 +110,87 @@
             .priority {
                 grid-area: priority;
                 @include flexCol;
-                height: 100%;
-                width: 100%;
             }
 
             .title {
                 grid-area: title;
 
                 @include flexRow(center);
-                padding: 0;
-                margin: 0;
-                height: 100%;
-                width: 100%;
-                // overflow-x: scroll;
 
                 overflow-wrap: anywhere;
                 white-space: normal;
-                font-size: clamp(12px, 5vw, 18px);
-
-
+                font-size: clamp(12px, 2rem, 18px);
             }
 
             .expand {
                 grid-area: expand;
                 @include flexCol(center);
-                height: 100%;
-                width: 100%;
             }
         }
 
         .taskBody {
             display: grid;
             grid-template-areas: 'description buttons';
-            grid-template-columns: 70% 30%;
-            height: 100%;
+            grid-template-columns: 1fr auto;
 
+
+            transition:
+                max-height 1s ease-in-out,
+                opacity 1s ease-in-out,
+                visibility 1s ease-in-out;
 
             .descBox {
                 grid-area: description;
-                height: auto;
-                width: 100%;
-                overflow-y: auto;
+
+                max-height: 200px;
+                overflow-y: scroll;
                 margin: 1rem;
+                background-color: var(--textInput);
+                border: solid $mainGrey 1px;
+                border-radius: 8px;
+                text-align: left;
+                padding: 1rem;
+                overflow-wrap: anywhere;
+                white-space: normal;
+                font-size: clamp(8px, 1.6rem, 18px);
 
-                .desc {
-                    //@extend %border;
-                    background-color: var(--taskBody);
-                    max-width: 100%;
-                    height: 100%;
-                    text-align: left;
-                    padding: 1rem;
-                    background-color: var(--textInput);
-
-
-                    border: solid $mainGrey 1px;
-                    border-radius: 8px;
-
-                    font-family: $body;
-
-
-                    overflow-wrap: anywhere;
-                    white-space: normal;
-                    font-size: clamp(8px, 3.5vw, 18px);
-
-                    transition: background-color 1s ease-in-out;
-
-                }
+                transition: background-color 1s ease-in-out;
             }
 
             .btnCont {
                 grid-area: buttons;
-                width: 100%;
-                //height: 100%;
-                margin: 5px;
+                margin-top: 1rem;
+                margin-right: 1rem;
 
-                @include flexCol(space-around);
+                box-sizing: border-box;
+
+                @include flexCol(flex-start);
+
                 & button {
-                    //height: 30px;
-                    //text-align: center;
-                    
-                    //padding: 1rem;
+                    box-sizing: border-box;
+                    margin-bottom: 1rem;
+                    border-radius: 50%;
+
+                    & img {
+                        width: 30px;
+                    }
+
                 }
             }
+        }
+
+        .tasksOpen {
+            max-height: 300px;
+            opacity: 1;
+            visibility: visible;
+            overflow: auto;
+        }
+
+        .tasksClosed {
+            max-height: 0;
+            opacity: 0;
+            visibility: hidden;
+            overflow: hidden;
         }
     }
 }

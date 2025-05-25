@@ -1,15 +1,18 @@
 @use '../../styles/buttons';
-@use '../../styles/modal';
 @use '../../styles/global' as *;
 
 .head {
+    width: 350px;
+    margin: 0 auto;
+    @extend %border;
+
     position: relative;
     background-image: url('../../assets/duk-img.jpg');
     background-size: cover;
     background-position: center;
 
     padding: 1rem;
-    @extend %border;
+
     z-index: -2;
 
     display: grid;

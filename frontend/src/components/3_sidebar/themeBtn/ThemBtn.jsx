@@ -1,4 +1,4 @@
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../../context/ThemeContext';
 import styles from './themeBtn.module.scss';
 
 function ThemeBtn() {

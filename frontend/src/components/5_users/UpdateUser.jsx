@@ -15,6 +15,8 @@ function UpdateUser() {
     const { setModalContent } = useModal();
     const navigate = useNavigate();
 
+
+
     const handleChangeUsername = (e) => {
         changeInput(e, setNewUsername, setUpdateError, 'username')
     };
@@ -68,7 +70,7 @@ function UpdateUser() {
     };
 
     return (
-        setModalContent(
+        <div className={styles.updateUser}>
             <form onSubmit={handleSubmit}>
                 <input
                     type='text'
@@ -78,19 +80,21 @@ function UpdateUser() {
                 />
 
                 {updateError && <p>{updateError}</p>}
-                
+
                 <input
                     type='password'
                     value={newPassword}
                     onChange={handleChangePassword}
                     placeholder='new password'
                 />
+                <br />
                 <div className={styles.updateBtns}>
                     <button type='button' className={styles.btn2} onClick={() => setModalContent(null)}>Cancel</button>
                     <button type='submit' className={styles.btn1}>Update</button>
                 </div>
             </form>
-        ));
+        </div>
+    );
 };
 
 export default UpdateUser;
