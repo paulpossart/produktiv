@@ -27,7 +27,7 @@ const createTasks = async (req, res, next) => {
                 newPriority += prevPriority;
             }
         }
-       console.log('Inserting task with:', userId, title, description, newPriority);
+
         const result = await pool.query(
             `INSERT INTO produktiv.tasks
              (user_id, title, description, priority)
@@ -65,4 +65,88 @@ const getTasks = async (req, res, next) => {
     }
 };
 
-export {createTasks, getTasks};
+const editTasksById = async (req, res, next) => {
+    const userId = req.userId;
+    const taskId = parseInt(req.params.id)
+    const { newTitle, newDescription } = req.body;
+
+    if (!isValidInput('title', newTitle, 1, 100)
+        || !isValidInput('description', newDescription, 0, 500)) {
+        return res.status(400).json({
+            success: false,
+            message: 'invalid title or description.'
+        })
+    };
+
+    try {
+        await pool.query(
+            `UPDATE produktiv.tasks
+             SET title = $1, description = $2
+             WHERE id = $3 AND user_id = $4`,
+            [newTitle, newDescription, taskId, userId]
+        );
+        res.status(201).json({
+            success: true,
+            message: `Task '${newTitle}' succesfully edited`
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
+const prioritiseTasksById = async (req, res, next) => {
+    const userId = req.userId;
+    const taskId = parseInt(req.params.id);
+    const { operator, adjacentTaskId } = req.body;
+
+    if (operator !== '+' && operator !== '-') {
+        return res.sendStatus(400)
+    }
+    try {
+        const result = await pool.query(
+            `SELECT priority FROM produktiv.tasks
+             WHERE id = $1 AND user_id = $2`,
+            [adjacentTaskId, userId]
+        );
+
+        const adjPriority = result.rows[0].priority;
+
+        const newPriority = operator === '+'
+            ? adjPriority + 1
+            : adjPriority - 1;
+
+        await pool.query(
+            `UPDATE produktiv.tasks
+                 SET priority = $1
+                 WHERE id = $2 AND user_id = $3`,
+            [newPriority, taskId, userId]
+        );
+        res.sendStatus(204);
+    } catch (err) {
+        next(err);
+    }
+};
+
+const deleteTasksById = async (req, res, next) => {
+    const userId = req.userId;
+    const taskId = parseInt(req.params.id);
+
+    try {
+        await pool.query(
+            `DELETE FROM produktiv.tasks
+             WHERE id = $1 AND user_id = $2`,
+            [taskId, userId]
+        );
+        res.sendStatus(204);
+    } catch (err) {
+        next(err);
+    }
+}
+
+export {
+    createTasks,
+    getTasks,
+    editTasksById,
+    prioritiseTasksById,
+    deleteTasksById
+};
