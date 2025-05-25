@@ -1,9 +1,10 @@
+import styles from './account.module.scss';
+
 import { useNavigate } from 'react-router-dom';
-import Modal from '../6_ui/Modal';
 import { useModal } from '../../context/ModalContext';
 import { useAuth } from '../../context/AuthContext';
-import styles from './account.module.scss';
 import { callDeleteUser } from "../../apiCalls/usersCalls";
+import { setModal } from '../6_utils/helperFunctions';
 
 function DeleteUser() {
     const { setUser } = useAuth();
@@ -15,37 +16,37 @@ function DeleteUser() {
             const deleteUser = await callDeleteUser();
 
             if (deleteUser && deleteUser.success) {
-                setModalContent(
-                    <>
-                        <p>{deleteUser.message}</p>
-                        <button className={styles.btn1} onClick={() => {
-                            setModalContent(null);
-                            setUser(null);
-                            navigate('/auth');
-                        }}>
-                            OK
-                        </button>
-                    </>
-                )
+                setModal({
+                    setModalContent: setModalContent,
+                    btn: false,
+                    message: (
+                        <>
+                            <p>{deleteUser.message}</p>
+                            <button className={styles.btn1} onClick={() => {
+                                setModalContent(null);
+                                setUser(null);
+                                navigate('/auth');
+                            }}>
+                                OK
+                            </button>
+                        </>
+                    )
+                })
             }
         } catch (err) {
-            setModalContent(
-                <>
-                    <p>{err.message}</p>
-                    <button
-                        className={styles.btn1}
-                        onClick={() => setModalContent(<DeleteUser />)}
-                    >
-                        OK
-                    </button>
-                </>
-            )
+            setModal({
+                setModalContent: setModalContent,
+                content: <DeleteUser />,
+                message: (<p>{err.message}</p>)
+            })
         }
     }
 
     return (
-        <Modal className={styles.deleteUser}>
+
+        <div className={styles.deleteUser}>
             <p>Really delete?</p>
+
             <div className={styles.delBtns}>
                 <button
                     type='button'
@@ -62,7 +63,7 @@ function DeleteUser() {
                     Confirm
                 </button>
             </div>
-        </Modal>
+        </div>
     );
 };
 

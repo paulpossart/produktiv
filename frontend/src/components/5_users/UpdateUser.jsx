@@ -1,108 +1,68 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Modal from '../6_ui/Modal';
-import { callUpdateUser } from '../../apiCalls/usersCalls';
-import { useModal } from '../../context/ModalContext';
-import { useAuth } from '../../context/AuthContext';
 import styles from './account.module.scss';
 
-function UpdateUser({ setIsUpdateUser }) {
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { useModal } from '../../context/ModalContext';
+import { changeInput, validSubmmission, setModal } from '../6_utils/helperFunctions';
+import { callUpdateUser } from '../../apiCalls/usersCalls';
+
+function UpdateUser() {
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [updateError, setUpdateError] = useState(null);
-
     const { setUser } = useAuth();
-
     const { setModalContent } = useModal();
-
     const navigate = useNavigate();
 
-    const safeRegex = /^[^<>{};\\]*$/;
-    const bannedRegEx = '< > { } ; \\';
 
-
-    const modalMessage = (message) => (
-        <>
-            <p>{message}</p>
-            <button
-                className={styles.btn1}
-                onClick={() => setModalContent(<UpdateUser />)}
-            >
-                OK
-            </button>
-        </>
-    );
 
     const handleChangeUsername = (e) => {
-        const bannedRegEx = '< > { } ; \\';
-        const value = e.target.value;
-        setNewUsername(value);
-
-        if (value.length > 30) {
-            setUpdateError('Username should be between 1 - 30 characters');
-        } else if (!safeRegex.test(newUsername)) {
-            setUpdateError(
-                `Username cannot contain the following characters: ${bannedRegEx}`
-            );
-        } else setUpdateError(null)
+        changeInput(e, setNewUsername, setUpdateError, 'username')
     };
 
     const handleChangePassword = (e) => {
-        const value = e.target.value;
-        setNewPassword(value);
-
-        if (value.length > 30) {
-            setUpdateError('Password should be between 6 - 30 characters');
-        } else setUpdateError(null)
+        changeInput(e, setNewPassword, setUpdateError, 'password')
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setModalContent(null);
+        const isValid = validSubmmission(newUsername, newPassword);
 
-        if (!newUsername.trim() || newUsername.length > 30) {
-            setModalContent(
-                modalMessage('Username should be between 1 - 30 characters')
-            )
+        if (!isValid.valid) {
+            setModal({
+                setModalContent: setModalContent,
+                message: isValid.message,
+                content: <UpdateUser />,
+                btnStyle: styles.btn1
+            })
             return;
-        };
-
-        if (!newPassword || newPassword.length < 6 || newPassword.length > 30) {
-            setModalContent(
-                modalMessage('Password should be between 6 - 30 characters')
-            )
-            return;
-        };
-
-        if (!safeRegex.test(newUsername)) {
-            setModalContent(
-                modalMessage(`Usernames cannot contain the following characters: ${bannedRegEx}`)
-            )
-            return;
-        };
+        }
 
         try {
             const data = await callUpdateUser(newUsername.trim(), newPassword);
             if (data && data.success) {
-                setModalContent(
-                    <>
-                        <p>{data.message}</p>
-                        <button className={styles.btn1} onClick={() => {
-                            setModalContent(null);
-                            setUser(null);
-                            navigate('/auth');
-                        }}>
-                            OK
-                        </button>
-                    </>
-                )
-            } else {
-                setModalContent(
-                    modalMessage('an error occured')
-                )
+                setModal({
+                    setModalContent: setModalContent,
+                    btn: false,
+                    message: (
+                        <>
+                            <p>{data.message}</p>
+                            <br />
+                            <button className={styles.btn1} onClick={() => {
+                                setModalContent(null);
+                                setUser(null);
+                                navigate('/auth');
+                            }}>
+                                OK
+                            </button>
+                        </>
+                    )
+                })
             }
-
         } catch (err) {
-            setModalContent(modalMessage(err.message))
+            setModal({ setModalContent: setModalContent, message: err.message });
         } finally {
             setNewUsername('');
             setNewPassword('');
@@ -110,7 +70,7 @@ function UpdateUser({ setIsUpdateUser }) {
     };
 
     return (
-        <Modal className={styles.updateUser}>
+        <div className={styles.updateUser}>
             <form onSubmit={handleSubmit}>
                 <input
                     type='text'
@@ -127,12 +87,13 @@ function UpdateUser({ setIsUpdateUser }) {
                     onChange={handleChangePassword}
                     placeholder='new password'
                 />
+                <br />
                 <div className={styles.updateBtns}>
                     <button type='button' className={styles.btn2} onClick={() => setModalContent(null)}>Cancel</button>
                     <button type='submit' className={styles.btn1}>Update</button>
                 </div>
             </form>
-        </Modal>
+        </div>
     );
 };
 

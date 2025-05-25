@@ -1,68 +1,41 @@
+import styles from './auth.module.scss';
+
+import Duk from '../6_utils/duk/Duk';
+import dukStyles from '../6_utils/duk/duk.module.scss';
+
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useModal } from '../../context/ModalContext';
+import { changeInput, validSubmmission, setModal } from '../6_utils/helperFunctions';
 import { callCreateUser } from '../../apiCalls/usersCalls';
-import styles from './auth.module.scss'
-import Duk from '../6_ui/Duk';
 
-function RegUser({ setView, setAuthError }) {
+function RegUser({ setView }) {
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [regError, setRegError] = useState(null);
     const { setUser } = useAuth();
-
-    const safeRegex = /^[^<>{};\\]*$/;
-    const bannedRegEx = '< > { } ; \\';
+    const { setModalContent } = useModal();
 
     const handleChangeUsername = (e) => {
-
-        const value = e.target.value;
-        setNewUsername(value);
-
-        if (value.length > 30) {
-            setRegError('Username should be between 1 - 30 characters');
-        } else if (!safeRegex.test(newUsername)) {
-            setRegError(
-                `Username cannot contain the following characters: ${bannedRegEx}`
-            );
-        } else setRegError(null)
-    };
+        changeInput(e, setNewUsername, setRegError, 'username')
+    }
 
     const handleChangePassword = (e) => {
-        const value = e.target.value;
-        setNewPassword(value);
-
-        if (value.length > 30) {
-            setRegError('Password should be between 6 - 30 characters');
-        } else setRegError(null)
-    };
+        changeInput(e, setNewPassword, setRegError, 'password')
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setAuthError(null);
 
-        if (!newUsername.trim() || newUsername.length > 30) {
-            setAuthError('Username should be between 1 - 30 characters');
-            return;
-        };
-
-        if (!newPassword || newPassword.length < 6 || newPassword.length > 30) {
-            setAuthError('Password should be between 6 - 30 characters');
-            return;
-        };
-
-        if (!safeRegex.test(newUsername)) {
-            setAuthError(
-                `Usernames cannot contain the following characters: ${bannedRegEx}`
-            );
-            return;
-        };
+        const isValid = validSubmmission(newUsername, newPassword, setModalContent);
+        if (!isValid) return;
 
         try {
             const data = await callCreateUser(newUsername.trim(), newPassword);
             if (data && data.userData) setUser(data.user);
             else setUser(null);
         } catch (err) {
-            setAuthError(err.message);
+            setModal({ setModalContent: setModalContent, message: err.message })
             setUser(null);
         } finally {
             setNewUsername('');
@@ -73,7 +46,7 @@ function RegUser({ setView, setAuthError }) {
     return (
         <div className={styles.formContainer}>
             <div>
-                <Duk className={styles.duk} />
+                <Duk className={dukStyles.auth} />
             </div>
             <form className={styles.form} onSubmit={handleSubmit} >
                 <input

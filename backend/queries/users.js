@@ -112,7 +112,7 @@ const updateUser = async (req, res, next) => {
 
     if (
         !isValidInput('username', updatedUsername, 1, 30)
-        || !isValidInput('passwordd', updatedPassword, 6, 30)
+        || !isValidInput('password', updatedPassword, 6, 30)
     ) {
         return res.status(400).json({
             success: false,

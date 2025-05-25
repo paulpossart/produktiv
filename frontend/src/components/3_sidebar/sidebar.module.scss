@@ -1,5 +1,4 @@
 @use '../../styles/buttons';
-@use '../../styles/modal';
 @use '../../styles/global' as *;
 
 
@@ -26,7 +25,6 @@
         background-color: rgba(0, 0, 0, 0);
         visibility: hidden;
     }
-
 
     .burger {
         @include flexRow;

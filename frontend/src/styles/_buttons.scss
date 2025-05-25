@@ -4,7 +4,6 @@
     cursor: pointer;
     line-height: 1.5;
     padding: 0.4em 0.8em;
-
     outline: none;
     border: none;
     border: solid 2px;
@@ -12,6 +11,7 @@
     border-radius: 25px;
     //white-space: nowrap;
     transform: scale(1);
+
 
     font: {
         family: $body;
@@ -71,5 +71,14 @@
             color: white;
             background-color: rgba(0, 0, 0, 0.5);
         }
+    }
+}
+
+.homeBtn {
+    @extend .btn1;
+    border-radius: 50%;
+
+    & img {
+        width: 40px;
     }
 }

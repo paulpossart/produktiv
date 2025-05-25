@@ -1,5 +1,5 @@
- @use '../../styles/buttons';
- @use '../../styles/global' as *;
+ @use '../../../styles/buttons';
+ @use '../../../styles/global' as *;
 
  .modalOverlay {
    position: fixed;
@@ -11,24 +11,25 @@
  }
 
  .modal {
-   position: absolute;
+   @extend %border;
+   @include flexCol;
+   gap: 20px;
+
+   position: fixed;
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
 
    z-index: 1001;
-
-   @extend %border;
-   @include flexCol;
-
-   min-width: 200px;
-   min-height: 180px;
-
+   width: fit-content;
+   height: fit-content;
+   max-width: 90vw;
+   max-height: 50vh;
    text-align: center;
-
    background-color: var(--main);
    color: var(--alt);
+   padding: 1.5rem;
 
-   padding: 1em;
+   overflow-wrap: anywhere;
+   white-space: normal;
  }
- 

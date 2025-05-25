@@ -1,6 +1,7 @@
-import quack from '../../assets/rubber-duk.mp3';
+import quack from '../../../assets/rubber-duk.mp3';
+import styles from './duk.module.scss';
 
-function Duk({ className }) {
+function Duk({className}) {
     const dukQuack = () => {
         const audio = new Audio(quack);
         audio.play();
@@ -10,7 +11,7 @@ function Duk({ className }) {
         <>
             <svg
                 onClick={dukQuack}
-                className={className}
+                className={`${styles.duk} ${className}`}
                 viewBox="-2.4 -2.4 28.80 28.80"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

@@ -12,7 +12,7 @@ updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 CREATE TABLE produktiv.tasks (
 id SERIAL PRIMARY KEY,
 user_id UUID NOT NULL REFERENCES produktiv.users(id),
-title VARCHAR(30),
+title VARCHAR(100),
 description VARCHAR(500),
 priority INTEGER,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

@@ -1,0 +1,55 @@
+import styles from './helper.module.scss';
+
+const safeRegex = /^[^<>{};\\]*$/;
+const bannedRegEx = '< > { } ; \\';
+
+const changeInput = (e, setValue, setError, type) => {
+    const value = e.target.value;
+    setValue(value);
+
+    if (value.length > 30) setError(`${type} should be between 1 - 30 characters`);
+    else if (!safeRegex.test(value) && type === 'username') setError(`username cannot contain the following characters: ${bannedRegEx}`);
+    else setError(null);
+};
+
+const validSubmmission = (username, password) => {
+    if (!username.trim() || username.length > 30) {
+        return {
+            valid: false,
+            message: 'username should be between 1 - 30 characters'
+        };
+    };
+
+    if (!password || password.length < 6 || password.length > 30) {
+        return {
+            valid: false,
+            message: 'password should be between 6 - 30 characters'
+        };
+    };
+
+    if (!safeRegex.test(username)) {
+        return {
+            valid: false,
+            message: `username cannot contain the following characters: ${bannedRegEx}`
+        };
+    }
+    return { valid: true };
+};
+
+const setModal = ({
+    setModalContent,
+    message,
+    content = null,
+    btn = true,
+    btnStyle = styles.btn1,
+    divStyle = styles.modal
+}) => {
+    setModalContent(
+        <div className={divStyle}>
+            <div>{message}</div>
+            {btn && <button className={btnStyle} onClick={() => setModalContent(content)}>OK</button>}
+        </div>
+    )
+};
+
+export { changeInput, validSubmmission, setModal };

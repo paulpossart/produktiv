@@ -1,5 +1,4 @@
 @use '../../styles/buttons';
-@use '../../styles/modal';
 @use '../../styles/global' as *;
 
 .account {
@@ -31,14 +30,11 @@
 }
 
 .updateUser {
-    position: absolute;
-    height: 200px;
-    width: 230px;
-
+    
     & form {
+        @include flexCol(space-between);
         height: 100%;
         width: 100%;
-        @include flexCol(space-between);
 
         & input {
             margin: 1rem;
@@ -51,17 +47,21 @@
         }
 
         .updateBtns {
+            @include flexRow(space-around);
             width: 100%;
-            @include flexRow(space-between);
         }
     }
 }
 
 .deleteUser {
-    width: 220px;
+    @include flexCol;
+    gap: 20px;
 
+    width: 200px;
+    height: 150px;
+    
     .delBtns {
-        width: 100%;
-        @include flexRow(space-between);
+        @include flexRow(space-around);
+        width: 100%;  
     }
 }
