@@ -26,4 +26,49 @@ const callGetTasks = async () => {
     return data
 }
 
-export { callCreateTasks, callGetTasks };
+const callEditTasksById = async (taskId, newTitle, newDescription) => {
+    console.log(taskId, newTitle, newDescription)
+    const response = await fetch(`/api/tasks/${taskId}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            newTitle,
+            newDescription
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+    return data;
+};
+
+const callPrioritiseTasksById = async (taskId, operator, adjacentTaskId) => {
+    const response = await fetch(`/api/tasks/${taskId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+            operator,
+            adjacentTaskId
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    });
+    if (!response.ok) throw new Error('unable to update task priority')
+    return;
+};
+
+const callDeleteTasksById = async (taskId) => {
+    const response = await fetch(`/api/tasks/${taskId}`, {
+        method: 'DELETE',
+        credentials: 'include'
+    });
+    if (!response.ok) throw new Error('unable to delete task');
+    return;
+};
+
+export {
+    callCreateTasks,
+    callGetTasks,
+    callEditTasksById,
+    callPrioritiseTasksById,
+    callDeleteTasksById
+};

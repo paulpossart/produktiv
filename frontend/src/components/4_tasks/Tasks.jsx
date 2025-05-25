@@ -10,6 +10,7 @@ import styles from './tasks.module.scss';
 import { callGetTasks } from '../../apiCalls/tasksCalls';
 
 
+
 function Tasks() {
     const [tasks, setTasks] = useState([]);
     const [fetchError, setFetchError] = useState('');
@@ -31,7 +32,13 @@ function Tasks() {
         setModal({
             setModalContent: setModalContent,
             btn: false,
-            message: <CreateTasks fetchTasks={fetchTasks} />
+            message: <CreateTasks
+                fetchTasks={fetchTasks}
+                prevTask={
+                    tasks.length !== 0
+                        ? tasks[0]
+                        : null
+                } />
         });
     }
 

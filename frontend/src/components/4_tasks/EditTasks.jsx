@@ -1,34 +1,39 @@
 import { useState } from 'react';
-import { callCreateTasks } from '../../apiCalls/tasksCalls';
-import Modal from '../6_utils/modal/Modal';
-import { setModal } from '../6_utils/helperFunctions';
+import { callEditTasksById } from '../../apiCalls/tasksCalls';
+
 import { useModal } from '../../context/ModalContext';
+import { setModal } from '../6_utils/helperFunctions';
+
 import styles from './tasks.module.scss';
 
-function CreateTasks({ fetchTasks, prevTask }) {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+function EditTasks({
+    fetchTasks,
+    taskId,
+    originalTitle,
+    originalDescription
+}) {
+    const [newTitle, setNewTitle] = useState(originalTitle);
+    const [newDescription, setNewDescription] = useState(originalDescription);
     const { setModalContent } = useModal();
-
-    const prevId = prevTask ? prevTask.id : 0;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (!title.trim()) {
+        if (!newTitle.trim()) {
             setModal({
                 setModalContent: setModalContent,
                 message: 'title cannot be empty',
-                content: <CreateTasks
+                content: <EditTasks
                     fetchTasks={fetchTasks}
-                    prevTask={prevTask}
+                    taskId={taskId}
+                    originalTitle={originalTitle}
+                    originalDescription={originalDescription}
                 />
             });
             return;
         }
 
         try {
-            const data = await callCreateTasks(title, description, prevId);
+            const data = await callEditTasksById(taskId, newTitle, newDescription);
             if (data && data.success) {
                 setModal({
                     setModalContent: setModalContent,
@@ -41,29 +46,28 @@ function CreateTasks({ fetchTasks, prevTask }) {
                 message: err.message
             });
         } finally {
-            setTitle('');
-            setDescription('');
+            setNewTitle('');
+           setNewDescription('');
             fetchTasks();
         }
-    };
-
+    }
+    
     return (
         <div className={styles.newTask}>
             <form onSubmit={handleSubmit}>
                 <input
                     type='text'
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder='title'
+                    value={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)}
                 />
                 <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder='description'
+                    value={newDescription}
+                    onChange={(e) => setNewDescription(e.target.value)}
+
                 />
                 <div className={styles.taskBtns}>
                     <button className={styles.btn2} type='button' onClick={() => setModalContent(null)}>Cancel</button>
-                    <button className={styles.btn1} type='submit'>Add</button>
+                    <button className={styles.btn1} type='submit'>Save</button>
                 </div>
 
             </form>
@@ -71,4 +75,4 @@ function CreateTasks({ fetchTasks, prevTask }) {
     );
 };
 
-export default CreateTasks;
+export default EditTasks;

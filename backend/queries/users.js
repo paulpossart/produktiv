@@ -14,7 +14,7 @@ const createUser = async (req, res, next) => {
 
     if (
         !isValidInput('username', newUsername, 1, 30)
-        || !isValidInput('passwordd', newPassword, 6, 30)
+        || !isValidInput('password', newPassword, 6, 30)
     ) {
         return res.status(400).json({
             userData: false,
