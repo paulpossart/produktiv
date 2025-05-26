@@ -108,11 +108,12 @@
 
             display: grid;
             grid-template-areas: 'priority title expand';
-            grid-template-columns: 20% 60% 20%;
+            grid-template-columns: 10% 75% 15%;
 
             .priority {
                 grid-area: priority;
                 @include flexCol;
+                gap: 3px;
             }
 
             .title {
@@ -128,72 +129,129 @@
             .expand {
                 grid-area: expand;
                 @include flexCol(center);
-            }
-        }
-
-        .taskBody {
-            display: grid;
-            grid-template-areas: 'description buttons';
-            grid-template-columns: 1fr auto;
-
-
-            transition:
-                max-height 1s ease-in-out,
-                opacity 1s ease-in-out,
-                visibility 1s ease-in-out;
-
-            .descBox {
-                grid-area: description;
-
-                max-height: 200px;
-                overflow-y: scroll;
-                margin: 1rem;
-                background-color: var(--textInput);
-                border: solid $mainGrey 1px;
-                border-radius: 8px;
-                text-align: left;
-                padding: 1rem;
-                overflow-wrap: anywhere;
-                white-space: normal;
-                font-size: clamp(8px, 1.6rem, 18px);
-
-                transition: background-color 1s ease-in-out;
-            }
-
-            .btnCont {
-                grid-area: buttons;
-                margin-top: 1rem;
-                margin-right: 1rem;
-
-                box-sizing: border-box;
-
-                @include flexCol(flex-start);
 
                 & button {
-                    box-sizing: border-box;
-                    margin-bottom: 1rem;
-                    border-radius: 50%;
+                    position: relative;
+                    width: 40px;
+                    height: 40px;
+                    padding: 0;
+
 
                     & img {
-                        width: 25px;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        padding: 0;
+                        margin: 0;
+                        width: 30px;
                     }
 
+                    .expandDown {
+                        transform: translate(-50%, -50%) scaleY(1); //rotate(0deg);
+                        transition: transform 1s ease-in-out;
+                    }
+
+                    .expandUp {
+                        transform: translate(-50%, -50%) scaleY(-1); //rotate(540deg);
+                        transition: transform 1s ease-in-out;
+                    }
                 }
             }
         }
+    }
 
-        .tasksOpen {
-            max-height: 300px;
-            opacity: 1;
-            visibility: visible;
-            overflow: auto;
+    .taskBody {
+        display: grid;
+        grid-template-areas: 'description buttons';
+        grid-template-columns: 1fr auto;
+
+
+        transition:
+            max-height 1s ease-in-out,
+            opacity 1s ease-in-out,
+            visibility 1s ease-in-out;
+
+        .descBox {
+            grid-area: description;
+
+            max-height: 200px;
+            overflow-y: scroll;
+            margin: 1rem;
+            background-color: var(--textInput);
+            border: solid $mainGrey 1px;
+            border-radius: 8px;
+            text-align: left;
+            padding: 1rem;
+            overflow-wrap: anywhere;
+            white-space: normal;
+            font-size: clamp(8px, 1.6rem, 18px);
+
+            transition: background-color 1s ease-in-out;
         }
 
-        .tasksClosed {
-            max-height: 0;
-            opacity: 0;
-            visibility: hidden;
-            overflow: hidden;
+        .btnCont {
+            grid-area: buttons;
+            margin-top: 1rem;
+            margin-right: 1rem;
+
+            box-sizing: border-box;
+
+            @include flexCol(flex-start);
+
+            & button {
+                box-sizing: border-box;
+                margin-bottom: 1rem;
+                border-radius: 50%;
+
+                & img {
+                    width: 25px;
+                }
+
+            }
+        }
+    }
+
+    .tasksOpen {
+        max-height: 300px;
+        opacity: 1;
+        visibility: visible;
+        overflow: auto;
+    }
+
+    .tasksClosed {
+        max-height: 0;
+        opacity: 0;
+        visibility: hidden;
+        overflow: hidden;
+    }
+}
+
+
+.priority {
+
+    & button {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+
+        & img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0;
+            margin: 0;
+            width: 30px;
+        }
+
+        .upBtn {
+            top: 45%;
+        }
+
+        .downBtn {
+            top: 55%;
+            transform: translate(-50%, -50%) scaleY(-1);
         }
     }
 }

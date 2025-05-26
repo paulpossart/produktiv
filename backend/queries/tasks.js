@@ -4,7 +4,7 @@ import pool from '../db/config.js';
 const createTasks = async (req, res, next) => {
     const userId = req.userId;
     const { title, description, prevId } = req.body;
-    let newPriority = 100;
+    let newPriority = 1000;
 
     if (!isValidInput('title', title, 1, 100)
         || !isValidInput('description', description, 0, 500)) {
@@ -97,31 +97,55 @@ const editTasksById = async (req, res, next) => {
 const prioritiseTasksById = async (req, res, next) => {
     const userId = req.userId;
     const taskId = parseInt(req.params.id);
-    const { operator, adjacentTaskId } = req.body;
+    const { operator, adjacentTaskId, adjacentAdjacentTaskId } = req.body;
 
     if (operator !== '+' && operator !== '-') {
         return res.sendStatus(400)
     }
     try {
-        const result = await pool.query(
+        const adjResult = await pool.query(
             `SELECT priority FROM produktiv.tasks
              WHERE id = $1 AND user_id = $2`,
             [adjacentTaskId, userId]
         );
 
-        const adjPriority = result.rows[0].priority;
+        //========================
+        if (adjResult.rows.length === 0) {
+            return res.sendStatus(404);
+        }
+        //=====================
 
-        const newPriority = operator === '+'
+        const adjPriority = adjResult.rows[0].priority;
+        console.log(adjPriority)
+        let adjAdjPriority = operator === '+' ? 1000 : 0;
+
+        if (adjacentAdjacentTaskId !== null) {
+            const adjAdjResult = await pool.query(
+                `SELECT priority FROM produktiv.tasks
+                 WHERE id = $1 AND user_id = $2`,
+                [adjacentAdjacentTaskId, userId]
+            );
+
+            if (adjAdjResult.rows.length === 0) {
+                return res.sendStatus(404);
+            }
+
+            adjAdjPriority = adjAdjResult.rows[0].priority;
+        }
+
+        const newPriority = Math.floor((adjPriority + adjAdjPriority) / 2);
+
+        /*const newPriority = operator === '+'
             ? adjPriority + 1
-            : adjPriority - 1;
+            : adjPriority - 1;*/
 
         await pool.query(
             `UPDATE produktiv.tasks
-                 SET priority = $1
-                 WHERE id = $2 AND user_id = $3`,
+             SET priority = $1
+             WHERE id = $2 AND user_id = $3`,
             [newPriority, taskId, userId]
         );
-        res.sendStatus(204);
+        res.sendStatus(204); 
     } catch (err) {
         next(err);
     }
