@@ -24,10 +24,6 @@
     border-color 0.25s ease-in-out,
     transform 0.1s ease-in-out,
     background-color 0.25s ease-in-out;
-
-    &:active {
-        transform: scale(0.9);
-    }
 }
 
 .btn1 {
@@ -41,6 +37,11 @@
             border-color: var(--btn1Hover);
             background-color: var(--btn1Hover);
         }
+    }
+
+    &:active {
+        transform: scale(0.9);
+        background-color: var(--btn1Hover);
     }
 }
 
@@ -57,20 +58,30 @@
             background-color: $mainGreyHover;
         }
     }
+
+    &:active {
+        transform: scale(0.9);
+        background-color: $mainGreyHover;
+    }
 }
 
 .btn3 {
     @extend %button;
+
     color: white;
     background-color: rgba(0, 0, 0, 0);
-    border-color: var(--main);
+    border-radius: 50%;
+    border-color: transparent;
 
     @media (hover: hover) and (pointer: fine) {
         &:hover {
-            border-color: var(--main);
-            color: white;
             background-color: rgba(0, 0, 0, 0.5);
         }
+    }
+
+    &:active {
+        transform: scale(0.9);
+        background-color: rgba(0, 0, 0, 0.25);
     }
 }
 

@@ -42,16 +42,22 @@ const callEditTasksById = async (taskId, newTitle, newDescription) => {
     return data;
 };
 
-const callPrioritiseTasksById = async (taskId, operator, adjacentTaskId) => {
+const callPrioritiseTasksById = async (taskId, operator, adjacentTaskId, adjacentAdjacentTaskId) => {
     const response = await fetch(`/api/tasks/${taskId}`, {
         method: 'PATCH',
         body: JSON.stringify({
             operator,
-            adjacentTaskId
+            adjacentTaskId,
+            adjacentAdjacentTaskId
         }),
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
     });
+    //==============
+    //const data = await response.json();
+    //if (!response.ok) throw new Error(data.message)
+    //if (response.ok) throw new Error(data.message)
+    //========================
     if (!response.ok) throw new Error('unable to update task priority')
     return;
 };

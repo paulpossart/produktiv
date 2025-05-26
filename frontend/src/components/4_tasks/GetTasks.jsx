@@ -4,6 +4,8 @@ import PrioritiseTasks from './PrioritiseTasks';
 import DeleteTasks from './DeleteTasks';
 import styles from './tasks.module.scss';
 
+import expandIcon from '../../assets/expand.svg';
+
 
 import editIcon from '../../assets/edit.svg';
 import { setModal } from '../6_utils/helperFunctions';
@@ -53,12 +55,17 @@ function GetTasks({ fetchTasks, tasks }) {
                                             taskId={task.id}
                                             fetchTasks={fetchTasks}
                                             prevTask={tasks[index - 1] || null}
+                                            prevPrevTask={tasks[index - 2] || null}
                                             nextTask={tasks[index + 1] || null}
+                                            nextNextTask={tasks[index + 2] || null}
+
                                         />
                                     </div>
                                     <h3 className={styles.title}>{task.title}</h3>
                                     <div className={styles.expand}>
-                                        <button onClick={() => openTasks(task.id)}></button>
+                                        <button className={styles.btn3} onClick={() => openTasks(task.id)}>
+                                            <img className={tasksOpen[task.id] ? styles.expandUp : styles.expandDown} src={expandIcon} />
+                                        </button>
                                     </div>
                                 </div>
 
