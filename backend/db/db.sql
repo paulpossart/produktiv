@@ -1,4 +1,4 @@
-CREATE SCHEMA produktiv
+CREATE SCHEMA produktiv;
 
 CREATE TABLE produktiv.users (
 id UUID PRIMARY KEY,
