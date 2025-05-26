@@ -18,6 +18,7 @@ const callCreateUser = async (newUsername, newPassword) => {
 };
 
 const callGetUser = async () => {
+    console.log(backendUrl)
     const response = await fetch(`${backendUrl}/api/users`, {
         method: 'GET',
         credentials: 'include'
