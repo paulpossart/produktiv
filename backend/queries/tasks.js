@@ -4,7 +4,7 @@ import pool from '../db/config.js';
 const createTasks = async (req, res, next) => {
     const userId = req.userId;
     const { title, description, prevId } = req.body;
-    let newPriority = 1000;
+    let newPriority = 100;
 
     if (!isValidInput('title', title, 1, 100)
         || !isValidInput('description', description, 0, 500)) {
@@ -52,6 +52,19 @@ const getTasks = async (req, res, next) => {
     const userId = req.userId;
 
     try {
+        await pool.query(
+            `WITH prioritise AS (
+             SELECT id, ROW_NUMBER() OVER (ORDER BY priority ASC) AS row_num
+             FROM produktiv.tasks
+             WHERE user_id = $1
+            )
+             UPDATE produktiv.tasks
+             SET priority = 1000 * prioritise.row_num
+             FROM prioritise
+             WHERE produktiv.tasks.id = prioritise.id`,
+             [userId]
+        )
+
         const result = await pool.query(
             `SELECT id, title, description, priority
             FROM produktiv.tasks
@@ -116,8 +129,8 @@ const prioritiseTasksById = async (req, res, next) => {
         //=====================
 
         const adjPriority = adjResult.rows[0].priority;
-        console.log(adjPriority)
-        let adjAdjPriority = operator === '+' ? 1000 : 0;
+       // console.log(adjPriority)
+        let adjAdjPriority = operator === '+' ? adjPriority * 2 : 0;
 
         if (adjacentAdjacentTaskId !== null) {
             const adjAdjResult = await pool.query(
@@ -133,7 +146,7 @@ const prioritiseTasksById = async (req, res, next) => {
             adjAdjPriority = adjAdjResult.rows[0].priority;
         }
 
-        const newPriority = Math.floor((adjPriority + adjAdjPriority) / 2);
+        const newPriority = Math.ceil((adjPriority + adjAdjPriority) / 2);
 
         /*const newPriority = operator === '+'
             ? adjPriority + 1
@@ -145,7 +158,7 @@ const prioritiseTasksById = async (req, res, next) => {
              WHERE id = $2 AND user_id = $3`,
             [newPriority, taskId, userId]
         );
-        res.sendStatus(204); 
+        res.sendStatus(204);
     } catch (err) {
         next(err);
     }
