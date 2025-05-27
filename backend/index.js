@@ -13,7 +13,7 @@ import { isProd } from './queries/helperFunctions.js';
 
 const app = express();
 
-const allowedOrigin = process.env.ALLOWED_URL
+const allowedOrigin = process.env.ALLOWED_URL.split(',');
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
