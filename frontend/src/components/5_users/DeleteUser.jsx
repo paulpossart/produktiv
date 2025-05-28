@@ -36,8 +36,7 @@ function DeleteUser() {
         } catch (err) {
             setModal({
                 setModalContent: setModalContent,
-                content: <DeleteUser />,
-                message: (<p>{err.message}</p>)
+                message: (<p>{err.message}</p>),
             })
         }
     }

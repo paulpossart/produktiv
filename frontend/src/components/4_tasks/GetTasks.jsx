@@ -92,8 +92,7 @@ function GetTasks({ fetchTasks, tasks }) {
                 </ul >
             ) : (
                 <p>Please add a task</p>
-            )
-            }
+            )}
         </div>
     )
 };

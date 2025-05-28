@@ -19,10 +19,13 @@ function CreateTasks({ fetchTasks, prevTask }) {
             setModal({
                 setModalContent: setModalContent,
                 message: 'title cannot be empty',
-                content: <CreateTasks
-                    fetchTasks={fetchTasks}
-                    prevTask={prevTask}
-                />
+                content: () => setModal({
+                    setModalContent: setModalContent,
+                    btn: false,
+                    message: <CreateTasks
+                        fetchTasks={fetchTasks}
+                        prevTask={prevTask} />
+                })
             });
             return;
         }

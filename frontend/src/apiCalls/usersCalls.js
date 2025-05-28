@@ -60,6 +60,7 @@ const callDeleteUser = async () => {
     });
 
     const data = await response.json();
+    console.log(data);
     if (!response.ok) throw new Error('Unable to delete user');
     return data;
 }
