@@ -2,31 +2,27 @@
 @use '../../styles/global' as *;
 
 .head {
-    width: 350px;
-    margin: 0 auto;
     @extend %border;
 
     position: relative;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: var(--divShadow);
+    padding: 1rem 2rem;
+    z-index: -2;
+
     background-image: url('../../assets/duk-img.jpg');
     background-size: cover;
-    background-position: center;
-
-    padding: 1rem;
-
-    z-index: -2;
+    background-position: 0 60%;
 
     display: grid;
     grid-template-areas: 'duk title sidebar';
     grid-template-columns: 25% 50% 25%;
 
-    box-shadow: var(--divShadow);
-
-
     .overlay {
         position: absolute;
         inset: 0;
         border-radius: 4px;
-
         z-index: -1;
         transition: opacity 1s ease-in-out;
     }
@@ -53,9 +49,12 @@
 
     .duk {
         grid-area: duk;
+        @include flexRow(flex-start);
     }
 
     .title {
+        @include flexRow;
+
         grid-area: title;
 
         color: var(--titleColor);
@@ -68,6 +67,12 @@
             text-shadow 1s ease-in-out,
             color 1s ease-in-out;
 
+        font: {
+            family: $title;
+            weight: 500;
+            size: clamp(2.5rem, 4vw, 6rem)
+        }
+
         span {
             color: var(--titleSpanColor);
             text-shadow: 1px 1px 0 var(--titleSpanShadow),
@@ -79,14 +84,6 @@
                 text-shadow 1s ease-in-out,
                 color 1s ease-in-out;
         }
-
-        font: {
-            family: $title;
-            size: 2.5rem;
-            weight: 500;
-        }
-
-        @include flexRow;
     }
 
     .sidebar {

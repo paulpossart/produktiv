@@ -29,6 +29,22 @@ $borderColor: rgb(136, 136, 136);
             rgba($col, $col, $col, 0.1) 100%);
 }
 
+@mixin formStyle {
+    @include flexCol;
+    height: 80%;
+    width: 100%;
+
+    & input {
+        max-width: 90%;
+        background-color: var(--textInput);
+        color: var(--alt);
+        border: solid $mainGrey 1px;
+        border-radius: 8px;
+        padding: 0.4em;
+        font-family: $body;
+    }
+}
+
 %border {
     border: solid, $borderColor 4px;
     border-radius: 8px;
