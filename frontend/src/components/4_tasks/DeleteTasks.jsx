@@ -2,14 +2,21 @@ import { callDeleteTasksById } from '../../apiCalls/tasksCalls';
 import { useModal } from '../../context/ModalContext';
 import { setModal } from '../6_utils/helperFunctions';
 import styles from './tasks.module.scss';
-import deleteIcon from '../../assets/delete.svg';
 
 function DeleteTasks({ taskId, fetchTasks }) {
     const { setModalContent } = useModal();
 
     const handleDelete = async () => {
         try {
-            await callDeleteTasksById(taskId);
+            const deleteTask = await callDeleteTasksById(taskId);
+
+            if (deleteTask) {
+                setModal({
+                    setModalContent: setModalContent,
+                    message: 'task deleted'
+                })
+            }
+            
             fetchTasks();
         } catch (err) {
             setModal({
@@ -20,9 +27,26 @@ function DeleteTasks({ taskId, fetchTasks }) {
     }
 
     return (
-        <button className={styles.btn1} onClick={handleDelete}>
-            <img src={deleteIcon} />
-        </button>
+        <div className={styles.deleteUser}>
+            <p>Really delete?</p>
+
+            <div className={styles.delBtns}>
+                <button
+                    type='button'
+                    className={styles.btn2}
+                    onClick={() => setModalContent(null)}
+                >
+                    Cancel
+                </button>
+                <button
+                    type='button'
+                    className={styles.btn1}
+                    onClick={handleDelete}
+                >
+                    Confirm
+                </button>
+            </div>
+        </div>
     );
 };
 

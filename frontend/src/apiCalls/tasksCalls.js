@@ -70,7 +70,7 @@ const callDeleteTasksById = async (taskId) => {
         credentials: 'include'
     });
     if (!response.ok) throw new Error('unable to delete task');
-    return;
+    return true;
 };
 
 export {

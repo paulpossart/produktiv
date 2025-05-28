@@ -15,7 +15,7 @@ function DeleteUser() {
         try {
             const deleteUser = await callDeleteUser();
 
-            if (deleteUser && deleteUser.success) {
+            if (deleteUser?.success) {
                 setModal({
                     setModalContent: setModalContent,
                     btn: false,
@@ -36,8 +36,7 @@ function DeleteUser() {
         } catch (err) {
             setModal({
                 setModalContent: setModalContent,
-                content: <DeleteUser />,
-                message: (<p>{err.message}</p>)
+                message: (<p>{err.message}</p>),
             })
         }
     }

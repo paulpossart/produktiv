@@ -22,19 +22,23 @@ function EditTasks({
             setModal({
                 setModalContent: setModalContent,
                 message: 'title cannot be empty',
-                content: <EditTasks
-                    fetchTasks={fetchTasks}
-                    taskId={taskId}
-                    originalTitle={originalTitle}
-                    originalDescription={originalDescription}
-                />
+                content: () => setModal({
+                    setModalContent: setModalContent,
+                    btn: false,
+                    message: <EditTasks
+                        taskId={taskId}
+                        fetchTasks={fetchTasks}
+                        originalTitle={originalTitle}
+                        originalDescription={originalDescription}
+                    />
+                })
             });
             return;
         }
 
         try {
             const data = await callEditTasksById(taskId, newTitle, newDescription);
-            if (data && data.success) {
+            if (data?.success) {
                 setModal({
                     setModalContent: setModalContent,
                     message: data.message
@@ -47,11 +51,11 @@ function EditTasks({
             });
         } finally {
             setNewTitle('');
-           setNewDescription('');
+            setNewDescription('');
             fetchTasks();
         }
     }
-    
+
     return (
         <div className={styles.newTask}>
             <form onSubmit={handleSubmit}>

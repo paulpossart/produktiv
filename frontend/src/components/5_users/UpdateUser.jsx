@@ -34,15 +34,19 @@ function UpdateUser() {
             setModal({
                 setModalContent: setModalContent,
                 message: isValid.message,
-                content: <UpdateUser />,
-                btnStyle: styles.btn1
+                btnStyle: styles.btn1,
+                content: () => setModal({
+                    setModalContent: setModalContent,
+                    btn: false,
+                    message: <UpdateUser />
+                })
             })
             return;
         }
 
         try {
             const data = await callUpdateUser(newUsername.trim(), newPassword);
-            if (data && data.success) {
+            if (data?.success) {
                 setModal({
                     setModalContent: setModalContent,
                     btn: false,

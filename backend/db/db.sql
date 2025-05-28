@@ -11,7 +11,7 @@ updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 CREATE TABLE produktiv.tasks (
 id SERIAL PRIMARY KEY,
-user_id UUID NOT NULL REFERENCES produktiv.users(id),
+user_id UUID NOT NULL REFERENCES produktiv.users(id) ON DELETE CASCADE,
 title VARCHAR(100),
 description VARCHAR(500),
 priority INTEGER,

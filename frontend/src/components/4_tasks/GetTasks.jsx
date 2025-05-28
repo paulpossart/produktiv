@@ -8,6 +8,8 @@ import expandIcon from '../../assets/expand.svg';
 
 
 import editIcon from '../../assets/edit.svg';
+import deleteIcon from '../../assets/delete.svg';
+
 import { setModal } from '../6_utils/helperFunctions';
 import { useModal } from '../../context/ModalContext';
 
@@ -35,6 +37,17 @@ function GetTasks({ fetchTasks, tasks }) {
                 fetchTasks={fetchTasks}
                 originalTitle={taskTitle}
                 originalDescription={taskDescription}
+            />
+        })
+    }
+
+    const handleDelete = (taskId, fetchTasks) => {
+        setModal({
+            setModalContent: setModalContent,
+            btn: false,
+            message: <DeleteTasks
+                taskId={taskId}
+                fetchTasks={fetchTasks}
             />
         })
     }
@@ -82,7 +95,12 @@ function GetTasks({ fetchTasks, tasks }) {
                                         )}>
                                             <img src={editIcon} />
                                         </button>
-                                        <DeleteTasks taskId={task.id} fetchTasks={fetchTasks} />
+                                        <button className={styles.btn1} onClick={() => handleDelete(
+                                            task.id, fetchTasks
+                                        )}>
+                                            <img src={deleteIcon} />
+                                        </button>
+
                                     </div>
                                 </div>
 
@@ -92,8 +110,7 @@ function GetTasks({ fetchTasks, tasks }) {
                 </ul >
             ) : (
                 <p>Please add a task</p>
-            )
-            }
+            )}
         </div>
     )
 };
