@@ -32,7 +32,7 @@ function CreateTasks({ fetchTasks, prevTask }) {
 
         try {
             const data = await callCreateTasks(title, description, prevId);
-            if (data && data.success) {
+            if (data?.success) {
                 setModal({
                     setModalContent: setModalContent,
                     message: data.message

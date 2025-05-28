@@ -38,7 +38,7 @@ function EditTasks({
 
         try {
             const data = await callEditTasksById(taskId, newTitle, newDescription);
-            if (data && data.success) {
+            if (data?.success) {
                 setModal({
                     setModalContent: setModalContent,
                     message: data.message

@@ -19,7 +19,7 @@ function SignIn({ setView }) {
         e.preventDefault();
         try {
             const data = await callSignIn(username, password);
-            if (data && data.userData) setUser(data.user);
+            if (data?.userData) setUser(data.user);
             else setUser(null);
         } catch (err) {
             setModal({setModalContent: setModalContent, message: err.message});

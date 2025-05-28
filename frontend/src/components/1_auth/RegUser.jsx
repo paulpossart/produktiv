@@ -32,7 +32,7 @@ function RegUser({ setView }) {
 
         try {
             const data = await callCreateUser(newUsername.trim(), newPassword);
-            if (data && data.userData) setUser(data.user);
+            if (data?.userData) setUser(data.user);
             else setUser(null);
         } catch (err) {
             setModal({ setModalContent: setModalContent, message: err.message })

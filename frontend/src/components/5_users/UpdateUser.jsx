@@ -46,7 +46,7 @@ function UpdateUser() {
 
         try {
             const data = await callUpdateUser(newUsername.trim(), newPassword);
-            if (data && data.success) {
+            if (data?.success) {
                 setModal({
                     setModalContent: setModalContent,
                     btn: false,

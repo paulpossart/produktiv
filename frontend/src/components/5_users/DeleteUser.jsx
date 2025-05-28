@@ -15,7 +15,7 @@ function DeleteUser() {
         try {
             const deleteUser = await callDeleteUser();
 
-            if (deleteUser && deleteUser.success) {
+            if (deleteUser?.success) {
                 setModal({
                     setModalContent: setModalContent,
                     btn: false,
