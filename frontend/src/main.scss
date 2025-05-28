@@ -3,21 +3,15 @@
 body.dark {
   --main: rgb(12, 12, 20);
   --alt: white;
-
   --div: rgba(0, 0, 0, 0);
   --divShadow: none;
-
-  // --taskHead: rgb(102, 102, 102);
   --taskBody: rgb(32, 32, 40);
-
   --textInput: black;
-
   --headOverlay: linear-gradient(90deg,
       rgba(0, 0, 0, 1) 0%,
       rgba(0, 0, 0, 1) 25%,
       rgba(0, 0, 0, 0.5) 75%,
       rgba(0, 0, 0, 0.1) 100%);
-
   --titleColor: white;
   --titleShadow: black;
   --titleSpanColor: black;
@@ -30,21 +24,15 @@ body.dark {
 body.light {
   --main: rgb(240, 240, 248);
   --alt: black;
-
   --div: white;
   --divShadow: 0 6px 12px grey;
-
-  // --taskHead: rgb(102, 102, 102);
   --taskBody: rgb(240, 240, 248);
-
   --textInput: white;
-
   --headOverlay: linear-gradient(90deg,
       rgba(255, 255, 255, 1) 0%,
       rgba(255, 255, 255, 1) 25%,
       rgba(255, 255, 255, 0.5) 75%,
       rgba(255, 255, 255, 0.1) 100%);
-
   --titleColor: black;
   --titleShadow: white;
   --titleSpanColor: yellow;
@@ -58,8 +46,6 @@ body.light {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
-
-
 
 html,
 body {
@@ -75,7 +61,7 @@ html {
 body {
   font: {
     family: 'Roboto';
-    size: 1.6rem
+    size: 1.6rem;
   }
 
   background-color: var(--main);
