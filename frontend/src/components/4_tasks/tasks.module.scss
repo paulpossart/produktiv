@@ -2,91 +2,69 @@
 @use '../../styles/global' as *;
 
 .homeDiv {
-    width: 350px;
-    margin: 0 auto;
-}
-
-.welcome {
-    @extend %border;
-    @include flexCol;
-
     width: 100%;
-    min-height: 150px;
-    background-color: var(--div);
-    box-shadow: var(--divShadow);
-    transition:
-        background-color 1s ease-in-out,
-        box-shadow 1s ease-in-out;
+    margin: 0 auto;
 
-    & button {
-        @include flexRow(space-between);
+    @media only screen and (orientation: landscape) {
+        grid-area: welcome;
+        height: 100%;
+    }
 
-        width: 70%;
+    .welcome {
+        @extend %border;
+        @include flexCol;
 
-        & img {
-            width: 30px;
-            background-color: var(--btn1);
-            padding: 0.5rem;
-            border-radius: 50%;
+        width: 100%;
+        min-height: 150px;
+        background-color: var(--div);
+        box-shadow: var(--divShadow);
+        transition:
+            background-color 1s ease-in-out,
+            box-shadow 1s ease-in-out;
 
-            @media (hover: hover) and (pointer: fine) {
-                &:hover {
-                    border-color: var(--btn1Hover);
-                    background-color: var(--btn1Hover);
+        & button {
+            @include flexRow(space-between);
+
+            width: 70%;
+
+            & img {
+                width: 30px;
+                background-color: var(--btn1);
+                padding: 0.5rem;
+                border-radius: 50%;
+
+                @media (hover: hover) and (pointer: fine) {
+                    &:hover {
+                        border-color: var(--btn1Hover);
+                        background-color: var(--btn1Hover);
+                    }
                 }
             }
         }
     }
-}
 
-.newTask {
-    @include flexRow;
+    .tasksContainer {
+        @extend %border;
 
-    width: 280px;
+        width: 100%;
+        max-height: 95vh;
+        overflow-y: auto;
+        margin-top: 10px;
+        background-color: var(--div);
+        box-shadow: var(--divShadow);
 
-    & form {
-        height: 100%;
-        width: 90%;
-        @include flexCol;
-
-        & input {
-            margin: 1rem;
-            background-color: var(--textInput);
-            color: var(--alt);
-            border: solid $mainGrey 1px;
-            border-radius: 8px;
-            padding: 0.4em;
-            font-family: $body;
-            width: 100%;
-        }
-
-        & textarea {
-            margin: 1rem;
-            background-color: var(--textInput);
-            color: var(--alt);
-            border: solid $mainGrey 1px;
-            border-radius: 8px;
-            padding: 0.4em;
-            font-family: $body;
-            height: 100px;
-            width: 100%;
-        }
-
-        & .taskBtns {
-            width: 100%;
-            @include flexRow(flex-end);
-            gap: 10px;
-
+        @media only screen and (orientation: landscape) {
+            grid-area: tasks;
+            margin: 0;
         }
     }
-}
 
-.tasksContainer {
-    @extend %border;
-    width: 100%;
-    max-height: 95vh;
-    overflow-y: auto;
-    margin-top: 10px;
+    @media only screen and (orientation: landscape) {
+        display: grid;
+        grid-template-areas: 'welcome tasks';
+        grid-template-columns: 40% 1fr;
+        gap: 10px;
+    }
 }
 
 .tasksDiv {
@@ -252,6 +230,48 @@
         .downBtn {
             top: 55%;
             transform: translate(-50%, -50%) scaleY(-1);
+        }
+    }
+}
+
+.newTask {
+    @include flexRow;
+
+    width: 280px;
+
+    & form {
+        height: 100%;
+        width: 90%;
+        @include flexCol;
+
+        & input {
+            margin: 1rem;
+            background-color: var(--textInput);
+            color: var(--alt);
+            border: solid $mainGrey 1px;
+            border-radius: 8px;
+            padding: 0.4em;
+            font-family: $body;
+            width: 100%;
+        }
+
+        & textarea {
+            margin: 1rem;
+            background-color: var(--textInput);
+            color: var(--alt);
+            border: solid $mainGrey 1px;
+            border-radius: 8px;
+            padding: 0.4em;
+            font-family: $body;
+            height: 100px;
+            width: 100%;
+        }
+
+        & .taskBtns {
+            width: 100%;
+            @include flexRow(flex-end);
+            gap: 10px;
+
         }
     }
 }

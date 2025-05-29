@@ -27,13 +27,18 @@
         cursor: pointer;
     }
 
+    @media only screen and (min-width: 1000px) and (min-height: 500px) {
+        width: 50px;
+        height: 50px;
+    }
+
     .line {
         top: 50%;
         left: 50%;
         position: absolute;
         background-color: black;
         height: 3px;
-        width: 40px;
+        width: 100%;
         border-radius: 2px;
         transform-origin: center;
         transform: translate(-50%, -50%) rotate(0deg);
