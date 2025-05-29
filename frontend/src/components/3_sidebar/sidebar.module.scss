@@ -55,13 +55,18 @@
     }
 
     .sidebar {
+        display: none;
+
         position: absolute;
         top: 0;
         right: 0;
         @include flexCol;
         z-index: 1001;
 
-        height: 281px;
+        width: 0px;
+        height: 290px;
+
+        padding-bottom: 10px;
 
         overflow: hidden;
         background-color: var(--main);
@@ -84,6 +89,7 @@
 
     .sidebarOpen {
         width: 180px;
+
         visibility: visible;
         opacity: 1;
     }

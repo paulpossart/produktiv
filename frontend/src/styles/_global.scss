@@ -46,6 +46,6 @@ $borderColor: rgb(136, 136, 136);
 }
 
 %border {
-    border: solid, $borderColor 4px;
+    border: solid $borderColor 4px;
     border-radius: 8px;
 }

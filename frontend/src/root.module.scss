@@ -20,6 +20,10 @@
         background-color 1s ease-in-out,
         color 1s ease-in-out;
 
+    @media only screen and (orientation: landscape) {
+        max-height: 100vh;
+    }
+
     .header {
         grid-area: header;
         z-index: 10;
@@ -28,5 +32,9 @@
     .outlet {
         grid-area: outlet;
         z-index: 1;
+
+        @media only screen and (orientation: landscape) {
+            overflow: hidden;
+        }
     }
 }
