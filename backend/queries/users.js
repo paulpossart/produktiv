@@ -159,7 +159,7 @@ const updateUser = async (req, res, next) => {
             })
             .status(200).json({
                 success: true,
-                message: 'Username and password updated. Please sign in with new credentials',
+                message: 'Username and password updated.Please sign in with new credentials',
                 user: null
             });
 
