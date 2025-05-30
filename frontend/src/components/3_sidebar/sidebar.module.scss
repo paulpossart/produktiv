@@ -64,7 +64,7 @@
         z-index: 1001;
 
         width: 0px;
-        height: clamp(290px, 50vh, 400px);
+        height: clamp(290px, 45vh, 340px);
         padding-bottom: clamp(10px, 20%, 50px);
 
         overflow: hidden;
@@ -87,7 +87,7 @@
     }
 
     .sidebarOpen {
-        width: clamp(180px, 40vw, 280px);
+        width: 220px;
 
         visibility: visible;
         opacity: 1;
