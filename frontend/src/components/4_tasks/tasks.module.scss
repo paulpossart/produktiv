@@ -92,9 +92,6 @@
 
     .li {
 
-        transition: all 0.3s ease;
-
-
         @extend %border;
         border-color: $mainGrey;
         margin: 1rem;
