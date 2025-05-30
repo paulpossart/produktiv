@@ -53,4 +53,14 @@ const setModal = ({
     )
 };
 
-export { changeInput, validSubmmission, setModal };
+
+const setUpdateMiniModal = (setter, content) => {
+    setter(
+        <>
+            <div onClick={() => setter(null)} className={styles.modalOverlay}></div>
+            <div className={styles.modal}>{content}</div>
+        </>
+    )
+}
+
+export { changeInput, validSubmmission, setModal, setUpdateMiniModal };

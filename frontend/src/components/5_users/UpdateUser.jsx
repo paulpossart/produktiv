@@ -1,18 +1,23 @@
 import styles from './account.module.scss';
 
+import Account from './Account';
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useModal } from '../../context/ModalContext';
-import { changeInput, validSubmmission, setModal } from '../6_utils/helperFunctions';
+import { changeInput, validSubmmission, setModal, setUpdateMiniModal } from '../6_utils/helperFunctions';
 import { callUpdateUser } from '../../apiCalls/usersCalls';
+import DeleteUser from './DeleteUser';
+import { useUserMsg } from '../../context/UserMsgContext';
 
-function UpdateUser() {
+function UpdateUser({ setMiniModal }) {
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [updateError, setUpdateError] = useState(null);
     const { setUser } = useAuth();
     const { setModalContent } = useModal();
+    const { setUserMsg } = useUserMsg();
     const navigate = useNavigate();
 
 
@@ -27,46 +32,40 @@ function UpdateUser() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setModalContent(null);
         const isValid = validSubmmission(newUsername, newPassword);
 
         if (!isValid.valid) {
-            setModal({
-                setModalContent: setModalContent,
-                content: isValid.message,
-                btnStyle: styles.btn1,
-                clickTo: () => setModal({
-                    setModalContent: setModalContent,
-                    btn: false,
-                    content: <UpdateUser />
-                })
-            })
+
+            setUpdateMiniModal(setMiniModal, (
+                <>
+                    <p> {isValid.message}</p>
+                    <button className={styles.btn1} onClick={() => setUpdateMiniModal(setMiniModal, <UpdateUser setMiniModal={setMiniModal} />)}>
+                        OK
+                    </button>
+                </>
+            ))
             return;
         }
 
         try {
             const data = await callUpdateUser(newUsername.trim(), newPassword);
             if (data?.success) {
-                setModal({
-                    setModalContent: setModalContent,
-                    btn: false,
-                    content: (
-                        <>
-                            <p>{data.message}</p>
-                            <br />
-                            <button className={styles.btn1} onClick={() => {
-                                setModalContent(null);
-                                setUser(null);
-                                navigate('/auth');
-                            }}>
-                                OK
-                            </button>
-                        </>
-                    )
-                })
+                setUserMsg(data.message)
+                navigate('/new-credentials');
+                setMiniModal(null)
+                setModalContent(null)
+
             }
         } catch (err) {
-            setModal({ setModalContent: setModalContent, content: err.message });
+            setUpdateMiniModal(setMiniModal, (
+                <>
+                    <p> {err.message}</p>
+                    <button className={styles.btn1} onClick={() => setUpdateMiniModal(setMiniModal, <UpdateUser setMiniModal={setMiniModal} />)}>
+                        OK
+                    </button>
+                </>
+            ))
+
         } finally {
             setNewUsername('');
             setNewPassword('');
@@ -93,7 +92,7 @@ function UpdateUser() {
                 />
                 <br />
                 <div className={styles.updateBtns}>
-                    <button type='button' className={styles.btn2} onClick={() => setModalContent(null)}>Cancel</button>
+                    <button type='button' className={styles.btn2} onClick={() => setMiniModal(null)}>Cancel</button>
                     <button type='submit' className={styles.btn1}>Update</button>
                 </div>
             </form>

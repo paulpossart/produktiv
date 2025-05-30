@@ -91,6 +91,10 @@
     }
 
     .li {
+
+        transition: all 0.3s ease;
+
+
         @extend %border;
         border-color: $mainGrey;
         margin: 1rem;
@@ -207,7 +211,7 @@
                 height: 50px;
 
                 & img {
-                    position:absolute;
+                    position: absolute;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
