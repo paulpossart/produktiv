@@ -1,17 +1,12 @@
 @use '../../styles/buttons';
 @use '../../styles/global' as *;
+@use '../6_utils/modal/modal.module.scss' as *;
 
 .account {
     @include flexCol;
-    @extend %border;
     height: 340px;
     width: 350px;
     margin: 0 auto;
-    padding: 2rem 0;
-
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
 
     background-color: var(--div);
     box-shadow: var(--divShadow);
@@ -29,8 +24,17 @@
     }
 }
 
+.miniOverlay {
+    background-color: rgba(0, 255, 0, 0.5);
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    height: 100%;
+    width: 100%;
+}
+
 .updateUser {
-    
+
     & form {
         @include flexCol(space-between);
         height: 100%;
@@ -59,9 +63,9 @@
 
     width: 200px;
     height: 150px;
-    
+
     .delBtns {
         @include flexRow(space-around);
-        width: 100%;  
+        width: 100%;
     }
 }

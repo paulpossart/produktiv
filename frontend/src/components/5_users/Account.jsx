@@ -5,13 +5,14 @@ import UpdateUser from './UpdateUser';
 import DeleteUser from './DeleteUser';
 import styles from './account.module.scss';
 import { useModal } from '../../context/ModalContext';
-import { setModal } from '../6_utils/helperFunctions';
+import { setModal, setUpdateMiniModal } from '../6_utils/helperFunctions';
 import homeIcon from '../../assets/home-btn.svg';
 
 
 function Account() {
     const { user } = useAuth();
     const { setModalContent } = useModal();
+    const [miniModal, setMiniModal] = useState(null);
 
     const username = user.username;
     const createdAt = new Date(user.created_at).toLocaleDateString('en-GB', {
@@ -20,24 +21,10 @@ function Account() {
         day: 'numeric'
     });
 
-    const setUpdateUser = () => {
-        setModal({
-            setModalContent: setModalContent,
-            btn: false,
-            message: <UpdateUser />
-        })
-    }
-
-    const setDeleteUser = () => {
-        setModal({
-            setModalContent: setModalContent,
-            btn: false,
-            message: <DeleteUser />
-        })
-    }
-
     return (
         <div className={styles.account}>
+
+            {miniModal && miniModal}
 
             <div className={styles.text}>
                 <h2>{username}</h2>
@@ -45,9 +32,9 @@ function Account() {
             </div>
 
             <div className={styles.btnContainer}>
-                <button style={{ width: '90%', borderRadius: '12px' }} className={styles.btn2} onClick={setUpdateUser}>Change Username <br /> and Password</button>
-                <button style={{ width: '90%', borderRadius: '12px' }} className={styles.btn2} onClick={setDeleteUser}>Delete User</button>
-                <Link className={`${styles.btn1} ${styles.homeBtn}`} to='/'> <img src={homeIcon} /></Link>
+                <button style={{ width: '90%', borderRadius: '12px' }} className={styles.btn2} onClick={() => setUpdateMiniModal(setMiniModal, <UpdateUser setMiniModal={setMiniModal} />)}>Change Username <br /> and Password</button>
+                <button style={{ width: '90%', borderRadius: '12px' }} className={styles.btn2} onClick={() => setUpdateMiniModal(setMiniModal, <DeleteUser setMiniModal={setMiniModal} />)}>Delete User</button>
+                <button className={`${styles.btn1} ${styles.homeBtn}`} onClick={() => setModalContent(null)}> <img src={homeIcon} /></button>
             </div>
 
         </div>

@@ -21,12 +21,12 @@ $borderColor: rgb(136, 136, 136);
     align-items: center;
 }
 
-@mixin headerGradient($col) {
+@mixin headerGradient($col1, $col2, $col3) {
     background: linear-gradient(90deg,
-            rgba($col, $col, $col, 1) 0%,
-            rgba($col, $col, $col, 1) 25%,
-            rgba($col, $col, $col, 0.5) 75%,
-            rgba($col, $col, $col, 0.1) 100%);
+            rgba($col1, $col2, $col3, 1) 0%,
+            rgba($col1, $col2, $col3, 1) 25%,
+            rgba($col1, $col2, $col3, 0.5) 75%,
+            rgba($col1, $col2, $col3, 0.1) 100%);
 }
 
 @mixin formStyle {

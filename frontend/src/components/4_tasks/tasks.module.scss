@@ -4,6 +4,7 @@
 .homeDiv {
     width: 100%;
     margin: 0 auto;
+    padding-bottom: 10px;
 
     @media only screen and (orientation: landscape) {
         grid-area: welcome;
@@ -12,20 +13,27 @@
 
     .welcome {
         @extend %border;
-        @include flexCol;
+        @include flexCol(center);
+        gap: 40px;
 
         width: 100%;
-        min-height: 150px;
+        height: clamp(150px, 35vh, 300px);
         background-color: var(--div);
         box-shadow: var(--divShadow);
         transition:
             background-color 1s ease-in-out,
             box-shadow 1s ease-in-out;
 
+        @media only screen and (orientation: landscape) {
+            height: 100%;
+        }
+
         & button {
             @include flexRow(space-between);
 
-            width: 70%;
+            width: clamp(150px, 60%, 250px);
+            border-color: $mainGrey;
+            box-shadow: var(--divShadow);
 
             & img {
                 width: 30px;
@@ -53,11 +61,16 @@
         background-color: var(--div);
         box-shadow: var(--divShadow);
 
+        transition:
+            background-color 1s ease-in-out,
+            box-shadow 1s ease-in-out;
+
         @media only screen and (orientation: landscape) {
             grid-area: tasks;
             margin: 0;
         }
     }
+
 
     @media only screen and (orientation: landscape) {
         display: grid;
@@ -67,8 +80,18 @@
     }
 }
 
+
 .tasksDiv {
+    height: 100%;
+
+    .noTasks {
+        @include flexCol(center);
+        height: 100%;
+        padding: 3rem;
+    }
+
     .li {
+
         @extend %border;
         border-color: $mainGrey;
         margin: 1rem;
@@ -110,8 +133,8 @@
 
                 & button {
                     position: relative;
-                    width: 40px;
-                    height: 40px;
+                    width: 50px;
+                    height: 50px;
                     padding: 0;
 
 
@@ -121,7 +144,7 @@
                         left: 50%;
                         padding: 0;
                         margin: 0;
-                        width: 30px;
+                        width: 40px;
                     }
 
                     .expandDown {
@@ -177,11 +200,19 @@
             @include flexCol(flex-start);
 
             & button {
+                position: relative;
                 box-sizing: border-box;
                 margin-bottom: 1rem;
                 border-radius: 50%;
+                width: 50px;
+                height: 50px;
 
                 & img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+
                     width: 25px;
                 }
 
@@ -209,8 +240,8 @@
 
     & button {
         position: relative;
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
         padding: 0;
 
         & img {
@@ -220,15 +251,15 @@
             transform: translate(-50%, -50%);
             padding: 0;
             margin: 0;
-            width: 30px;
+            width: 50px;
         }
 
         .upBtn {
-            top: 45%;
+            top: 40%;
         }
 
         .downBtn {
-            top: 55%;
+            top: 60%;
             transform: translate(-50%, -50%) scaleY(-1);
         }
     }
@@ -273,5 +304,18 @@
             gap: 10px;
 
         }
+    }
+}
+
+.deleteTask {
+    @include flexCol;
+    gap: 20px;
+
+    width: 200px;
+    height: 150px;
+
+    .delBtns {
+        @include flexRow(space-around);
+        width: 100%;
     }
 }

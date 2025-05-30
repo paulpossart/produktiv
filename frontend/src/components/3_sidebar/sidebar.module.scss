@@ -40,7 +40,7 @@
             width 0.5s ease-in-out,
             height 0.5s ease-in-out;
 
-        @media only screen and (min-width: 1000px) and (min-height: 500px) {
+        @media only screen and (min-width: 700px) and (min-height: 550px) {
             height: 75px;
             width: 75px;
         }
@@ -64,9 +64,8 @@
         z-index: 1001;
 
         width: 0px;
-        height: 290px;
-
-        padding-bottom: 10px;
+        height: clamp(290px, 50vh, 400px);
+        padding-bottom: clamp(10px, 20%, 50px);
 
         overflow: hidden;
         background-color: var(--main);
@@ -88,7 +87,7 @@
     }
 
     .sidebarOpen {
-        width: 180px;
+        width: clamp(180px, 40vw, 280px);
 
         visibility: visible;
         opacity: 1;

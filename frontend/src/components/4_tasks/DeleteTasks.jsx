@@ -13,7 +13,7 @@ function DeleteTasks({ taskId, fetchTasks }) {
             if (deleteTask) {
                 setModal({
                     setModalContent: setModalContent,
-                    message: 'task deleted'
+                    content: 'task deleted'
                 })
             }
             
@@ -21,13 +21,13 @@ function DeleteTasks({ taskId, fetchTasks }) {
         } catch (err) {
             setModal({
                 setModalContent: setModalContent,
-                message: err.message
+                content: err.message
             })
         }
     }
 
     return (
-        <div className={styles.deleteUser}>
+        <div className={styles.deleteTask}>
             <p>Really delete?</p>
 
             <div className={styles.delBtns}>

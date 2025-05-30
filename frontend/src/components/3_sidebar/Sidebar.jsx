@@ -1,4 +1,7 @@
 import styles from './sidebar.module.scss';
+import Account from '../5_users/Account';
+import { setModal } from '../6_utils/helperFunctions';
+import { useModal } from '../../context/ModalContext';
 
 import Burger from './burger/Burger';
 import ThemeBtn from './themeBtn/ThemBtn';
@@ -11,6 +14,16 @@ import { useTheme } from '../../context/ThemeContext';
 function Sidebar({ className }) {
     const [isOpen, setIsOpen] = useState(false);
     const { theme, setTheme } = useTheme();
+    const { setModalContent } = useModal();
+
+    const openAccount = () => {
+        setModal({
+            setModalContent: setModalContent,
+            btn: false,
+            content: <Account />
+        })
+
+    }
 
     return (
         <div className={`${className} ${styles.sidebarMain}`}>
@@ -30,11 +43,11 @@ function Sidebar({ className }) {
                     <ThemeBtn />
                 </button>
 
-                <Link onClick={() => setIsOpen(false)} className={styles.btn1} to='settings'>Account</Link>
+                <button onClick={() => { setIsOpen(false); openAccount()}} className={styles.btn1} to='settings'>Account</button>
 
-                <SignOut className={styles.btn2} />
+            <SignOut className={styles.btn2} />
 
-            </div>
+        </div>
         </div >
     );
 };

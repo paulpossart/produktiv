@@ -8,16 +8,20 @@
     width: 100%;
     margin: 0 auto;
     box-shadow: var(--divShadow);
-    padding: 1rem 2rem;
+    padding: 0.5rem;
     z-index: -2;
 
     background-image: url('../../assets/duk-img.jpg');
     background-size: cover;
-    background-position: 0 60%;
+    background-position: center;
 
     display: grid;
     grid-template-areas: 'duk title sidebar';
     grid-template-columns: 25% 50% 25%;
+
+    @media only screen and (min-width: 700px) and (min-height: 550px) {
+        padding: 2rem;
+    }
 
     .overlay {
         position: absolute;
@@ -28,22 +32,22 @@
     }
 
     .darkOn {
-        @include headerGradient(0);
+        @include headerGradient(12, 12, 20);
         opacity: 1;
     }
 
     .darkOff {
-        @include headerGradient(0);
+        @include headerGradient(12, 12, 20);
         opacity: 0;
     }
 
     .lightOn {
-        @include headerGradient(255);
+        @include headerGradient(255, 255, 255);
         opacity: 1;
     }
 
     .lightOff {
-        @include headerGradient(255);
+        @include headerGradient(255, 255, 255);
         opacity: 0;
     }
 
@@ -70,7 +74,7 @@
         font: {
             family: $title;
             weight: 500;
-            size: clamp(2.5rem, 4vw, 6rem)
+            size: clamp(2.5rem, 4.5vw, 6rem)
         }
 
         span {

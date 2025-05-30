@@ -39,18 +39,28 @@ const validSubmmission = (username, password) => {
 
 const setModal = ({
     setModalContent,
-    message,
-    content = null,
+    content,
     btn = true,
+    clickTo = null,
     btnStyle = styles.btn1,
     divStyle = styles.modal
 }) => {
     setModalContent(
         <div className={divStyle}>
-            <div>{message}</div>
-            {btn && <button className={btnStyle} onClick={() => setModalContent(content)}>OK</button>}
+            <div>{content}</div>
+            {btn && <button className={btnStyle} onClick={() => setModalContent(clickTo)}>OK</button>}
         </div>
     )
 };
 
-export { changeInput, validSubmmission, setModal };
+
+const setUpdateMiniModal = (setter, content) => {
+    setter(
+        <>
+            <div onClick={() => setter(null)} className={styles.modalOverlay}></div>
+            <div className={styles.modal}>{content}</div>
+        </>
+    )
+}
+
+export { changeInput, validSubmmission, setModal, setUpdateMiniModal };

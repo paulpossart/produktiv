@@ -1,43 +1,43 @@
 import styles from './account.module.scss';
 
+import Account from './Account';
+
 import { useNavigate } from 'react-router-dom';
 import { useModal } from '../../context/ModalContext';
 import { useAuth } from '../../context/AuthContext';
 import { callDeleteUser } from "../../apiCalls/usersCalls";
-import { setModal } from '../6_utils/helperFunctions';
+import { setModal, setUpdateMiniModal } from '../6_utils/helperFunctions';
+import { useUserMsg } from '../../context/UserMsgContext';
 
-function DeleteUser() {
+
+function DeleteUser({ setMiniModal }) {
     const { setUser } = useAuth();
     const { setModalContent } = useModal();
     const navigate = useNavigate();
+    const { setUserMsg } = useUserMsg();
+
 
     const handleDelete = async () => {
         try {
             const deleteUser = await callDeleteUser();
 
             if (deleteUser?.success) {
-                setModal({
-                    setModalContent: setModalContent,
-                    btn: false,
-                    message: (
-                        <>
-                            <p>{deleteUser.message}</p>
-                            <button className={styles.btn1} onClick={() => {
-                                setModalContent(null);
-                                setUser(null);
-                                navigate('/auth');
-                            }}>
-                                OK
-                            </button>
-                        </>
-                    )
-                })
+
+                setUserMsg(deleteUser.message)
+                navigate('/new-credentials');
+                setMiniModal(null)
+                setModalContent(null)
+
             }
         } catch (err) {
-            setModal({
-                setModalContent: setModalContent,
-                message: (<p>{err.message}</p>),
-            })
+            setUpdateMiniModal(setMiniModal, (
+                <>
+                    <p> {err.message}</p>
+                    <button className={styles.btn1} onClick={() => setUpdateMiniModal(setMiniModal, <DeleteUser setMiniModal={setMiniModal} />)}>
+                        OK
+                    </button>
+                </>
+            ))
         }
     }
 
@@ -50,7 +50,7 @@ function DeleteUser() {
                 <button
                     type='button'
                     className={styles.btn2}
-                    onClick={() => setModalContent(null)}
+                    onClick={() => setMiniModal(null)}
                 >
                     Cancel
                 </button>
