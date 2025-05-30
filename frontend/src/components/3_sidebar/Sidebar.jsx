@@ -1,15 +1,12 @@
-import styles from './sidebar.module.scss';
-import Account from '../5_users/Account';
-import { setModal } from '../6_utils/helperFunctions';
-import { useModal } from '../../context/ModalContext';
-
-import Burger from './burger/Burger';
-import ThemeBtn from './themeBtn/ThemBtn';
+import Burger from '../6_utils/burger/Burger';
+import ThemeBtn from '../6_utils/themeBtn/ThemBtn';
 import SignOut from '../1_auth/SignOut';
-
+import Account from '../5_users/Account';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
+import { setModal } from '../6_utils/helpers/helperFunctions';
+import { useModal } from '../../context/ModalContext';
+import styles from './sidebar.module.scss';
 
 function Sidebar({ className }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +19,6 @@ function Sidebar({ className }) {
             btn: false,
             content: <Account />
         })
-
     }
 
     return (

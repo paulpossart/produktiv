@@ -87,7 +87,7 @@ const editTasksById = async (req, res, next) => {
         || !isValidInput('description', newDescription, 0, 500)) {
         return res.status(400).json({
             success: false,
-            message: 'invalid title or description.'
+            message: 'Invalid input. Titles must be 1-100 characters, description up to 500 characters'
         })
     };
 
@@ -122,14 +122,11 @@ const prioritiseTasksById = async (req, res, next) => {
             [adjacentTaskId, userId]
         );
 
-        //========================
         if (adjResult.rows.length === 0) {
             return res.sendStatus(404);
         }
-        //=====================
 
         const adjPriority = adjResult.rows[0].priority;
-       // console.log(adjPriority)
         let adjAdjPriority = operator === '+' ? adjPriority * 2 : 0;
 
         if (adjacentAdjacentTaskId !== null) {
@@ -147,10 +144,6 @@ const prioritiseTasksById = async (req, res, next) => {
         }
 
         const newPriority = Math.ceil((adjPriority + adjAdjPriority) / 2);
-
-        /*const newPriority = operator === '+'
-            ? adjPriority + 1
-            : adjPriority - 1;*/
 
         await pool.query(
             `UPDATE produktiv.tasks

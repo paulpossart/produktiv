@@ -1,9 +1,8 @@
 import { callPrioritiseTasksById } from '../../apiCalls/tasksCalls';
 import { useModal } from '../../context/ModalContext';
-import { setModal } from '../6_utils/helperFunctions';
-import priorityUp from '../../assets/priority-up.svg';
-import priorityDown from '../../assets/priority-down.svg';
+import { setModal } from '../6_utils/helpers/helperFunctions';
 import styles from './tasks.module.scss';
+import priorityUp from '../../assets/priority-up.svg';
 
 function PrioritiseTasks({ taskId, fetchTasks, prevTask, prevPrevTask, nextTask, nextNextTask }) {
     const { setModalContent } = useModal();

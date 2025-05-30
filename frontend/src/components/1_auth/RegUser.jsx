@@ -1,13 +1,11 @@
-import styles from './auth.module.scss';
-
 import Duk from '../6_utils/duk/Duk';
 import dukStyles from '../6_utils/duk/duk.module.scss';
-
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useModal } from '../../context/ModalContext';
-import { changeInput, validSubmmission, setModal } from '../6_utils/helperFunctions';
+import { changeInput, validSubmmission, setModal } from '../6_utils/helpers/helperFunctions';
 import { callCreateUser } from '../../apiCalls/usersCalls';
+import styles from './auth.module.scss';
 
 function RegUser({ setView }) {
     const [newUsername, setNewUsername] = useState('');

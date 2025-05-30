@@ -1,15 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
 import CreateTasks from './CreateTasks';
 import GetTasks from './GetTasks';
-import Modal from '../6_utils/modal/Modal';
-import { setModal } from '../6_utils/helperFunctions';
+import { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { setModal } from '../6_utils/helpers/helperFunctions';
 import { useModal } from '../../context/ModalContext';
-import plus from '../../assets/plus-sign.svg';
-import styles from './tasks.module.scss';
 import { callGetTasks } from '../../apiCalls/tasksCalls';
-
-
+import styles from './tasks.module.scss';
+import plus from '../../assets/plus-sign.svg';
 
 function Tasks() {
     const [tasks, setTasks] = useState([]);

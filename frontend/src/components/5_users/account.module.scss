@@ -6,7 +6,6 @@
     @include flexCol;
 
     max-height: 300px;
-    
     width: 300px;
     margin: 0 auto;
 
@@ -18,14 +17,12 @@
 
     .text {
         height: 20%;
-        //@extend %border;
     }
 
     .btnContainer {
         @include flexCol;
         height: 70%;
         min-width: 90%;
-        // @extend %border;
     }
 }
 
@@ -41,18 +38,12 @@
 .updateUser {
 
     & form {
-        @include flexCol(space-between);
+        @include formStyle;
+
         height: 100%;
-        width: 100%;
 
         & input {
             margin: 1rem;
-            background-color: var(--textInput);
-            color: var(--alt);
-            border: solid $mainGrey 1px;
-            border-radius: 8px;
-            padding: 0.4em;
-            font-family: $body;
         }
 
         .updateBtns {

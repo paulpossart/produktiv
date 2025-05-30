@@ -7,11 +7,6 @@ body.dark {
   --divShadow: none;
   --taskBody: rgb(32, 32, 40);
   --textInput: black;
-  /*--headOverlay: linear-gradient(90deg,
-      rgba(112, 112, 120, 1) 0%,
-      rgba(112, 112, 120, 1) 25%,
-      rgba(112, 112, 120, 0.5) 75%,
-      rgba(112, 112, 120, 0.1) 100%);*/
   --titleColor: white;
   --titleShadow: black;
   --titleSpanColor: black;
@@ -28,11 +23,6 @@ body.light {
   --divShadow: 0 6px 12px grey;
   --taskBody: rgb(240, 240, 248);
   --textInput: white;
-  /*--headOverlay: linear-gradient(90deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 1) 25%,
-      rgba(255, 255, 255, 0.5) 75%,
-      rgba(255, 255, 255, 0.1) 100%);*/
   --titleColor: black;
   --titleShadow: white;
   --titleSpanColor: yellow;
@@ -59,18 +49,19 @@ html {
 }
 
 body {
-  font: {
-    family: 'Roboto';
-    size: 1.6rem;
-  }
-
   background-color: var(--main);
   color: var(--alt);
   text-align: center;
   line-height: 1.5;
 
-  transition: background-color 1s ease-in-out,
-  color 1s ease-in-out
+  transition:
+    background-color 0.8s ease-in-out,
+    color 0.8s ease-in-out;
+
+  font: {
+    family: 'Roboto';
+    size: 1.6rem;
+  }
 }
 
 ::-webkit-scrollbar {

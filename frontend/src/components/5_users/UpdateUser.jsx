@@ -1,26 +1,18 @@
-import styles from './account.module.scss';
-
-import Account from './Account';
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 import { useModal } from '../../context/ModalContext';
-import { changeInput, validSubmmission, setModal, setUpdateMiniModal } from '../6_utils/helperFunctions';
+import { changeInput, validSubmmission, setUpdateMiniModal } from '../6_utils/helpers/helperFunctions';
 import { callUpdateUser } from '../../apiCalls/usersCalls';
-import DeleteUser from './DeleteUser';
 import { useUserMsg } from '../../context/UserMsgContext';
+import styles from './account.module.scss';
 
 function UpdateUser({ setMiniModal }) {
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [updateError, setUpdateError] = useState(null);
-    const { setUser } = useAuth();
     const { setModalContent } = useModal();
     const { setUserMsg } = useUserMsg();
     const navigate = useNavigate();
-
-
 
     const handleChangeUsername = (e) => {
         changeInput(e, setNewUsername, setUpdateError, 'username')

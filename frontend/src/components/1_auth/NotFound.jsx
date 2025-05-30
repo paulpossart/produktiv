@@ -4,7 +4,7 @@ import styles from './auth.module.scss';
 function NotFound() {
     return (
         <div className={styles.backgroundImg}>
-            <div className={styles.notFound}>
+            <div className={styles.userMsg}>
                 <p>You appear to be lost.</p>
                 <p>Click here to return</p>
                 <Link className={styles.btn1} to='/auth'>OK</Link>

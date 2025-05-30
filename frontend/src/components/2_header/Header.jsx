@@ -1,12 +1,8 @@
-import styles from './header.module.scss';
-
 import Sidebar from '../3_sidebar/Sidebar';
-
 import Duk from '../6_utils/duk/Duk';
 import dukStyles from '../6_utils/duk/duk.module.scss'
-
 import { useTheme } from '../../context/ThemeContext';
-
+import styles from './header.module.scss';
 
 function Header({ className }) {
     const { theme } = useTheme();

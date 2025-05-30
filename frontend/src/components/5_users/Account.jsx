@@ -1,11 +1,10 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 import UpdateUser from './UpdateUser';
 import DeleteUser from './DeleteUser';
-import styles from './account.module.scss';
+import { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import { useModal } from '../../context/ModalContext';
-import { setModal, setUpdateMiniModal } from '../6_utils/helperFunctions';
+import { setUpdateMiniModal } from '../6_utils/helpers/helperFunctions';
+import styles from './account.module.scss';
 import homeIcon from '../../assets/home-btn.svg';
 
 

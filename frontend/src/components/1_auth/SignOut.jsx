@@ -1,9 +1,7 @@
-import styles from './auth.module.scss';
-
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { callSignOut } from '../../apiCalls/authCalls';
-
+import styles from './auth.module.scss';
 
 function SignOut() {
     const navigate = useNavigate();

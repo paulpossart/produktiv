@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
-import styles from './auth.module.scss';
-import { useAuth } from '../../context/AuthContext';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import { useUserMsg } from '../../context/UserMsgContext';
+import styles from './auth.module.scss';
 
 function NewCreds() {
     const { setUser } = useAuth();
@@ -14,7 +14,7 @@ function NewCreds() {
 
     return (
         <div className={styles.backgroundImg}>
-            <div className={styles.notFound}>
+            <div className={styles.userMsg}>
                 <p>{userMsg}</p>
                 <Link className={styles.btn1} to='/auth'>OK</Link>
             </div>

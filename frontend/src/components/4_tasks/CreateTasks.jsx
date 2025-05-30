@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { callCreateTasks } from '../../apiCalls/tasksCalls';
-import Modal from '../6_utils/modal/Modal';
-import { setModal } from '../6_utils/helperFunctions';
+import { setModal } from '../6_utils/helpers/helperFunctions';
 import { useModal } from '../../context/ModalContext';
 import styles from './tasks.module.scss';
 

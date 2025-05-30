@@ -43,6 +43,10 @@ $borderColor: rgb(136, 136, 136);
         padding: 0.4em;
         font-family: $body;
     }
+
+    & textarea {
+        @extend input;
+    }
 }
 
 %border {

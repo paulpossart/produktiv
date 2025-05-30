@@ -1,13 +1,11 @@
-import styles from './auth.module.scss';
-
 import Duk from '../6_utils/duk/Duk';
 import dukStyles from '../6_utils/duk/duk.module.scss';
-
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useModal } from '../../context/ModalContext';
-import { setModal } from '../6_utils/helperFunctions';
+import { setModal } from '../6_utils/helpers/helperFunctions';
 import { callSignIn } from '../../apiCalls/authCalls';
+import styles from './auth.module.scss';
 
 function SignIn({ setView }) {
     const [username, setUsername] = useState('');
@@ -48,7 +46,6 @@ function SignIn({ setView }) {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder='password'
                 />
-
                 <button type='submit' className={styles.btn1}>Sign In</button>
             </form >
             <button onClick={() => setView('reg')} className={styles.btn2}>Go To User Registration</button>
