@@ -21,10 +21,12 @@
    transform: translate(-50%, -50%);
 
    z-index: 1001;
+   min-width: 200px;
+   min-height: 100px;
    width: fit-content;
    height: fit-content;
    max-width: 90vw;
-   max-height: 50vh;
+   max-height: 900vh;
    text-align: center;
    background-color: var(--main);
    color: var(--alt);

@@ -25,7 +25,7 @@
 .header {
     width: 55px;
 
-    @media only screen and (min-width: 1000px) and (min-height: 500px) {
+    @media only screen and (min-width: 700px) and (min-height: 550px) {
         width: 75px;
     }
 }

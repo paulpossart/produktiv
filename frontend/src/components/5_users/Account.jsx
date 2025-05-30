@@ -24,7 +24,7 @@ function Account() {
         setModal({
             setModalContent: setModalContent,
             btn: false,
-            message: <UpdateUser />
+            content: <UpdateUser />
         })
     }
 
@@ -32,7 +32,7 @@ function Account() {
         setModal({
             setModalContent: setModalContent,
             btn: false,
-            message: <DeleteUser />
+            content: <DeleteUser />
         })
     }
 

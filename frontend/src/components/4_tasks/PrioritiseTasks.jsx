@@ -23,7 +23,7 @@ function PrioritiseTasks({ taskId, fetchTasks, prevTask, prevPrevTask, nextTask,
         } catch (err) {
             setModal({
                 setModalContent: setModalContent,
-                message: err.message
+                content: err.message
             })
         }
     }

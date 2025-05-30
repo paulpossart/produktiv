@@ -1,5 +1,6 @@
 @use '../../styles/buttons';
 @use '../../styles/global' as *;
+@use '../6_utils/modal/modal.module.scss' as *;
 
 .account {
     @include flexCol;

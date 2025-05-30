@@ -35,7 +35,7 @@ function RegUser({ setView }) {
             if (data?.userData) setUser(data.user);
             else setUser(null);
         } catch (err) {
-            setModal({ setModalContent: setModalContent, message: err.message })
+            setModal({ setModalContent: setModalContent, content: err.message })
             setUser(null);
         } finally {
             setNewUsername('');

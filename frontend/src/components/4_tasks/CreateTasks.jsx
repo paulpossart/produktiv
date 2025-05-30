@@ -18,11 +18,11 @@ function CreateTasks({ fetchTasks, prevTask }) {
         if (!title.trim()) {
             setModal({
                 setModalContent: setModalContent,
-                message: 'title cannot be empty',
-                content: () => setModal({
+                content: 'title cannot be empty',
+                clickTo: () => setModal({
                     setModalContent: setModalContent,
                     btn: false,
-                    message: <CreateTasks
+                    content: <CreateTasks
                         fetchTasks={fetchTasks}
                         prevTask={prevTask} />
                 })
@@ -35,13 +35,13 @@ function CreateTasks({ fetchTasks, prevTask }) {
             if (data?.success) {
                 setModal({
                     setModalContent: setModalContent,
-                    message: data.message
+                    content: data.message
                 });
             }
         } catch (err) {
             setModal({
                 setModalContent: setModalContent,
-                message: err.message
+                content: err.message
             });
         } finally {
             setTitle('');

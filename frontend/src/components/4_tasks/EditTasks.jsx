@@ -21,11 +21,11 @@ function EditTasks({
         if (!newTitle.trim()) {
             setModal({
                 setModalContent: setModalContent,
-                message: 'title cannot be empty',
-                content: () => setModal({
+                content: 'title cannot be empty',
+                clickTo: () => setModal({
                     setModalContent: setModalContent,
                     btn: false,
-                    message: <EditTasks
+                    content: <EditTasks
                         taskId={taskId}
                         fetchTasks={fetchTasks}
                         originalTitle={originalTitle}
@@ -41,13 +41,13 @@ function EditTasks({
             if (data?.success) {
                 setModal({
                     setModalContent: setModalContent,
-                    message: data.message
+                    content: data.message
                 });
             }
         } catch (err) {
             setModal({
                 setModalContent: setModalContent,
-                message: err.message
+                content: err.message
             });
         } finally {
             setNewTitle('');

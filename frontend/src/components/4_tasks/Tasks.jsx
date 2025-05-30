@@ -32,7 +32,7 @@ function Tasks() {
         setModal({
             setModalContent: setModalContent,
             btn: false,
-            message: <CreateTasks
+            content: <CreateTasks
                 fetchTasks={fetchTasks}
                 prevTask={
                     tasks.length !== 0

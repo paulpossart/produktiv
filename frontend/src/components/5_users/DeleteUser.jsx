@@ -19,8 +19,8 @@ function DeleteUser() {
                 setModal({
                     setModalContent: setModalContent,
                     btn: false,
-                    message: (
-                        <>
+                    content: (
+                        <div className={styles.modal}>
                             <p>{deleteUser.message}</p>
                             <button className={styles.btn1} onClick={() => {
                                 setModalContent(null);
@@ -29,14 +29,14 @@ function DeleteUser() {
                             }}>
                                 OK
                             </button>
-                        </>
+                        </div>
                     )
                 })
             }
         } catch (err) {
             setModal({
                 setModalContent: setModalContent,
-                message: (<p>{err.message}</p>),
+                content: (<p>{err.message}</p>),
             })
         }
     }

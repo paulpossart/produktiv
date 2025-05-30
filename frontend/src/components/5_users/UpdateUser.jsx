@@ -33,12 +33,12 @@ function UpdateUser() {
         if (!isValid.valid) {
             setModal({
                 setModalContent: setModalContent,
-                message: isValid.message,
+                content: isValid.message,
                 btnStyle: styles.btn1,
-                content: () => setModal({
+                clickTo: () => setModal({
                     setModalContent: setModalContent,
                     btn: false,
-                    message: <UpdateUser />
+                    content: <UpdateUser />
                 })
             })
             return;
@@ -50,7 +50,7 @@ function UpdateUser() {
                 setModal({
                     setModalContent: setModalContent,
                     btn: false,
-                    message: (
+                    content: (
                         <>
                             <p>{data.message}</p>
                             <br />
@@ -66,7 +66,7 @@ function UpdateUser() {
                 })
             }
         } catch (err) {
-            setModal({ setModalContent: setModalContent, message: err.message });
+            setModal({ setModalContent: setModalContent, content: err.message });
         } finally {
             setNewUsername('');
             setNewPassword('');

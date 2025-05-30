@@ -32,7 +32,7 @@ function GetTasks({ fetchTasks, tasks }) {
         setModal({
             setModalContent: setModalContent,
             btn: false,
-            message: <EditTasks
+            content: <EditTasks
                 taskId={taskId}
                 fetchTasks={fetchTasks}
                 originalTitle={taskTitle}
@@ -45,7 +45,7 @@ function GetTasks({ fetchTasks, tasks }) {
         setModal({
             setModalContent: setModalContent,
             btn: false,
-            message: <DeleteTasks
+            content: <DeleteTasks
                 taskId={taskId}
                 fetchTasks={fetchTasks}
             />
@@ -109,7 +109,9 @@ function GetTasks({ fetchTasks, tasks }) {
                     }
                 </ul >
             ) : (
-                <p>Please add a task</p>
+                <div className={styles.noTasks}>
+                    <p>Please add a task</p>
+                </div>
             )}
         </div>
     )
