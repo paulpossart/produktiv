@@ -5,7 +5,7 @@ import DeleteTasks from './DeleteTasks';
 import styles from './tasks.module.scss';
 
 import expandIcon from '../../assets/expand.svg';
-
+import { motion, AnimatePresence } from 'framer-motion';
 
 import editIcon from '../../assets/edit.svg';
 import deleteIcon from '../../assets/delete.svg';
@@ -58,55 +58,65 @@ function GetTasks({ fetchTasks, tasks }) {
         <div className={styles.tasksDiv}>
             {tasks.length > 0 ? (
                 <ul>
-                    {
-                        tasks.map((task, index) =>
-                            <li className={styles.li} key={task.id}>
+                    <AnimatePresence>
+                        {
 
-                                <div className={styles.head}>
-                                    <div className={styles.priority}>
-                                        <PrioritiseTasks
-                                            taskId={task.id}
-                                            fetchTasks={fetchTasks}
-                                            prevTask={tasks[index - 1] || null}
-                                            prevPrevTask={tasks[index - 2] || null}
-                                            nextTask={tasks[index + 1] || null}
-                                            nextNextTask={tasks[index + 2] || null}
+                            tasks.map((task, index) =>
+                                <motion.li
+                                    className={styles.li}
+                                    key={task.id}
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                    transition={{ duration: 0.3 }}>
 
-                                        />
+                                    <div className={styles.head}>
+                                        <div className={styles.priority}>
+                                            <PrioritiseTasks
+                                                taskId={task.id}
+                                                fetchTasks={fetchTasks}
+                                                prevTask={tasks[index - 1] || null}
+                                                prevPrevTask={tasks[index - 2] || null}
+                                                nextTask={tasks[index + 1] || null}
+                                                nextNextTask={tasks[index + 2] || null}
+
+                                            />
+                                        </div>
+                                        <h3 className={styles.title}>{task.title}</h3>
+                                        <div className={styles.expand}>
+                                            <button className={styles.btn3} onClick={() => openTasks(task.id)}>
+                                                <img className={tasksOpen[task.id] ? styles.expandUp : styles.expandDown} src={expandIcon} />
+                                            </button>
+                                        </div>
                                     </div>
-                                    <h3 className={styles.title}>{task.title}</h3>
-                                    <div className={styles.expand}>
-                                        <button className={styles.btn3} onClick={() => openTasks(task.id)}>
-                                            <img className={tasksOpen[task.id] ? styles.expandUp : styles.expandDown} src={expandIcon} />
-                                        </button>
-                                    </div>
-                                </div>
 
-                                <div className={`${styles.taskBody} ${tasksOpen[task.id] ? styles.tasksOpen : styles.tasksClosed}`}>
-                                    <div className={styles.descBox}>
-                                        <p>{task.description}</p>
-                                    </div>
-                                    <div className={styles.btnCont}>
-                                        <button className={styles.btn2} onClick={() => handleEdit(
-                                            task.id,
-                                            fetchTasks,
-                                            task.title,
-                                            task.description
-                                        )}>
-                                            <img src={editIcon} />
-                                        </button>
-                                        <button className={styles.btn1} onClick={() => handleDelete(
-                                            task.id, fetchTasks
-                                        )}>
-                                            <img src={deleteIcon} />
-                                        </button>
+                                    <div className={`${styles.taskBody} ${tasksOpen[task.id] ? styles.tasksOpen : styles.tasksClosed}`}>
+                                        <div className={styles.descBox}>
+                                            <p>{task.description}</p>
+                                        </div>
+                                        <div className={styles.btnCont}>
+                                            <button className={styles.btn2} onClick={() => handleEdit(
+                                                task.id,
+                                                fetchTasks,
+                                                task.title,
+                                                task.description
+                                            )}>
+                                                <img src={editIcon} />
+                                            </button>
+                                            <button className={styles.btn1} onClick={() => handleDelete(
+                                                task.id, fetchTasks
+                                            )}>
+                                                <img src={deleteIcon} />
+                                            </button>
 
+                                        </div>
                                     </div>
-                                </div>
 
-                            </li>
-                        )
-                    }
+                                </motion.li>
+                            )
+                        }
+                    </AnimatePresence>
                 </ul >
             ) : (
                 <div className={styles.noTasks}>
