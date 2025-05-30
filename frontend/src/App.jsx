@@ -10,20 +10,21 @@ import NotFound from './components/1_auth/NotFound';
 import NewCreds from './components/1_auth/NewCreds';
 import Tasks from './components/4_tasks/Tasks';
 import Account from './components/5_users/Account';
+import Loader from './components/6_utils/loader/Loader';
 import { useAuth } from './context/AuthContext';
 
 function App() {
   const { user, isLoading } = useAuth();
-  
+
   if (isLoading) {
-    return <p>loading</p>;
+    return <Loader />;
   }
 
   return (
     <Router>
       <Routes>
 
-         <Route path='/new-credentials' element={<NewCreds />} />
+        <Route path='/new-credentials' element={<NewCreds />} />
 
         <Route
           path='/auth'
@@ -39,7 +40,7 @@ function App() {
 
         </Route>
 
-       
+
         <Route path='*' element={<NotFound />} />
 
       </Routes>
