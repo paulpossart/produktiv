@@ -49,6 +49,3 @@ function Duk({className}) {
 }
 
 export default Duk;
-
-
-

@@ -1,17 +1,16 @@
+import Root from './Root';
+import AuthPage from './components/1_auth/AuthPage';
+import NotFound from './components/1_auth/NotFound';
+import NewCredentials from './components/1_auth/NewCredentials';
+import Tasks from './components/4_tasks/Tasks';
+import Loader from './components/6_utils/loader/Loader';
+import { useAuth } from './context/AuthContext';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate
 } from 'react-router-dom';
-import Root from './Root';
-import AuthPage from './components/1_auth/AuthPage';
-import NotFound from './components/1_auth/NotFound';
-import NewCreds from './components/1_auth/NewCreds';
-import Tasks from './components/4_tasks/Tasks';
-import Account from './components/5_users/Account';
-import Loader from './components/6_utils/loader/Loader';
-import { useAuth } from './context/AuthContext';
 
 function App() {
   const { user, isLoading } = useAuth();
@@ -24,7 +23,7 @@ function App() {
     <Router>
       <Routes>
 
-        <Route path='/new-credentials' element={<NewCreds />} />
+        <Route path='/new-credentials' element={<NewCredentials />} />
 
         <Route
           path='/auth'

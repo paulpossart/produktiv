@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react';
 import EditTasks from './EditTasks';
 import PrioritiseTasks from './PrioritiseTasks';
 import DeleteTasks from './DeleteTasks';
-import styles from './tasks.module.scss';
-
-import expandIcon from '../../assets/expand.svg';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import { setModal } from '../6_utils/helpers/helperFunctions';
+import { useModal } from '../../context/ModalContext';
+import styles from './tasks.module.scss';
+import expandIcon from '../../assets/expand.svg';
 import editIcon from '../../assets/edit.svg';
 import deleteIcon from '../../assets/delete.svg';
-
-import { setModal } from '../6_utils/helperFunctions';
-import { useModal } from '../../context/ModalContext';
 
 function GetTasks({ fetchTasks, tasks }) {
     const [tasksOpen, setTasksOpen] = useState({});
@@ -51,8 +48,6 @@ function GetTasks({ fetchTasks, tasks }) {
             />
         })
     }
-
-
 
     return (
         <div className={styles.tasksDiv}>

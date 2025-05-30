@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { callEditTasksById } from '../../apiCalls/tasksCalls';
-
 import { useModal } from '../../context/ModalContext';
-import { setModal } from '../6_utils/helperFunctions';
-
+import { setModal } from '../6_utils/helpers/helperFunctions';
 import styles from './tasks.module.scss';
 
 function EditTasks({

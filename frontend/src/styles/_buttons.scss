@@ -9,21 +9,19 @@
     border: solid 2px;
     text-decoration: none;
     border-radius: 25px;
-    //white-space: nowrap;
     transform: scale(1);
 
+    transition:
+        color 0.8s ease-in-out,
+        border-color 0.8s ease-in-out,
+        transform 0.1s ease-in-out,
+        background-color 0.3s ease-in-out;
 
     font: {
         family: $body;
         size: 16px;
         weight: 500;
     }
-
-    transition: color 0.25s ease-in-out,
-    transform 0.25s ease-in-out,
-    border-color 0.25s ease-in-out,
-    transform 0.1s ease-in-out,
-    background-color 0.25s ease-in-out;
 }
 
 .btn1 {
@@ -67,8 +65,6 @@
 
 .btn3 {
     @extend %button;
-
-    //color: white;
     background-color: rgba(0, 0, 0, 0);
     border-radius: 50%;
     border-color: transparent;

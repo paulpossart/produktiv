@@ -29,7 +29,6 @@ const callGetTasks = async () => {
 }
 
 const callEditTasksById = async (taskId, newTitle, newDescription) => {
-    console.log(taskId, newTitle, newDescription)
     const response = await fetch(`${backendUrl}/api/tasks/${taskId}`, {
         method: 'PUT',
         body: JSON.stringify({
@@ -55,11 +54,7 @@ const callPrioritiseTasksById = async (taskId, operator, adjacentTaskId, adjacen
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
     });
-    //==============
-    //const data = await response.json();
-    //if (!response.ok) throw new Error(data.message)
-    //if (response.ok) throw new Error(data.message)
-    //========================
+
     if (!response.ok) throw new Error('unable to update task priority')
     return;
 };
