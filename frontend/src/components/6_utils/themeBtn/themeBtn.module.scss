@@ -1,6 +1,6 @@
 .main {
     position: relative;
-    background-color: var(--div);
+    background-color: var(--textInput);
     border: solid rgb(136, 136, 136) 4px;
     border-radius: 25px;
     padding: 0.5rem;
@@ -15,7 +15,7 @@
     height: 100%;
     width: 100%;
 
-    transition: background-color 1s ease-in-out;
+    transition: background-color 0.6s ease-in-out;
 
     .slider {
         position: absolute;
@@ -40,6 +40,5 @@
     .moon {
         width: 25px;
         color: var(--alt);
-        transition: color 10s ease-in-out;
     }
 }
