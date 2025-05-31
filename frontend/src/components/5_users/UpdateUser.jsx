@@ -74,7 +74,7 @@ function UpdateUser({ setMiniModal }) {
                     placeholder='new username'
                 />
 
-                {updateError && <p>{updateError}</p>}
+                {updateError && <p className={styles.feedback}>{updateError}</p>}
 
                 <input
                     type='password'

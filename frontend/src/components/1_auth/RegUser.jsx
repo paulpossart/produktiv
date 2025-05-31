@@ -54,7 +54,7 @@ function RegUser({ setView }) {
                     placeholder='new username'
                 />
 
-                {regError && <p>{regError}</p>}
+                {regError && <p className={styles.feedback}>{regError}</p>}
 
                 <input
                     type='password'
