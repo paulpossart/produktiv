@@ -3,7 +3,6 @@ import 'dotenv/config';
 import express from 'express';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
-
 import usersRouter from  './routers/usersRouter.js';
 import authRouter from './routers/authRouter.js';
 import tasksRouter from './routers/tasksRouter.js';
@@ -11,6 +10,7 @@ import tasksRouter from './routers/tasksRouter.js';
 import { isProd } from './queries/helperFunctions.js';
 
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
