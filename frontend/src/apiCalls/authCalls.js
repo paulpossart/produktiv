@@ -1,7 +1,7 @@
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
+//const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const callSignIn = async (username, password) => {
-    const response = await fetch(`${backendUrl}/api/auth/sign-in`, {
+    const response = await fetch(`/api/auth/sign-in`, {
         method: 'POST',
         body: JSON.stringify({
             username,
@@ -17,7 +17,7 @@ const callSignIn = async (username, password) => {
 };
 
 const callSignOut = async () => {
-    const response = await fetch(`${backendUrl}/api/auth/sign-out`, {
+    const response = await fetch(`/api/auth/sign-out`, {
         method: 'POST',
         credentials: 'include',
     });

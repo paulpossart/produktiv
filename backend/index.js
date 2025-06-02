@@ -1,7 +1,6 @@
 import 'dotenv/config';
 
 import express from 'express';
-import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 
@@ -12,19 +11,14 @@ import tasksRouter from './routers/tasksRouter.js';
 import { isProd } from './queries/helperFunctions.js';
 
 const app = express();
-
-const allowedOrigin = process.env.ALLOWED_URL.split(',');
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors({origin: allowedOrigin, credentials: true}));
 app.use(helmet());
 app.use(cookieParser());
 
-//=====
 app.get('/', (req, res) => res.json({backend: 'running'}));
-//=====
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);

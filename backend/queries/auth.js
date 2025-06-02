@@ -39,13 +39,13 @@ const signIn = async (req, res, next) => {
             .cookie('accessToken', accessToken, {
                 httpOnly: true,
                 secure: isProd(),
-                sameSite: isProd() ? 'None' : 'Lax',
+                sameSite: 'lax',
                 maxAge: 15 * 60 * 1000
             })
             .cookie('refreshToken', refreshToken, {
                 httpOnly: true,
                 secure: isProd(),
-                sameSite: isProd() ? 'None' : 'Lax',
+                sameSite: 'lax',
                 maxAge: 7 * 24 * 60 * 60 * 1000
             })
             .status(200).json({
@@ -67,12 +67,12 @@ const signOut = (req, res) => {
         .clearCookie('accessToken', {
             httpOnly: true,
             secure: isProd(),
-             sameSite: isProd() ? 'None' : 'Lax',
+            sameSite: 'lax',
         })
         .clearCookie('refreshToken', {
             httpOnly: true,
             secure: isProd(),
-             sameSite: isProd() ? 'None' : 'Lax',
+            sameSite: 'lax',
         })
         .sendStatus(204);
 };
@@ -115,7 +115,7 @@ const verifyUser = (req, res, next) => {
             res.cookie('accessToken', newAccessToken, {
                 httpOnly: true,
                 secure: isProd(),
-                sameSite: isProd() ? 'None' : 'Lax',
+                sameSite: 'lax',
                 maxAge: 15 * 60 * 1000
             });
 
