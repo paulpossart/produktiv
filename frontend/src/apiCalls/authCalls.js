@@ -1,5 +1,3 @@
-//const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
 const callSignIn = async (username, password) => {
     const response = await fetch(`/api/auth/sign-in`, {
         method: 'POST',

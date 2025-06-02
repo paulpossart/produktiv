@@ -1,5 +1,3 @@
-//const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
 const callCreateTasks = async (title, description, prevId) => {
     const response = await fetch(`/api/tasks`, {
         method: 'POST',

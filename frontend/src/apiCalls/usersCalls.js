@@ -1,5 +1,3 @@
-//const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
 const callCreateUser = async (newUsername, newPassword) => {
 
     const response = await fetch(`/api/users`, {
