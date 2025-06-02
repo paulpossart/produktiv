@@ -28,7 +28,7 @@ Produktiv is a full-stack task management app that uses the PERN stack. It allow
 
 - **Custom animations** for settings burger and theme slider
 
-- - **Rate limit:** 10 minute timeout after 5 failed login attempts 
+- **Rate limit:** 10 minute timeout after 5 failed login attempts 
 
 [Visit Site](https://produktiv.netlify.app/)
 
