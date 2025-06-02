@@ -1,5 +1,6 @@
 import validator from 'validator';
 import jwt from 'jsonwebtoken';
+import rateLimit from 'express-rate-limit';
 
 const safeRegex = /^[^<>{};\\]*$/;
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
@@ -29,9 +30,20 @@ const signRefreshToken = (payload) => {
     });
 };
 
+const rateCheck = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 5,
+    handler: (req, res) => {
+        res.status(429).json({
+            message: 'Too many requests from this IP, please try again later.'
+        });
+    }
+})
+
 export {
     isProd,
     signAccessToken,
     signRefreshToken,
-    isValidInput
+    isValidInput,
+    rateCheck
 };
