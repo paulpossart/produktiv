@@ -1,8 +1,8 @@
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
+//const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const callCreateUser = async (newUsername, newPassword) => {
 
-    const response = await fetch(`${backendUrl}/api/users`, {
+    const response = await fetch(`/api/users`, {
         method: 'POST',
         body: JSON.stringify({
             newUsername,
@@ -18,7 +18,7 @@ const callCreateUser = async (newUsername, newPassword) => {
 };
 
 const callGetUser = async () => {
-    const response = await fetch(`${backendUrl}/api/users`, {
+    const response = await fetch(`/api/users`, {
         method: 'GET',
         credentials: 'include'
     });
@@ -37,7 +37,7 @@ const callGetUser = async () => {
 }
 
 const callUpdateUser = async (updatedUsername, updatedPassword) => {
-    const response = await fetch(`${backendUrl}/api/users`, {
+    const response = await fetch(`/api/users`, {
         method: 'PUT',
         body: JSON.stringify({
             updatedUsername,
@@ -53,7 +53,7 @@ const callUpdateUser = async (updatedUsername, updatedPassword) => {
 };
 
 const callDeleteUser = async () => {
-    const response = await fetch(`${backendUrl}/api/users`, {
+    const response = await fetch(`/api/users`, {
         method: 'DELETE',
         credentials: 'include'
     });

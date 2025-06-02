@@ -1,7 +1,7 @@
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
+//const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const callCreateTasks = async (title, description, prevId) => {
-    const response = await fetch(`${backendUrl}/api/tasks`, {
+    const response = await fetch(`/api/tasks`, {
         method: 'POST',
         body: JSON.stringify({
             title,
@@ -18,7 +18,7 @@ const callCreateTasks = async (title, description, prevId) => {
 };
 
 const callGetTasks = async () => {
-    const response = await fetch(`${backendUrl}/api/tasks`, {
+    const response = await fetch(`/api/tasks`, {
         method: 'GET',
         credentials: 'include'
     });
@@ -29,7 +29,7 @@ const callGetTasks = async () => {
 }
 
 const callEditTasksById = async (taskId, newTitle, newDescription) => {
-    const response = await fetch(`${backendUrl}/api/tasks/${taskId}`, {
+    const response = await fetch(`/api/tasks/${taskId}`, {
         method: 'PUT',
         body: JSON.stringify({
             newTitle,
@@ -44,7 +44,7 @@ const callEditTasksById = async (taskId, newTitle, newDescription) => {
 };
 
 const callPrioritiseTasksById = async (taskId, operator, adjacentTaskId, adjacentAdjacentTaskId) => {
-    const response = await fetch(`${backendUrl}/api/tasks/${taskId}`, {
+    const response = await fetch(`/api/tasks/${taskId}`, {
         method: 'PATCH',
         body: JSON.stringify({
             operator,
@@ -60,7 +60,7 @@ const callPrioritiseTasksById = async (taskId, operator, adjacentTaskId, adjacen
 };
 
 const callDeleteTasksById = async (taskId) => {
-    const response = await fetch(`${backendUrl}/api/tasks/${taskId}`, {
+    const response = await fetch(`/api/tasks/${taskId}`, {
         method: 'DELETE',
         credentials: 'include'
     });
