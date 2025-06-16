@@ -10,7 +10,7 @@ function AuthPage() {
     const { modalContent } = useModal();
 
     return (
-        <div className={styles.backgroundImg}>
+        <section className={styles.backgroundImg}>
             {modalContent && <Modal>{modalContent}</Modal>}
             <div className={styles.authForm}>
                 <div className={styles.viewContainer}>
@@ -20,7 +20,7 @@ function AuthPage() {
                     }
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

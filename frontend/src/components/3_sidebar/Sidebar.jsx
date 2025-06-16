@@ -22,7 +22,7 @@ function Sidebar({ className }) {
     }
 
     return (
-        <div className={`${className} ${styles.sidebarMain}`}>
+        <nav className={`${className} ${styles.sidebarMain}`}>
 
             <div onClick={() => setIsOpen(false)} className={`${styles.overlay} ${isOpen ? styles.overlayOpen : styles.overlayClosed}`}></div>
 
@@ -39,12 +39,12 @@ function Sidebar({ className }) {
                     <ThemeBtn />
                 </button>
 
-                <button onClick={() => { setIsOpen(false); openAccount()}} className={styles.btn1} to='settings'>Account</button>
+                <button onClick={() => { setIsOpen(false); openAccount() }} className={styles.btn1} to='settings'>Account</button>
 
-            <SignOut className={styles.btn2} />
+                <SignOut className={styles.btn2} />
 
-        </div>
-        </div >
+            </div>
+        </nav >
     );
 };
 

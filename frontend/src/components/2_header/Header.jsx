@@ -8,7 +8,7 @@ function Header({ className }) {
     const { theme } = useTheme();
 
     return (
-        <div className={`${className} ${styles.head}`}>
+        <header className={`${className} ${styles.head}`}>
             <div className={`${styles.overlay} ${theme === 'dark' ? styles.darkOn : styles.darkOff}`}></div>
             <div className={`${styles.overlay} ${theme === 'light' ? styles.lightOn : styles.lightOff}`}></div>
             <div className={styles.duk}>
@@ -16,7 +16,7 @@ function Header({ className }) {
             </div>
             <h1 className={styles.title}>pro&nbsp;·&nbsp;<span>duk</span>&nbsp;·&nbsp;tiv</h1>
             <Sidebar className={styles.sidebar} />
-        </div>
+        </header>
     );
 };
 

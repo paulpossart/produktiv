@@ -10,9 +10,9 @@ function Root() {
         <div className={styles.root}>
             {modalContent && <Modal>{modalContent}</Modal>}
             <Header className={styles.header} />
-            <div className={styles.outlet}>
+            <main className={styles.outlet}>
                 <Outlet />
-            </div>
+            </main>
         </div>
     );
 };

@@ -41,19 +41,19 @@ function Tasks() {
 
     return (
         <div className={styles.homeDiv}>
-            <div className={styles.welcome}>
+            <section className={styles.welcome}>
                 <p>Welcome {username}!</p>
                 <button className={styles.btn2} onClick={addTask}>Add Task <img src={plus} /></button>
-            </div>
+            </section>
 
-            <div className={styles.tasksContainer}>
+            <section className={styles.tasksContainer}>
                 {fetchError
                     ? fetchError
                     : <GetTasks
                         fetchTasks={fetchTasks}
                         tasks={tasks}
                     />}
-            </div>
+            </section>
         </div>
     );
 };

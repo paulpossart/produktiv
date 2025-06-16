@@ -8,9 +8,9 @@ function Modal({ children }) {
     return (
         <>
             <div onClick={() => setModalContent(null)} className={styles.modalOverlay}></div>
-            <>
+            <aside>
                 {children}
-            </>
+            </aside>
         </>
     )
 }
