@@ -4,6 +4,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 
+import authRouter from './routers/authRouters.js';
+
 const app = express();
 const allowedOrigin = process.env.ALLOWED_URL;
 const PORT = process.env.PORT;
@@ -15,6 +17,8 @@ app.use(helmet());
 app.use(cookieParser());
 
 app.get('/', (req, res) => res.json({ backend: 'running' }));
+
+app.use('/api/auth', authRouter);
 
 app.use((err, req, res, next) => {
     const status = err.status || 500;
