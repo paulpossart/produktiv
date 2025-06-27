@@ -1,16 +1,30 @@
 import { useState, useEffect } from 'react'
-import './App.css'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import AuthPage from './components/auth/AuthPage';
+import Home from './components/home/Home';
+import { useAuth } from './context/AuthContext';
 
 function App() {
-  const [auth, setAuth] = useState(true);
-  const [user, setUser] = useState(null)
+  const { user } = useAuth();
 
-  if (!auth) return 'sign in';
+  useEffect(()=>{
+    document.body.className = 'light';
+  }, [])
 
   return (
-    <>
-      home
-    </>
+    <BrowserRouter>
+      <Routes>
+
+        <Route path='/' element={
+          user ? <Home /> : <Navigate to='/auth' />
+        } />
+
+        <Route path='/auth' element={
+          !user ? <AuthPage /> : <Navigate to='/' />
+        } />
+
+      </Routes>
+    </BrowserRouter>
   )
 }
 

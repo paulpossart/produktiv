@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 
 import authRouter from './routers/authRouters.js';
+import usersRouter from './routers/usersRouter.js';
 
 const app = express();
 const allowedOrigin = process.env.ALLOWED_URL;
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.get('/', (req, res) => res.json({ backend: 'running' }));
 
 app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
 
 app.use((err, req, res, next) => {
     const status = err.status || 500;
