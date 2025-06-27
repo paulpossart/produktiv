@@ -1,0 +1,21 @@
+@use '../../../styles/global' as *;
+@use '../../../styles/buttons';
+
+.authForm {
+    @include flex;
+    height: 100%;
+    width: 240px;
+    padding-top: 1.6rem;
+
+    .inputs {
+        @include formInputStyle;
+        height: 60%;
+        width: 100%;
+    }
+
+    .buttons {
+        @include flex;
+        height: 40%;
+        width: 100%;
+    }
+}

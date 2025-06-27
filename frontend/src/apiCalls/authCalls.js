@@ -14,4 +14,14 @@ const callSignIn = async (username, password) => {
     return data;
 }
 
-export { callSignIn };
+const callSignOut = async () => {
+    const response = await fetch('/api/auth/sign-out', {
+        method: 'POST',
+        credentials: 'include'
+    });
+
+    if (!response.ok) throw new Error('Could not sign out, please try again');
+    return null;
+}
+
+export { callSignIn, callSignOut };

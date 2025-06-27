@@ -1,0 +1,68 @@
+@use '../../../styles/global' as *;
+
+
+.dukWrapper {
+    @include flex(row, flex-start);
+    transition: width 0.5s ease-in-out, border-radius 0.5s ease;
+    border: solid black 3px;
+    background-color: yellow;
+    color: black;
+
+    & button {
+        cursor: pointer;
+        border-radius: 50%;
+        border: none;
+        width: 55px;
+        height: 55px;
+        padding: 0;
+        line-height: 1;
+        background-color: transparent;
+
+        & img {
+            width: 55px;
+            transform: scaleX(-1);
+            padding: 4px;
+            transition: transform 0.2s ease;
+
+            @media (hover: hover) and (pointer: fine) {
+                &:hover {
+                    transform:
+                        scaleX(-1) scale(1.05);
+                }
+            }
+
+            &:active {
+                transform:
+                    scaleX(-1) scale(0.95);
+            }
+        }
+    }
+
+    .err {
+        width: 100%;
+        overflow: hidden;
+        @include flex(row, flex-start);
+
+        & p {
+            white-space: nowrap;
+            font-size: 1.3rem;
+        }
+    }
+}
+
+.dukClosed {
+    width: 61px;
+    border-radius: 50%;
+    border-top-left-radius: 30.5px;
+    border-bottom-left-radius: 30.5px;
+    border-top-right-radius: 30.5px;
+    border-bottom-right-radius: 30.5px;
+}
+
+.dukOpen {
+    width: 240px;
+    border-top-left-radius: 30.5px;
+    border-bottom-left-radius: 30.5px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}

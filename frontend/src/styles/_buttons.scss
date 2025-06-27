@@ -1,0 +1,55 @@
+@use './global' as *;
+
+.btn1 {
+    cursor: pointer;
+    line-height: 1.5;
+    width: 100%;
+    padding: 0.8rem 0.16rem;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    border-radius: 20px;
+    transform: scale(1);
+    color: black;
+    background-color: var(--btn1);
+
+    transition:
+        color 0.4s ease-in-out,
+        transform 0.1s ease-in-out,
+        background-color 0.4s ease-in-out;
+
+
+    font: {
+        family: $body;
+        size: 1.6rem;
+        weight: 700;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            transform: scale(1.02);
+            background-color: var(--btn1Hover);
+        }
+    }
+
+    &:active {
+        transform: scale(0.98);
+        background-color: var(--btn1Hover);
+    }
+}
+
+.btn2 {
+    @extend .btn1;
+    color: white;
+    background-color: $mainGrey;
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background-color: $mainGreyHover;
+        }
+    }
+
+    &:active {
+        background-color: $mainGreyHover;
+    }
+}

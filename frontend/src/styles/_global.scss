@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+$title: 'Saira Semi Condensed', sans-serif;
+$body: 'Roboto', sans-serif;
+
+$mainGrey: rgb(102, 102, 102);
+$mainGreyHover: rgb(62, 62, 62);
+$borderColor: rgb(136, 136, 136);
+
+@mixin flex($dir: column, $jus: space-around, $align: center) {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $jus;
+    align-items: $align;
+}
+
+@mixin formInputStyle {
+    @include flex(column, space-between);
+    height: 100%;
+    width: 100%;
+
+    & input {
+        width: 100%;
+        background-color: var(--textInput);
+        color: var(--alt);
+        border: solid var(--greyText) 1px;
+        border-radius: 8px;
+        padding: 0.4em;
+        line-height: 1;
+
+        font: {
+            family: $body;
+            size: 1.6rem;
+        }
+
+        &::placeholder {
+            color: var(--greyText);
+            font-style: italic;
+        }
+    }
+}
+
+%border {
+    border: solid $borderColor 4px;
+    border-radius: 8px;
+}
+
+.inputErr {
+    color: var(--errCol);
+
+    font: {
+        size: 1.3rem;
+        weight: 500;
+    }
+
+    & img {
+        width: 1.5em;
+        vertical-align: middle;
+        margin-right: 0.4rem;
+    }
+
+    & span {
+        vertical-align: middle;
+        line-height: 1.5;
+    }
+}
+
+.srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
