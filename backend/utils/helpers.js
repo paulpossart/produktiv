@@ -1,5 +1,6 @@
-import jwt from 'jsonwebtoken';
-import validator from 'validator';
+const jwt = require('jsonwebtoken');
+const validator = require('validator');
+const rateLimit = require('express-rate-limit');
 
 const isProd = () => process.env.NODE_ENV === 'production';
 
@@ -38,10 +39,19 @@ const isValidInput = (type, input, min, max) => {
     return false
 };
 
-export {
+const rateCheck = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 10,
+    message: {
+        message: 'Too many requests, try later.'
+    }
+})
+
+module.exports = {
     isProd,
     newErr,
     signAccessToken,
     signRefreshToken,
-    isValidInput
+    isValidInput,
+    rateCheck
 };

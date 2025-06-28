@@ -1,13 +1,13 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import pool from '../db/config.js';
-import {
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const pool = require('../db/config');
+const {
     isProd,
     newErr,
     signAccessToken,
     signRefreshToken,
     isValidInput
-} from '../utils/helpers.js';
+} = require('../utils/helpers');
 
 const signIn = async (req, res, next) => {
     const { username, password } = req.body;
@@ -38,7 +38,7 @@ const signIn = async (req, res, next) => {
 
         const accessToken = signAccessToken({ sub: user.id });
         const refreshToken = signRefreshToken({ sub: user.id });
-
+    
         res
             .cookie('accessToken', accessToken, {
                 httpOnly: true,
@@ -78,4 +78,4 @@ const signOut = (req, res) => {
         .sendStatus(204);
 };
 
-export { signIn, signOut };
+module.exports = { signIn, signOut };
