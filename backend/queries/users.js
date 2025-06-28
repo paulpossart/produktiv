@@ -1,13 +1,14 @@
-import { v4 as uuid4 } from 'uuid';
-import bcrypt from 'bcrypt';
-import pool from '../db/config.js';
-import {
+const { v4: uuid4 } = require('uuid');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const pool = require('../db/config');
+const {
     isProd,
     newErr,
     signAccessToken,
     signRefreshToken,
     isValidInput
-} from '../utils/helpers.js';
+} = require('../utils/helpers');
 
 const createUser = async (req, res, next) => {
     const id = uuid4();
@@ -21,7 +22,6 @@ const createUser = async (req, res, next) => {
     }
 
     if (newPassword !== retypedPassword) {
-        console.log(newPassword, retypedPassword)
         throw newErr('passwords do not match', 400, 'regUserError');
     }
 
@@ -72,4 +72,4 @@ const createUser = async (req, res, next) => {
     }
 }
 
-export { createUser };
+module.exports = { createUser };

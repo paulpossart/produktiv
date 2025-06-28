@@ -1,5 +1,5 @@
-import pg from 'pg';
-import { isProd } from '../utils/helpers.js';
+const pg = require('pg');
+const { isProd } = require('../utils/helpers');
 
 const { Pool } = pg;
 
@@ -10,5 +10,4 @@ const pool = new Pool(
     }
 );
 
-export default pool;
-
+module.exports = pool;

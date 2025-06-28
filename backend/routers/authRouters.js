@@ -1,9 +1,10 @@
-import { Router } from 'express';
-import { signIn, signOut } from '../queries/auth.js';
+const { Router } = require('express');
+const { signIn, signOut } = require('../queries/auth');
+const { rateCheck } = require('../utils/helpers');
 
 const router = Router();
 
-router.post('/sign-in', signIn);
+router.post('/sign-in', rateCheck, signIn);
 router.post('/sign-out', signOut);
 
-export default router;
+module.exports = router;
