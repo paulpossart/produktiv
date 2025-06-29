@@ -1,6 +1,6 @@
-import dukIcon from '../../../assets/duk-icon.svg';
 import quack from '../../../assets/rubber-duk.mp3';
 import styles from './Duk.module.scss';
+import dukIcon from '../../../assets/duk-icon.svg';
 
 function Duk({ errMsg }) {
 
@@ -18,7 +18,7 @@ function Duk({ errMsg }) {
                 onClick={handleClick}
                 aria-label='Duck image, the site logo - click to hear it squeak!'
             >
-                <img src={dukIcon} alt='' aria-hidden="true" />
+                <img src={dukIcon} alt='' />
             </button>
             <div className={styles.err}>
                 {errMsg && <p role='alert'>{errMsg}</p>}

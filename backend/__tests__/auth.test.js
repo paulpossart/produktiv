@@ -62,7 +62,13 @@ describe('signIn', () => {
                 password: 'password'
             }
         };
-        await expect(signIn(req, res, next)).rejects.toThrow();
+        await expect(signIn(req, res, next)).rejects.toThrow(
+            expect.objectContaining({
+                name: 'signInError',
+                status: 401,
+                message: 'invalid username or password'
+            })
+        );
     });
 
     it('throws on invalid password', async () => {
@@ -72,7 +78,13 @@ describe('signIn', () => {
                 password: 'p'
             }
         };
-        await expect(signIn(req, res, next)).rejects.toThrow();
+        await expect(signIn(req, res, next)).rejects.toThrow(
+            expect.objectContaining({
+                name: 'signInError',
+                status: 401,
+                message: 'invalid username or password'
+            })
+        );
     });
 });
 

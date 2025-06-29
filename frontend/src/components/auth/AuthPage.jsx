@@ -13,7 +13,7 @@ function AuthPage() {
             <section aria-labelledby='auth-title'>
                
                 <header>
-                    <h1 id='auth-title' className={styles.srOnly}>Authorisation Page</h1>
+                    <h1 id='auth-title' className={styles.srOnly}>Produktiv Authorisation Page</h1>
 
                     <Duk errMsg={submitErr} />
                 </header>
@@ -47,4 +47,3 @@ function AuthPage() {
 };
 
 export default AuthPage;
-
