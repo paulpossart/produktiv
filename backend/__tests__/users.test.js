@@ -66,7 +66,13 @@ describe('createUser', () => {
                 newPassword: 'password'
             }
         };
-        await expect(createUser(req, res, next)).rejects.toThrow();
+        await expect(createUser(req, res, next)).rejects.toThrow(
+            expect.objectContaining({
+                name: 'regUserError',
+                status: 401,
+                message: 'invalid username or password'
+            })
+        );
     });
 
     it('throws on  invalid password', async () => {
@@ -76,7 +82,13 @@ describe('createUser', () => {
                 newPassword: 'p'
             }
         };
-        await expect(createUser(req, res, next)).rejects.toThrow();
+        await expect(createUser(req, res, next)).rejects.toThrow(
+            expect.objectContaining({
+                name: 'regUserError',
+                status: 401,
+                message: 'invalid username or password'
+            })
+        );
     });
 
     it('throws on  unmatched password', async () => {
@@ -87,7 +99,13 @@ describe('createUser', () => {
                 retypedPassword: 'retypedPassword'
             }
         };
-        await expect(createUser(req, res, next)).rejects.toThrow();
+        await expect(createUser(req, res, next)).rejects.toThrow(
+            expect.objectContaining({
+                name: 'regUserError',
+                status: 400,
+                message: 'passwords do not match'
+            })
+        );
     });
 
     it('passes error on unavailable username', async () => {

@@ -7,6 +7,10 @@ const useAuth = () => useContext(AuthContext);
 function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
 
+    useEffect(() => {
+        console.log(user)
+    }, [user]);
+
     const signIn = async (username, password) => {
         try {
             const data = await callSignIn(username, password);
