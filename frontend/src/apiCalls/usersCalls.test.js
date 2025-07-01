@@ -1,4 +1,4 @@
-import { callCreateUser } from './usersCalls';
+import { callCreateUser, callGetUser } from './usersCalls';
 
 beforeEach(() => {
     global.fetch = jest.fn();
@@ -47,6 +47,45 @@ describe('callCreateUser', () => {
 
         await expect(callCreateUser('bad-username', 'bad-password', 'diff-password'))
             .rejects.toThrow('invalid username or password');
+
+        expect(fetch).toHaveBeenCalledWith('/api/users', expect
+            .any(Object));
+    });
+});
+
+describe('callGetUser', () => {
+    it('returns new user data on success', async () => {
+        const mockData = {
+            userData: true,
+            user: {
+                username: 'username',
+                created_at: new Date()
+            }
+        };
+        fetch.mockResolvedValue({
+            ok: true,
+            json: async () => mockData
+        });
+
+        const response = await callGetUser();
+
+        expect(fetch).toHaveBeenCalledWith('/api/users', {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        expect(response).toEqual(mockData);
+    });
+
+    it('throws on bad response', async () => {
+        const errMsg = { message: 'invalid username or password' };
+
+        fetch.mockResolvedValue({
+            ok: false,
+            json: async () => errMsg
+        });
+
+        await expect(callGetUser()).rejects.toThrow('invalid username or password');
 
         expect(fetch).toHaveBeenCalledWith('/api/users', expect
             .any(Object));
