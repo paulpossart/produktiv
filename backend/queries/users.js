@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const pool = require('../db/config');
 const {
     isProd,
+    setCookie,
     newErr,
     signAccessToken,
     signRefreshToken,
@@ -48,28 +49,46 @@ const createUser = async (req, res, next) => {
         const accessToken = signAccessToken({ sub: id });
         const refreshToken = signRefreshToken({ sub: id });
 
-        res
-            .cookie('accessToken', accessToken, {
-                httpOnly: true,
-                secure: isProd(),
-                sameSite: 'lax',
-                maxAge: 15 * 60 * 1000
-            })
-            .cookie('refreshToken', refreshToken, {
-                httpOnly: true,
-                secure: isProd(),
-                sameSite: 'lax',
-                maxAge: 7 * 24 * 60 * 60 * 1000
-            })
-            .status(200).json({
-                user: {
-                    username: user.username,
-                    created_at: user.created_at
-                }
-            });
+        setCookie(res, 'accessToken', accessToken, { maxAge: 15 * 60 * 1000 });
+        setCookie(res, 'refreshToken', refreshToken, { maxAge: 7 * 24 * 60 * 60 * 1000 });
+
+        res.status(200).json({
+            user: {
+                username: user.username,
+                created_at: user.created_at
+            }
+        });
     } catch (err) {
         next(err);
     }
 }
 
-module.exports = { createUser };
+const getUser = async (req, res, next) => {
+    const userId = req.userId;
+
+    try {
+        const result = await pool.query(
+            `SELECT username, created_at FROM produktiv.users
+             WHERE id = $1`,
+            [userId]
+        );
+        const user = result.rows[0];
+
+        if (!user) {
+            throw newErr('could not find user', 404, 'getUserError');
+        }
+        return res.status(200).json({
+            userData: true,
+            message: 'userdata successfully retrieved',
+            user: {
+                username: user.username,
+                created_at: user.created_at
+            }
+        });
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+module.exports = { createUser, getUser };

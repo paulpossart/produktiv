@@ -15,4 +15,23 @@ const callCreateUser = async (newUsername, newPassword, retypedPassword) => {
     return data;
 }
 
-export { callCreateUser };
+const callGetUser = async () => {
+    const response = await fetch('/api/users', {
+        method: 'GET',
+        credentials: 'include'
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+        console.log(data.message);
+        throw new Error(data.message);
+    }
+
+    if (data?.userData) {
+        return data;
+    }
+
+    return data.message;
+}
+
+export { callCreateUser, callGetUser };

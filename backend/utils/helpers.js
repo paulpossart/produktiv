@@ -4,6 +4,16 @@ const rateLimit = require('express-rate-limit');
 
 const isProd = () => process.env.NODE_ENV === 'production';
 
+const setCookie = (res, name, value, age) => {
+    const options = {
+        httpOnly: true,
+        secure: isProd(),
+        sameSite: 'lax',
+    };
+
+    res.cookie(name, value, {...options, ...age});
+};
+
 const newErr = (message, status = 500, name = 'Error') => {
     const err = new Error(message);
     err.status = status;
@@ -49,6 +59,7 @@ const rateCheck = rateLimit({
 
 module.exports = {
     isProd,
+    setCookie,
     newErr,
     signAccessToken,
     signRefreshToken,

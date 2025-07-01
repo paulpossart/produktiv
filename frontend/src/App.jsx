@@ -3,13 +3,17 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AuthPage from './components/auth/AuthPage';
 import Home from './components/home/Home';
 import { useAuth } from './context/AuthContext';
+import Loader from './components/utils/loader/Loader';
 
 function App() {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
 
-  useEffect(()=>{
+  useEffect(() => {
     document.body.className = 'light';
   }, [])
+
+
+  if (isLoading) return <Loader />;
 
   return (
     <BrowserRouter>
