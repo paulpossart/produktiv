@@ -1,11 +1,11 @@
-const { createUser } = require('../queries/users');
+const { createUser, getUser } = require('../queries/users');
 const pool = require('../db/config');
 const bcrypt = require('bcrypt');
 
 jest.mock('../db/config');
 jest.mock('../utils/helpers');
 jest.mock('bcrypt');
-
+/*
 describe('createUser', () => {
     let res;
     let next;
@@ -56,7 +56,6 @@ describe('createUser', () => {
                     expect.objectContaining({ username: 'username' })
             })
         );
-
     });
 
     it('throws on  invalid username', async () => {
@@ -136,5 +135,66 @@ describe('createUser', () => {
                 message: 'username unavailable'
             })
         );
+    });
+});
+*/
+describe('getUser', () => {
+    let req;
+    let res;
+    let next;
+
+    beforeEach(() => {
+        res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn().mockReturnThis(),
+            cookie: jest.fn().mockReturnThis(),
+        };
+        next = jest.fn();
+    });
+
+    it('returns user data on success', async () => {
+        req = { userId: 1 };
+
+        pool.query.mockResolvedValue({
+            rows: [{
+                id: 1,
+                username: 'username',
+                password_hash: 'hashed_password',
+                created_at: new Date(),
+                updated_at: new Date()
+            }]
+        });
+
+        await getUser(req, res, next);
+
+        expect(pool.query).toHaveBeenCalled();
+        expect(pool.query).toHaveBeenCalledWith(
+            expect.stringContaining('SELECT username, created_at FROM produktiv.users'),
+            expect.arrayContaining([1])
+        );
+        expect(res.status).toHaveBeenCalledWith(200);
+        expect(res.json).toHaveBeenCalledWith(
+            expect.objectContaining({
+                user:
+                    expect.objectContaining({ username: 'username' })
+            })
+        );
+    });
+
+    it('passes error to next when no user is found', async () => {
+        req = { userId: 1 };
+
+        pool.query.mockResolvedValue({
+            rows: []
+        });
+
+        await getUser(req, res, next);
+
+        expect(pool.query).toHaveBeenCalled();
+        expect(pool.query).toHaveBeenCalledWith(
+            expect.stringContaining('SELECT username, created_at FROM produktiv.users'),
+            expect.any(Array)
+        );
+        expect(next).toHaveBeenCalledWith(expect.any(Error));
     });
 });

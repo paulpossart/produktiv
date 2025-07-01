@@ -10,7 +10,6 @@ const setCookie = (res, name, value, age) => {
         secure: isProd(),
         sameSite: 'lax',
     };
-
     res.cookie(name, value, {...options, ...age});
 };
 

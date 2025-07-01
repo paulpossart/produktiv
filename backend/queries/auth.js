@@ -83,7 +83,7 @@ const verifyUser = (req, res, next) => {
     if (!accessToken) {
         return jwt.verify(refreshToken, refreshTokenSecret, (err, payload) => {
             if (err) {
-                throw newErr('invalid refresh token', 401, 'verificationError');
+                 return next(newErr('invalid refresh token', 401, 'verificationError'));
             }
             const newAccessToken = signAccessToken({ sub: payload.sub });
 
@@ -97,7 +97,7 @@ const verifyUser = (req, res, next) => {
         if (err) {
             return jwt.verify(refreshToken, refreshTokenSecret, (err, payload) => {
                 if (err) {
-                    throw newErr('invalid tokens', 401, 'verificationError');
+                    return next(newErr('invalid tokens', 401, 'verificationError'));
                 }
                 const newAccessToken = signAccessToken({ sub: payload.sub });
 
