@@ -1,0 +1,148 @@
+@use '../../styles/global' as *;
+
+@mixin headerGradient($col1, $col2, $col3) {
+    background: linear-gradient(90deg,
+            rgba($col1, $col2, $col3, 1) 0%,
+            rgba($col1, $col2, $col3, 1) 25%,
+            rgba($col1, $col2, $col3, 0.5) 75%,
+            rgba($col1, $col2, $col3, 0.1) 100%);
+}
+
+.header {
+    position: relative;
+    z-index: 1;
+    @extend %border;
+    width: 100%;
+    padding: 4px 8px;
+
+
+    background-image: url('../../assets/duk-img.jpg');
+    background-size: 60%;
+    background-position: 100% 45%;
+
+    display: grid;
+    grid-template-areas: 'logo title sidebar';
+    grid-template-columns: 25% 50% 25%;
+
+    @media only screen and (min-width: 500px) {
+        padding: 4px 24px;
+        
+        background-size: 50%;
+        background-position: 100% 45%;
+    }
+}
+
+.logo {
+    grid-area: logo;
+    @include flex(row, flex-start, center);
+    height: 100%;
+    width: 100%;
+}
+
+.duk {
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    line-height: 1;
+    background-color: yellow;
+    border: solid black 3px;
+
+
+    &:focus-visible {
+        @extend %focusVisible;
+    }
+
+    & img {
+        width: 40px;
+        transform: scaleX(-1);
+        padding: 0px;
+        transition: transform 0.2s ease;
+        border-radius: 50%;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                transform:
+                    scaleX(-1) scale(1.05);
+            }
+        }
+
+        &:active {
+            transform:
+                scaleX(-1) scale(0.95);
+        }
+    }
+}
+
+.title {
+    grid-area: title;
+    @include flex(row, center);
+    height: 100%;
+    width: 100%;
+
+    & h1 {
+        color: var(--titleColor);
+        text-shadow: 1px 1px 0 var(--titleShadow),
+            -1px 1px 0 var(--titleShadow),
+            1px -1px 0 var(--titleShadow),
+            -1px -1px 0 var(--titleShadow);
+
+        transition:
+            text-shadow 1s ease-in-out,
+            color 1s ease-in-out;
+
+        font: {
+            family: $title;
+            weight: 500;
+            size: clamp(2.5rem, 2.5vw, 4.5rem)
+        }
+
+        span {
+            color: var(--titleSpanColor);
+            text-shadow: 1px 1px 0 var(--titleSpanShadow),
+                -1px 1px 0 var(--titleSpanShadow),
+                1px -1px 0 var(--titleSpanShadow),
+                -1px -1px 0 var(--titleSpanShadow);
+
+            transition:
+                text-shadow 1s ease-in-out,
+                color 1s ease-in-out;
+        }
+    }
+}
+
+.sidebar {
+    grid-area: sidebar;
+    height: 100%;
+    width: 100%;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    z-index: -1;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.darkOn {
+    @include headerGradient(12, 12, 20);
+    opacity: 1;
+}
+
+.darkOff {
+    @include headerGradient(12, 12, 20);
+    opacity: 0;
+}
+
+.lightOn {
+    @include headerGradient(255, 255, 255);
+    opacity: 1;
+}
+
+.lightOff {
+    @include headerGradient(255, 255, 255);
+    opacity: 0;
+}

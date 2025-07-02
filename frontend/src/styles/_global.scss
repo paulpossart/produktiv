@@ -7,6 +7,21 @@ $mainGrey: rgb(102, 102, 102);
 $mainGreyHover: rgb(62, 62, 62);
 $borderColor: rgb(136, 136, 136);
 
+
+%border {
+    border: solid $borderColor 4px;
+    border-radius: 8px;
+}
+
+%focusVisible {
+    border: none;
+    outline: none;
+    box-shadow:
+        inset 0 0 0 2px blue,
+        0 0 0 2px white,
+        0 0 0 4px blue;
+}
+
 @mixin flex($dir: column, $jus: space-around, $align: center) {
     display: flex;
     flex-direction: $dir;
@@ -28,6 +43,10 @@ $borderColor: rgb(136, 136, 136);
         padding: 0.4em;
         line-height: 1;
 
+        &:focus-visible {
+            @extend %focusVisible;
+        }
+
         font: {
             family: $body;
             size: 1.6rem;
@@ -40,10 +59,6 @@ $borderColor: rgb(136, 136, 136);
     }
 }
 
-%border {
-    border: solid $borderColor 4px;
-    border-radius: 8px;
-}
 
 .inputErr {
     color: var(--errCol);

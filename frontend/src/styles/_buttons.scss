@@ -25,6 +25,10 @@
         weight: 700;
     }
 
+    &:focus-visible {
+        @extend %focusVisible;
+    }
+
     @media (hover: hover) and (pointer: fine) {
         &:hover {
             transform: scale(1.02);

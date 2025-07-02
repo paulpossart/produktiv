@@ -8,11 +8,6 @@ import Loader from './components/utils/loader/Loader';
 function App() {
   const { user, isLoading } = useAuth();
 
-  useEffect(() => {
-    document.body.className = 'light';
-  }, [])
-
-
   if (isLoading) return <Loader />;
 
   return (
