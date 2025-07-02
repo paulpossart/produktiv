@@ -17,11 +17,18 @@
         line-height: 1;
         background-color: transparent;
 
+        &:focus-visible {
+            @extend %focusVisible;
+
+        }
+
         & img {
             width: 55px;
             transform: scaleX(-1);
             padding: 4px;
             transition: transform 0.2s ease;
+            border-radius: 50%;
+
 
             @media (hover: hover) and (pointer: fine) {
                 &:hover {

@@ -1,0 +1,80 @@
+@mixin centerAndRotate($name, $topStart, $topEnd, $rotateStart, $rotateEnd) {
+    @keyframes #{$name} {
+        0% {
+            top: $topStart;
+            transform: translate(-50%, -50%) rotate($rotateStart);
+        }
+
+        50% {
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        100% {
+            top: $topEnd;
+            transform: translate(-50%, -50%) rotate($rotateEnd);
+        }
+    }
+}
+
+.burgerBox {
+    position: relative;
+    width: 40px;
+    height: 40px;
+
+    @media (hover: hover) {
+        cursor: pointer;
+    }
+
+   /* @media only screen and (min-width: 700px) and (min-height: 550px) {
+        width: 50px;
+        height: 50px;
+    }*/
+
+    .line {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        background-color: black;
+        height: 3px;
+        width: 100%;
+        border-radius: 2px;
+        transform-origin: center;
+        transform: translate(-50%, -50%) rotate(0deg);
+        transition:
+            width 0.5s ease-in-out,
+            background-color 1s ease-in-out;
+
+    }
+
+    // Burger
+
+    .topLine {
+        animation: toTopLine 0.5s ease-in-out forwards;
+        @include centerAndRotate(toTopLine, 50%, 30%, 45deg, 0deg);
+    }
+
+    .bottomLine {
+        animation: toBottomLine 0.5s ease-in-out forwards;
+        @include centerAndRotate(toBottomLine, 50%, 70%, -45deg, 0deg);
+    }
+
+    // Cross
+
+    .topCross {
+        background-color: var(--alt);
+        animation: toTopCross 0.5s ease-in-out forwards;
+        @include centerAndRotate(toTopCross, 30%, 50%, 0deg, 45deg);
+    }
+
+    .centerCross {
+        background-color: var(--alt);
+        width: 0;
+    }
+
+    .bottomCross {
+        background-color: var(--alt);
+        animation: toBottomCross 0.5s ease-in-out forwards;
+        @include centerAndRotate(toBottomCross, 70%, 50%, 0deg, -45deg)
+    }
+}
