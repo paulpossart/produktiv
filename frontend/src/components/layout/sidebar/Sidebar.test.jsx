@@ -35,9 +35,8 @@ describe('Sidebar', () => {
  
      test('that the theme button sets theme', () => {
          render(<Sidebar />);
-         const themeBtn = screen.getByTestId('theme-btn');
  
-         fireEvent.click(themeBtn);
+         fireEvent.click(screen.getByTestId('theme-btn'));
          expect(mockSetTheme).toHaveBeenCalledWith(
              expect.stringContaining('light' || 'dark')
          );
@@ -45,16 +44,15 @@ describe('Sidebar', () => {
  
      test('account button calls account modal', () => {
          render(<Sidebar />);
-         const accountBtn = screen.getByTestId('account-btn');
- 
-         fireEvent.click(accountBtn);
+         
+         fireEvent.click(screen.getByTestId('account-btn'));
          expect(displayAccountModal).toHaveBeenCalled();
      });
 
     test('sign out button sign user out', () => {
         render(<Sidebar />);
-        const signOutBtn = screen.getByTestId('sign-out-btn');
-        fireEvent.click(signOutBtn);
+        
+        fireEvent.click(screen.getByTestId('sign-out-btn'));
         expect(mockSignOut).toHaveBeenCalled();
     });
 });
