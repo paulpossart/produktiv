@@ -1,21 +1,15 @@
 import { useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
-import { changeInput, isValidSubmission } from '../../utils/helpers';
+import { isValidSubmission } from '../../utils/helpers';
 import styles from './View.module.scss';
 import errorIcon from '../../../assets/error.svg';
 
-function SignIn({ setView, setSubmitErr }) {
+function SignIn({ setView, setSubmitErr, handleInputChange }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [inputErr, setInputErr] = useState('');
+    const [usernameErr, setUsernameErr] = useState('');
+    const [passwordErr, setPasswordErr] = useState('');
     const { signIn } = useAuth();
-
-    const handleChange = (setter, inputType) => {
-        return (e) => {
-            setSubmitErr('');
-            changeInput(e, setter, setInputErr, inputType)
-        }
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,16 +19,17 @@ function SignIn({ setView, setSubmitErr }) {
             !isValidSubmission(password, 'password')
         ) {
             setSubmitErr('invalid username or password');
+            setPassword('');
             return;
         }
 
         try {
             await signIn(username, password);
             setSubmitErr('');
+            setUsername('');
         } catch (err) {
             setSubmitErr(err.message)
         } finally {
-            setUsername('');
             setPassword('');
         }
     };
@@ -53,29 +48,44 @@ function SignIn({ setView, setSubmitErr }) {
                     id='username'
                     type='text'
                     value={username}
-                    onChange={handleChange(setUsername, 'username')}
+                    onChange={handleInputChange('username', setUsername, setUsernameErr)}
                     placeholder='username'
                     required
+                    aria-invalid={!!usernameErr}
+                    aria-errormessage={usernameErr ? 'username-error' : undefined}
                 />
 
-                {inputErr ?
-                    <p className={styles.inputErr} aria-live='polite'>
-                        <img src={errorIcon} alt='' />
-                        <span>{inputErr}</span>
-                    </p>
-                    : <div style={{ height: '12px' }}></div>}
+                <div className={styles.inputErr}>
+                    {usernameErr &&
+                        <p id='username-error' >
+                            <img src={errorIcon} alt='' />
+                            <span>{usernameErr}</span>
+                        </p>}
+                </div>
+
 
                 <label className={styles.srOnly} htmlFor='password'>Enter password</label>
                 <input
                     id='password'
                     type='password'
                     value={password}
-                    onChange={handleChange(setPassword, 'password')}
+                    onChange={handleInputChange('password', setPassword, setPasswordErr)}
                     placeholder='password'
                     required
+                    aria-invalid={!!passwordErr}
+                    aria-errormessage={passwordErr ? 'password-error' : undefined}
                 />
 
+                {
+                    passwordErr &&
+                    <p className={styles.inputErr} id='password-error'>
+                        <img src={errorIcon} alt='' />
+                        <span>{passwordErr}</span>
+                    </p>
+                }
+
                 <input disabled style={{ visibility: 'hidden' }} />
+
             </div>
 
             <div className={styles.buttons}>
@@ -84,7 +94,7 @@ function SignIn({ setView, setSubmitErr }) {
                     setView('reg');
                     setSubmitErr('');
                 }}>
-                    Go To User Registration</button>
+                    Sign Up</button>
             </div>
 
         </form >

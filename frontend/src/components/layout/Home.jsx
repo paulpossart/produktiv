@@ -19,9 +19,11 @@ function Home() {
 
             <Header className={styles.Header} />
 
-            <AddTask className={styles.AddTask} />
-            <TaskList className={styles.TaskList} />
-
+            <main>
+                <AddTask className={styles.AddTask} />
+                <TaskList className={styles.TaskList} />
+            </main>
+            
         </div>
     );
 }
