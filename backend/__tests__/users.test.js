@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 jest.mock('../db/config');
 jest.mock('../utils/helpers');
 jest.mock('bcrypt');
-/*
+
 describe('createUser', () => {
     let res;
     let next;
@@ -137,7 +137,7 @@ describe('createUser', () => {
         );
     });
 });
-*/
+
 describe('getUser', () => {
     let req;
     let res;

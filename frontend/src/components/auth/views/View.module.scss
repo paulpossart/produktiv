@@ -5,17 +5,21 @@
     @include flex;
     height: 100%;
     width: 240px;
-    padding-top: 1.6rem;
 
     .inputs {
         @include formInputStyle;
-        height: 60%;
+        height: 100%;
         width: 100%;
+        padding: 1.6rem 0;
     }
 
     .buttons {
         @include flex;
-        height: 40%;
+        height: auto;
         width: 100%;
+
+        & button {
+            margin-top: 8px;
+        }
     }
 }

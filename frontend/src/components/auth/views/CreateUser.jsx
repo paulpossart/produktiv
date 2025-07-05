@@ -5,31 +5,25 @@ import { callCreateUser } from '../../../apiCalls/usersCalls';
 import styles from './View.module.scss';
 import errorIcon from '../../../assets/error.svg';
 
-function CreateUser({ setView, setSubmitErr }) {
+function CreateUser({ setView, setSubmitErr, handleInputChange }) {
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [retypedPassword, setRetypedPassword] = useState('');
-    const [inputErr, setInputErr] = useState('');
+    const [usernameErr, setUsernameErr] = useState('');
     const [passwordErr, setPasswordErr] = useState('');
+    const [passMatchErr, setPassMatchErr] = useState('');
     const { setUser } = useAuth();
 
     useEffect(() => {
         const checkPassword = () => {
             if (newPassword !== retypedPassword && retypedPassword.length > 0) {
-                setPasswordErr('passwords do not match');
+                setPassMatchErr('passwords do not match');
                 return;
             }
-            setPasswordErr('')
+            setPassMatchErr('')
         }
         checkPassword();
     }, [retypedPassword])
-
-    const handleChange = (setter, inputType) => {
-        return (e) => {
-            setSubmitErr('');
-            changeInput(e, setter, setInputErr, inputType)
-        }
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,6 +33,8 @@ function CreateUser({ setView, setSubmitErr }) {
             !isValidSubmission(newPassword, 'password')
         ) {
             setSubmitErr('invalid username or password');
+            setNewPassword('');
+            setRetypedPassword('');
             return;
         }
 
@@ -51,10 +47,10 @@ function CreateUser({ setView, setSubmitErr }) {
             const data = await callCreateUser(newUsername.trim(), newPassword, retypedPassword);
             if (data?.user) setUser(data.user);
             setSubmitErr('');
+            setNewUsername('');
         } catch (err) {
             setSubmitErr(err.message)
         } finally {
-            setNewUsername('');
             setNewPassword('');
             setRetypedPassword('');
         }
@@ -74,46 +70,65 @@ function CreateUser({ setView, setSubmitErr }) {
                     id='username'
                     type='text'
                     value={newUsername}
-                    onChange={handleChange(setNewUsername, 'username')}
+                    onChange={handleInputChange('username', setNewUsername, setUsernameErr)}
                     placeholder='new username'
                     required
+                    aria-invalid={!!usernameErr}
+                    aria-errormessage={usernameErr ? 'new-username-error' : undefined}
                 />
 
-                {inputErr ?
-                    <p className={styles.inputErr} aria-live='polite'>
-                        <img src={errorIcon} alt='' />
-                        <span>{inputErr}</span>
-                    </p>
-                    : <div style={{ height: '12px' }}></div>}
+                <div className={styles.inputErr}>
+                    {usernameErr &&
+                        <p id='new-username-error'>
+                            <img src={errorIcon} alt='' />
+                            <span>{usernameErr}</span>
+                        </p>}
+                </div>
+
 
                 <label className={styles.srOnly} htmlFor='password'>Register a new password</label>
                 <input
                     id='password'
                     type='password'
                     value={newPassword}
-                    onChange={handleChange(setNewPassword, 'password')}
+                    onChange={handleInputChange('password', setNewPassword, setPasswordErr)}
                     placeholder='new password'
                     required
+                    aria-invalid={!!passwordErr}
+                    aria-errormessage={passwordErr ? 'new-password-error' : undefined}
                 />
 
-                {passwordErr &&
-                    <p className={styles.inputErr} aria-live='polite'>
+                {
+                    passwordErr &&
+                    <p className={styles.inputErr} id='new-password-error'>
                         <img src={errorIcon} alt='' />
                         <span>{passwordErr}</span>
-                    </p>}
+                    </p>
+                }
 
-                <label className={styles.srOnly} htmlFor='re-enter-password'>Re-enter your new password</label>
+                <label className={styles.srOnly} htmlFor='confirm-password'>Confirm your new password</label>
                 <input
-                    id='re-enter-password'
+                    id='confirm-password'
                     type='password'
                     value={retypedPassword}
                     onChange={(e) => {
                         setRetypedPassword(e.target.value);
                         setSubmitErr('')
                     }}
-                    placeholder='re-enter new password'
+                    placeholder='confirm new password'
                     required
+                    aria-invalid={!!passMatchErr}
+                    aria-errormessage={passMatchErr ? 'confirm-password-error' : undefined}
                 />
+
+                {
+                    passMatchErr &&
+                    <p id='confirm-password-error' className={styles.inputErr}>
+                        <img src={errorIcon} alt='' />
+                        <span>{passMatchErr}</span>
+                    </p>
+                }
+
             </div>
 
             <div className={styles.buttons}>
@@ -121,9 +136,10 @@ function CreateUser({ setView, setSubmitErr }) {
                 <button type='button' className={styles.btn2} onClick={() => {
                     setView('sign-in');
                     setSubmitErr('');
-                }}>Go Back To Sign In</button>
+                }}>Back to Sign In</button>
             </div>
-        </form>
+
+        </form >
 
     );
 };

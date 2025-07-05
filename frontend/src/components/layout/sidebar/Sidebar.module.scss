@@ -1,5 +1,5 @@
-@use '../../styles/global' as *;
-@use '../../styles/buttons';
+@use '../../../styles/global' as *;
+@use '../../../styles/buttons';
 
 .Sidebar {
     position: relative;
@@ -33,14 +33,17 @@
         transform: translateY(-50%);
         width: 50px;
         height: 50px;
+        border: solid 1px transparent;
         border-radius: 50%;
-        @include flex(row, center, center);;
-        border: none;
+        @include flex(row, center, center);
+        ;
+        // border: none;
         transition:
             background-color 0.2s ease-in-out;
 
         &:focus-visible {
             @extend %focusVisible;
+            border: solid 1px blue;
         }
     }
 

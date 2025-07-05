@@ -1,9 +1,8 @@
-import { useEffect, useRef } from 'react';
-import dukIcon from '../../assets/duk-icon.svg';
-import quack from '../../assets/rubber-duk.mp3';
-import styles from './Header.module.scss';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../../context/ThemeContext';
 import Sidebar from '../sidebar/Sidebar';
+import styles from './Header.module.scss';
+import dukIcon from '../../../assets/duk-icon.svg';
+import quack from '../../../assets/rubber-duk.mp3';
 
 function Header({ className }) {
     const { theme } = useTheme();

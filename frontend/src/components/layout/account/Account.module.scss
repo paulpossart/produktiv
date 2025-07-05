@@ -1,0 +1,58 @@
+@use '../../../styles/global' as *;
+@use '../../../styles/buttons';
+
+.Account {
+    height: 100%;
+    width: 100%;
+
+    & header {
+        padding-bottom: 3.2rem;
+        height: 35%;
+        @include flex(column, center);
+
+        @media (orientation:landscape) and (max-height: 400px) {
+            padding-bottom: 1.2rem;
+        }
+
+        & h3 {
+            line-height: 2;
+
+            font: {
+                size: 2rem;
+                weight: 600;
+            }
+
+            @media (orientation:landscape) and (min-height: 400px) {
+                line-height: 3;
+            }
+        }
+    }
+
+    & nav {
+        @include flex;
+        gap: 1.2rem;
+
+        height: 65%;
+        width: 100%;
+
+        @media (min-width: 800px) and (min-height: 800px) {
+            gap: 0;
+        }
+    }
+}
+
+.homeBtn {
+    @extend .btn1;
+    position: relative;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+
+    & img {
+        position: absolute;
+        width: 25px;
+        top: 46%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

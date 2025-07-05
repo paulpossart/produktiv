@@ -1,4 +1,4 @@
-@use '../../styles/global' as *;
+@use '../../../styles/global' as *;
 
 @mixin headerGradient($col1, $col2, $col3) {
     background: linear-gradient(90deg,
@@ -16,7 +16,7 @@
     padding: 4px 8px;
 
 
-    background-image: url('../../assets/duk-img.jpg');
+    background-image: url('../../../assets/duk-img.jpg');
     background-size: 60%;
     background-position: 100% 45%;
 

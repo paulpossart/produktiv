@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { changeInput } from '../utils/helpers';
 import SignIn from './views/SignIn';
 import CreateUser from './views/CreateUser';
 import Duk from './logoAndErrMsg/Duk';
@@ -8,10 +9,17 @@ function AuthPage() {
     const [view, setView] = useState('sign-in');
     const [submitErr, setSubmitErr] = useState('');
 
+    const handleInputChange = (inputType, setter, errSetter) => {
+        return (e) => {
+            setSubmitErr('');
+            changeInput(e, setter, errSetter, inputType)
+        }
+    }
+
     return (
         <main className={styles.AuthPage}>
             <section aria-labelledby='auth-title'>
-               
+
                 <header>
                     <h1 id='auth-title' className={styles.srOnly}>Produktiv Authorisation Page</h1>
 
@@ -32,10 +40,12 @@ function AuthPage() {
                             ? <SignIn
                                 setView={setView}
                                 setSubmitErr={setSubmitErr}
+                                handleInputChange={handleInputChange}
                             />
                             : <CreateUser
                                 setView={setView}
                                 setSubmitErr={setSubmitErr}
+                                handleInputChange={handleInputChange}
                             />
                     }
                 </div>

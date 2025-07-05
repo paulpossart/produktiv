@@ -10,7 +10,7 @@
     & button {
         cursor: pointer;
         border-radius: 50%;
-        border: none;
+        border: solid yellow 1px;
         width: 55px;
         height: 55px;
         padding: 0;
@@ -19,7 +19,7 @@
 
         &:focus-visible {
             @extend %focusVisible;
-
+            border: solid black 1px;
         }
 
         & img {
@@ -47,7 +47,7 @@
     .err {
         width: 100%;
         overflow: hidden;
-        @include flex(row, flex-start);
+        @include flex(row);
 
         & p {
             white-space: nowrap;
