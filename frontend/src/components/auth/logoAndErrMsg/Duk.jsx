@@ -1,15 +1,17 @@
-import quack from '../../../assets/rubber-duk.mp3';
 import styles from './Duk.module.scss';
 import dukIcon from '../../../assets/duk-icon.svg';
+import quack from '../../../assets/rubber-duk.mp3';
 
 function Duk({ errMsg }) {
 
+    // Duk img squeaks when clicked
     const handleClick = () => {
         const audio = new Audio(quack);
         audio.play();
     }
 
     return (
+        //Duk img expands to include err message
         <div className={
             `${styles.dukWrapper} 
              ${errMsg ? styles.dukOpen : styles.dukClosed}`

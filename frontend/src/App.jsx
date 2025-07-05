@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import AuthPage from './components/auth/AuthPage';
-import Home from './components/home/Home';
 import { useAuth } from './context/AuthContext';
+import AuthPage from './components/auth/AuthPage';
+import Home from './components/layout/Home';
 import Loader from './components/utils/loader/Loader';
+
 
 function App() {
   const { user, isLoading } = useAuth();

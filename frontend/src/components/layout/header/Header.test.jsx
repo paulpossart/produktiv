@@ -1,16 +1,22 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import Header from './Header';
 
-jest.mock('../../context/ThemeContext', () => ({
+jest.mock('../../../context/ThemeContext', () => ({
     useTheme: () => ({
         theme: jest.fn()
     }),
 }));
 
-jest.mock('../../context/AuthContext', () => ({
+jest.mock('../../../context/AuthContext', () => ({
     useAuth: () => ({
         signOut: jest.fn()
     }),
+}));
+
+jest.mock('../../../context/ModalContext', () => ({
+    useModal: () => ({
+        setAccountModalContent: jest.fn()
+    })
 }));
 
 describe('Header', () => {

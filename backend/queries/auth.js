@@ -25,6 +25,8 @@ const signIn = async (req, res, next) => {
             `SELECT * FROM produktiv.users WHERE username = $1`,
             [username]
         );
+
+        // generic message avoids revealing user details
         if (result.rows.length === 0) {
             throw newErr('invalid username or password', 401, 'signInError');
         }
@@ -37,6 +39,9 @@ const signIn = async (req, res, next) => {
         const accessToken = signAccessToken({ sub: user.id });
         const refreshToken = signRefreshToken({ sub: user.id });
 
+        // set cookies:
+        // 15mins for access, 7 days for refresh - 
+        // matches JWT age lenghts
         setCookie(res, 'accessToken', accessToken, { maxAge: 15 * 60 * 1000 });
         setCookie(res, 'refreshToken', refreshToken, { maxAge: 7 * 24 * 60 * 60 * 1000 });
         res.status(200).json({
@@ -73,6 +78,7 @@ const verifyUser = (req, res, next) => {
     const refreshToken = req.cookies.refreshToken;
 
     if (!refreshToken && !accessToken) {
+        // no tokens = yet to sign in, not an err
         return res.status(200).json({
             userData: false,
             message: 'no tokens to validate',
@@ -81,6 +87,7 @@ const verifyUser = (req, res, next) => {
     }
 
     if (!accessToken) {
+        // attempt to get new access token if refresh token present
         return jwt.verify(refreshToken, refreshTokenSecret, (err, payload) => {
             if (err) {
                  return next(newErr('invalid refresh token', 401, 'verificationError'));
@@ -93,8 +100,10 @@ const verifyUser = (req, res, next) => {
         });
     }
 
+    // verify access token if present
     return jwt.verify(accessToken, accessTokenSecret, (err, payload) => {
         if (err) {
+            // attempt to get new access token if current token invalid 
             return jwt.verify(refreshToken, refreshTokenSecret, (err, payload) => {
                 if (err) {
                     return next(newErr('invalid tokens', 401, 'verificationError'));

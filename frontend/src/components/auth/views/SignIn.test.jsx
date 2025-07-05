@@ -1,13 +1,8 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { mockSignIn } from '../../../context/AuthContext';
 import SignIn from './SignIn';
 
-const mockSignIn = jest.fn();
-
-jest.mock('../../../context/AuthContext', () => ({
-    useAuth: () => ({
-        signIn: mockSignIn
-    }),
-}))
+jest.mock('../../../context/AuthContext')
 
 describe('SignIn', () => {
     it('calls sign in with expected args', async () => {

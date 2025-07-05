@@ -14,10 +14,8 @@ $borderColor: rgb(136, 136, 136);
 }
 
 %focusVisible {
-    border: none;
     outline: none;
     box-shadow:
-        inset 0 0 0 2px blue,
         0 0 0 2px white,
         0 0 0 4px blue;
 }

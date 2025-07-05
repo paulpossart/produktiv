@@ -1,9 +1,7 @@
 const { v4: uuid4 } = require('uuid');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const pool = require('../db/config');
 const {
-    isProd,
     setCookie,
     newErr,
     signAccessToken,
@@ -32,6 +30,8 @@ const createUser = async (req, res, next) => {
             [newUsername]
         );
 
+        // might give away usernames, so number of attempts
+        // is limited in route...
         if (checkUsername.rows.length > 0) {
             throw newErr('username unavailable', 409, 'regUserError');
         }

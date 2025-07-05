@@ -30,6 +30,8 @@ const callGetUser = async () => {
         return data;
     }
 
+    // additional return so that an error is not thrown if no 
+    // auth tokens are present, meaning there is no user data to get
     return data.message;
 }
 
