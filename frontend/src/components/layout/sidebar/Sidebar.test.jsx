@@ -1,20 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { displayAccountModal } from '../modals/AccountModal';
+import { mockRenderMainModal } from '../../../context/ModalContext';
 import { mockSignOut } from '../../../context/AuthContext';
 import { mockSetTheme } from '../../../context/ThemeContext';
 import Sidebar from './Sidebar';
 
 jest.mock('../../../context/AuthContext');
 jest.mock('../../../context/ThemeContext');
-jest.mock('../../../context/ModalContext', () => ({
-    useModal: () => ({
-        setAccountModalContent: jest.fn()
-    })
-}));
-jest.mock('../modals/AccountModal', () => ({
-    displayAccountModal: jest.fn()
-}));
-
+jest.mock('../../../context/ModalContext');
 
 describe('Sidebar', () => {
     beforeEach(() => {
@@ -46,7 +38,7 @@ describe('Sidebar', () => {
          render(<Sidebar />);
          
          fireEvent.click(screen.getByTestId('account-btn'));
-         expect(displayAccountModal).toHaveBeenCalled();
+         expect(mockRenderMainModal).toHaveBeenCalled();
      });
 
     test('sign out button sign user out', () => {

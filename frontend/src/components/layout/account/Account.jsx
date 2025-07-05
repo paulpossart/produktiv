@@ -5,7 +5,7 @@ import homeIcon from '../../../assets/home-btn.svg';
 
 function Account() {
     const { user } = useAuth();
-    const { setAccountModalContent } = useModal();
+    const { hideMainModal } = useModal();
 
     const username = user.username;
 
@@ -47,7 +47,7 @@ function Account() {
                 <button style={{ borderRadius: '12px' }} className={styles.btn2}>change username</button>
                 <button style={{ borderRadius: '12px' }} className={styles.btn2}>change password</button>
                 <button style={{ borderRadius: '12px' }} className={styles.btn2}>delete user</button>
-                <button aria-label='home-button' className={styles.homeBtn} onClick={() => setAccountModalContent(null)}>
+                <button aria-label='home-button' className={styles.homeBtn} onClick={hideMainModal}>
                     <img src={homeIcon} alt='' />
                 </button>
             </nav>

@@ -1,5 +1,5 @@
 import { useModal } from "../../context/ModalContext";
-import { AccountModal } from "./modals/AccountModal";
+import MainModal from "./modals/MainModal";
 import Header from "./header/Header";
 import AddTask from "../tasks/addTask/AddTask";
 import TaskList from "../tasks/taskList/TaskList";
@@ -7,14 +7,14 @@ import styles from './Home.module.scss';
 
 
 function Home() {
-    const { accountModalContent } = useModal();
+    const { mainModalContent } = useModal();
 
     return (
         <div className={styles.Home}>
 
             {
-                accountModalContent &&
-                <AccountModal>{accountModalContent}</AccountModal>
+                mainModalContent &&
+                <MainModal>{mainModalContent}</MainModal>
             }
 
             <Header className={styles.Header} />

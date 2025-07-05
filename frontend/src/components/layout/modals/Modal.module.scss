@@ -5,10 +5,10 @@
     position: fixed;
     inset: 0;
     z-index: 9000;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.AccountModal {
+.MainModal {
     position: fixed;
     z-index: 9999;
     height: fit-content;
