@@ -35,4 +35,42 @@ const callGetUser = async () => {
     return data.message;
 }
 
-export { callCreateUser, callGetUser };
+const callUpdateUsername = async (newUsername, password) => {
+    const response = await fetch('/api/users/update-username', {
+        method: 'PATCH',
+        body: JSON.stringify({
+            newUsername,
+            password
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+    return data;
+}
+
+const callUpdatePassword = async (currentPassword, newPassword, confirmPassword) => {
+    const response = await fetch('/api/users/update-password', {
+        method: 'PATCH',
+        body: JSON.stringify({
+            currentPassword,
+            newPassword,
+            confirmPassword
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+    return data;
+}
+
+export {
+    callCreateUser,
+    callGetUser,
+    callUpdateUsername,
+    callUpdatePassword
+};

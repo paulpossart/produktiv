@@ -17,7 +17,7 @@ function CreateUser({ setView, setSubmitErr, handleInputChange }) {
     useEffect(() => {
         const checkPassword = () => {
             if (newPassword !== retypedPassword && retypedPassword.length > 0) {
-                setPassMatchErr('passwords do not match');
+                setPassMatchErr('Passwords do not match');
                 return;
             }
             setPassMatchErr('')
@@ -32,14 +32,14 @@ function CreateUser({ setView, setSubmitErr, handleInputChange }) {
             !isValidSubmission(newUsername, 'username') ||
             !isValidSubmission(newPassword, 'password')
         ) {
-            setSubmitErr('invalid username or password');
+            setSubmitErr('Invalid username or password');
             setNewPassword('');
             setRetypedPassword('');
             return;
         }
 
         if (newPassword !== retypedPassword) {
-            setSubmitErr('passwords do not match');
+            setSubmitErr('Passwords do not match');
             return;
         }
 

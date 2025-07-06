@@ -29,8 +29,6 @@ $borderColor: rgb(136, 136, 136);
 
 @mixin formInputStyle {
     @include flex(column, space-between);
-    height: 100%;
-    width: 100%;
 
     & input {
         width: 100%;

@@ -17,7 +17,7 @@ const signIn = async (req, res, next) => {
         !isValidInput('username', username, 1, 30) ||
         !isValidInput('password', password, 6, 30)
     ) {
-        throw newErr('invalid username or password', 401, 'signInError');
+        throw newErr('Invalid username or password', 401, 'signInError');
     }
 
     try {
@@ -34,7 +34,7 @@ const signIn = async (req, res, next) => {
         const isMatch = await bcrypt.compare(password, user.password_hash);
 
         if (!isMatch) {
-            throw newErr('invalid username or password', 401, 'signInError');
+            throw newErr('Invalid username or password', 401, 'signInError');
         }
         const accessToken = signAccessToken({ sub: user.id });
         const refreshToken = signRefreshToken({ sub: user.id });
@@ -81,7 +81,7 @@ const verifyUser = (req, res, next) => {
         // no tokens = yet to sign in, not an err
         return res.status(200).json({
             userData: false,
-            message: 'no tokens to validate',
+            message: 'No tokens to validate',
             user: null
         });
     }
@@ -90,7 +90,7 @@ const verifyUser = (req, res, next) => {
         // attempt to get new access token if refresh token present
         return jwt.verify(refreshToken, refreshTokenSecret, (err, payload) => {
             if (err) {
-                 return next(newErr('invalid refresh token', 401, 'verificationError'));
+                 return next(newErr('Invalid refresh token', 401, 'verificationError'));
             }
             const newAccessToken = signAccessToken({ sub: payload.sub });
 
@@ -106,7 +106,7 @@ const verifyUser = (req, res, next) => {
             // attempt to get new access token if current token invalid 
             return jwt.verify(refreshToken, refreshTokenSecret, (err, payload) => {
                 if (err) {
-                    return next(newErr('invalid tokens', 401, 'verificationError'));
+                    return next(newErr('Invalid tokens', 401, 'verificationError'));
                 }
                 const newAccessToken = signAccessToken({ sub: payload.sub });
 
