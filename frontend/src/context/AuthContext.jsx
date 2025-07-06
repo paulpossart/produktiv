@@ -40,7 +40,7 @@ function AuthProvider({ children }) {
             await callSignOut();
             setUser(null);
         } catch (err) {
-            //throw 
+           throw err;
         }
     }
 

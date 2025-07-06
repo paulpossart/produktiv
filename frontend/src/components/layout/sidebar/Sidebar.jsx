@@ -8,6 +8,7 @@ import styles from './Sidebar.module.scss';
 
 function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [signOutErr, setSignOutErr] = useState('');
     const { signOut } = useAuth();
     const { renderMainModal } = useModal();
 
@@ -16,6 +17,16 @@ function Sidebar() {
         document.addEventListener('keydown', closeOnEsc);
         return () => document.removeEventListener('keydown', closeOnEsc);
     }, []);
+
+    const logOut = async (e) => {
+        e.preventDefault();
+        try {
+            await signOut();
+        } catch (err) {
+            setSignOutErr(err.message)
+            setTimeout(() => setSignOutErr(''), 3000);
+        }
+    }
 
     return (
         <aside aria-labelledby='options-title' className={styles.Sidebar}>
@@ -59,7 +70,14 @@ function Sidebar() {
                     Account
                 </button>
 
-                <button data-testid='sign-out-btn' style={{ whiteSpace: 'nowrap', overflow: 'hidden' }} className={styles.btn2} onClick={signOut}>Sign Out</button>
+                <button data-testid='sign-out-btn' style={{ whiteSpace: 'nowrap', overflow: 'hidden' }} className={styles.btn2} onClick={logOut}>Sign Out</button>
+
+                {
+                    signOutErr &&
+                    <p role='alert' className={styles.inputErr}>
+                        {signOutErr}
+                    </p>
+                }
 
             </nav>
         </aside>

@@ -215,4 +215,33 @@ const updatePasword = async (req, res, next) => {
     }
 };
 
-module.exports = { createUser, getUser, updateUsername, updatePasword };
+const deleteUser = async (req, res, next) => {
+    const userId = req.userId;
+
+    try {
+        await pool.query(
+            `DELETE FROM produktiv.users WHERE id = $1`,
+            [userId]
+        );
+
+        res
+            .clearCookie('accessToken', {
+                httpOnly: true,
+                secure: isProd(),
+                sameSite: 'lax',
+            })
+            .clearCookie('refreshToken', {
+                httpOnly: true,
+                secure: isProd(),
+                sameSite: 'lax',
+            })
+            .status(200).json({
+                success: true,
+                message: 'user successfully deleted'
+            });
+    } catch (err) {
+        next(err);
+    }
+}
+
+module.exports = { createUser, getUser, updateUsername, updatePasword, deleteUser};

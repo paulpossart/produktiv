@@ -1,7 +1,8 @@
 @use '../../styles/global' as *;
 @use '../../styles/buttons';
 
-.ChangeUsername {
+.ChangeUsername,
+.ChangePassword {
     width: clamp(240px, 70vw, 300px);
     height: clamp(250px, 70vh, 300px);
     padding: 1.6rem 2rem 1rem 2rem;
@@ -24,6 +25,51 @@
     }
 }
 
-.ChangePassword {
+.DeleteUser {
     @extend .ChangeUsername;
-} 
+    width: fit-content;
+    height: fit-content;
+    min-width: 280px;
+    min-height: 200px;
+
+    & p {
+        line-height: 2;
+
+        font: {
+            size: 2rem;
+            weight: 600;
+        }
+    }
+
+}
+
+.delBtn {
+    @extend .btn1;
+    outline: solid 3px var(--main);
+    border: solid red 4px;
+    border-radius: 24px;
+    transform: scale(1);
+    color: var(--alt);
+    background-color: var(--main);
+    transition:
+        color 0.2s ease-in-out,
+        transform 0.1s ease-in-out,
+        background-color 0.2s ease-in-out,
+        border-color 0.2s ease-in-out,
+        outline 0.2s ease-in-out;
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            transform: scale(1.02);
+            background-color: red;
+            border-color: var(--main);
+            outline: solid red 3px;
+            color: var(--main);
+        }
+    }
+
+    &:active {
+        transform: scale(0.98);
+        background-color: red;
+    }
+}
