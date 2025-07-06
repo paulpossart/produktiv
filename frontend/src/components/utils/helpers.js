@@ -5,9 +5,11 @@ const changeInput = (e, setValue, setError, type) => {
     const value = e.target.value;
     setValue(value);
 
-    if (value.length > 30) setError(`${type} maximum 30 characters`);
-    else if (value.length < 6 && type === 'password') setError('password minimum 6 characters')
-    else if (!safeRegex.test(value) && type === 'username') setError(`username cannot contain the following characters: ${bannedRegEx}`);
+    const capitaliseType = type.charAt(0).toUpperCase() + type.slice(1);
+
+    if (value.length > 30) setError(`${capitaliseType} maximum 30 characters`);
+    else if (value.length < 6 && type === 'password') setError('Password minimum 6 characters')
+    else if (!safeRegex.test(value) && type === 'username') setError(`Username cannot contain the following characters: ${bannedRegEx}`);
     else setError(null);
 };
 

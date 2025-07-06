@@ -1,20 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { displayAccountModal } from '../modals/AccountModal';
+import { mockRenderMainModal } from '../../../context/ModalContext';
 import { mockSignOut } from '../../../context/AuthContext';
 import { mockSetTheme } from '../../../context/ThemeContext';
 import Sidebar from './Sidebar';
 
 jest.mock('../../../context/AuthContext');
 jest.mock('../../../context/ThemeContext');
-jest.mock('../../../context/ModalContext', () => ({
-    useModal: () => ({
-        setAccountModalContent: jest.fn()
-    })
-}));
-jest.mock('../modals/AccountModal', () => ({
-    displayAccountModal: jest.fn()
-}));
-
+jest.mock('../../../context/ModalContext');
 
 describe('Sidebar', () => {
     beforeEach(() => {
@@ -35,9 +27,8 @@ describe('Sidebar', () => {
  
      test('that the theme button sets theme', () => {
          render(<Sidebar />);
-         const themeBtn = screen.getByTestId('theme-btn');
  
-         fireEvent.click(themeBtn);
+         fireEvent.click(screen.getByTestId('theme-btn'));
          expect(mockSetTheme).toHaveBeenCalledWith(
              expect.stringContaining('light' || 'dark')
          );
@@ -45,16 +36,15 @@ describe('Sidebar', () => {
  
      test('account button calls account modal', () => {
          render(<Sidebar />);
-         const accountBtn = screen.getByTestId('account-btn');
- 
-         fireEvent.click(accountBtn);
-         expect(displayAccountModal).toHaveBeenCalled();
+         
+         fireEvent.click(screen.getByTestId('account-btn'));
+         expect(mockRenderMainModal).toHaveBeenCalled();
      });
 
     test('sign out button sign user out', () => {
         render(<Sidebar />);
-        const signOutBtn = screen.getByTestId('sign-out-btn');
-        fireEvent.click(signOutBtn);
+        
+        fireEvent.click(screen.getByTestId('sign-out-btn'));
         expect(mockSignOut).toHaveBeenCalled();
     });
 });

@@ -2,6 +2,7 @@ const { v4: uuid4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const pool = require('../db/config');
 const {
+    isProd,
     setCookie,
     newErr,
     signAccessToken,
@@ -17,11 +18,11 @@ const createUser = async (req, res, next) => {
         !isValidInput('username', newUsername, 1, 30) ||
         !isValidInput('password', newPassword, 6, 30)
     ) {
-        throw newErr('invalid username or password', 401, 'regUserError');
+        throw newErr('Invalid username or password', 401, 'regUserError');
     }
 
     if (newPassword !== retypedPassword) {
-        throw newErr('passwords do not match', 400, 'regUserError');
+        throw newErr('Passwords do not match', 400, 'regUserError');
     }
 
     try {
@@ -33,7 +34,7 @@ const createUser = async (req, res, next) => {
         // might give away usernames, so number of attempts
         // is limited in route...
         if (checkUsername.rows.length > 0) {
-            throw newErr('username unavailable', 409, 'regUserError');
+            throw newErr('Username unavailable', 409, 'regUserError');
         }
 
         const saltRounds = 10;
@@ -75,7 +76,7 @@ const getUser = async (req, res, next) => {
         const user = result.rows[0];
 
         if (!user) {
-            throw newErr('could not find user', 404, 'getUserError');
+            throw newErr('Could not find user', 404, 'getUserError');
         }
         return res.status(200).json({
             userData: true,
@@ -91,4 +92,127 @@ const getUser = async (req, res, next) => {
     }
 };
 
-module.exports = { createUser, getUser };
+const updateUsername = async (req, res, next) => {
+    const userId = req.userId;
+    const { newUsername, password } = req.body;
+
+    if (
+        !isValidInput('username', newUsername, 1, 30) ||
+        !isValidInput('password', password, 6, 30)
+    ) {
+        throw newErr('Invalid username or password', 401, 'updatUsernameError');
+    }
+
+    try {
+        // Find user
+        const isUser = await pool.query(
+            `SELECT * FROM produktiv.users WHERE id =$1`,
+            [userId]
+        );
+
+        if (isUser.rows.length === 0) {
+            throw newErr('Could not find user details', 401, 'updatUsernameError');
+        }
+
+        const user = isUser.rows[0];
+
+        // Check password
+        const isMatch = await bcrypt.compare(password, user.password_hash);
+
+        if (!isMatch) {
+            throw newErr('Invalid password', 401, 'updatUsernameError');
+        }
+
+        // Check availability of new username
+        const nameAvailable = await pool.query(
+            `SELECT * FROM produktiv.users WHERE username = $1`,
+            [newUsername]
+        );
+
+        if (nameAvailable.rows.length > 0) {
+            throw newErr('Username unavailable', 409, 'updatUsernameError')
+        }
+
+        // Set new username
+        const result = await pool.query(
+            `UPDATE produktiv.users
+             SET username = $1
+             WHERE id = $2
+             RETURNING username, created_at`,
+            [newUsername, userId]
+        );
+
+        const updatedUser = result.rows[0];
+
+        res.status(200).json({
+            success: true,
+            message: `Username updated to: ${updatedUser.username}`,
+            user: updatedUser
+        });
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+const updatePasword = async (req, res, next) => {
+    const userId = req.userId;
+    const { currentPassword, newPassword, confirmPassword } = req.body;
+
+    if (!isValidInput('password', currentPassword, 6, 30)) {
+        throw newErr('Current password incorrect', 400, 'updatePaswordError');
+    }
+
+    if (!isValidInput('password', newPassword, 6, 30) ||
+        newPassword !== confirmPassword) {
+        throw newErr('New password invalid, or does not match', 400, 'updatePaswordError');
+    };
+
+    try {
+        const result = await pool.query(
+            `SELECT * FROM produktiv.users WHERE id = $1`,
+            [userId]
+        );
+
+        if (result.rows.length === 0) {
+            throw newErr('Could not find user', 401, 'updatePaswordError');
+        }
+
+        const user = result.rows[0];
+        const isMatch = await bcrypt.compare(currentPassword, user.password_hash);
+
+        if (!isMatch) {
+            throw newErr('Current password invalid', 401, 'updatePaswordError');
+        }
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+        await pool.query(
+            `UPDATE produktiv.users
+             SET password_hash = $1
+             WHERE id = $2`,
+            [hashedPassword, userId]
+        );
+
+        res
+            .clearCookie('accessToken', {
+                httpOnly: true,
+                secure: isProd(),
+                sameSite: 'lax',
+            })
+            .clearCookie('refreshToken', {
+                httpOnly: true,
+                secure: isProd(),
+                sameSite: 'lax',
+            })
+            .status(200).json({
+                success: true,
+                message: 'Password updated. Please sign in again',
+            });
+    } catch (err) {
+        next(err);
+    }
+};
+
+module.exports = { createUser, getUser, updateUsername, updatePasword };

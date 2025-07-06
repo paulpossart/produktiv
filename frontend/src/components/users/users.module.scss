@@ -1,0 +1,29 @@
+@use '../../styles/global' as *;
+@use '../../styles/buttons';
+
+.ChangeUsername {
+    width: clamp(240px, 70vw, 300px);
+    height: clamp(250px, 70vh, 300px);
+    padding: 1.6rem 2rem 1rem 2rem;
+
+    @include formInputStyle;
+
+    & h2 {
+        line-height: 2;
+
+        font: {
+            size: 2rem;
+            weight: 600;
+        }
+    }
+
+    .buttons {
+        @include flex(row);
+        width: 100%;
+        gap: 12px;
+    }
+}
+
+.ChangePassword {
+    @extend .ChangeUsername;
+} 

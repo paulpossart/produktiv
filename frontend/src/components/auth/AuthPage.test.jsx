@@ -15,6 +15,7 @@ describe('AuthPage', () => {
 
     it('passes error message to Duk', async () => {
         render(<AuthPage />);
+
         fireEvent.change(screen.getByLabelText(/enter username/i), { target: { value: '<>' } });
         fireEvent.change(screen.getByLabelText(/enter password/i), { target: { value: 'pass' } });
         fireEvent.click(screen.getByRole('button', { name: /sign in/i }));
@@ -24,12 +25,13 @@ describe('AuthPage', () => {
 
     it('announces view change politely', () => {
         render(<AuthPage />);
+
         expect(screen.getByText(/you are on the sign in page/i)).toBeInTheDocument();
 
-        fireEvent.click(screen.getByText(/go to user registration/i));
+        fireEvent.click(screen.getByText(/sign up/i));
         expect(screen.getByText(/you are on the user registration page/i)).toBeInTheDocument();
 
-        fireEvent.click(screen.getByText(/go back to sign in/i));
+        fireEvent.click(screen.getByText(/back to sign in/i));
         expect(screen.getByText(/you are on the sign in page/i)).toBeInTheDocument();
     });
 
@@ -37,10 +39,10 @@ describe('AuthPage', () => {
         render(<AuthPage />);
         expect(screen.getByText(/sign in form/i)).toBeInTheDocument();
 
-        fireEvent.click(screen.getByText(/go to user registration/i));
+        fireEvent.click(screen.getByText(/sign up/i));
         expect(screen.getByText(/user registration form/i)).toBeInTheDocument();
 
-        fireEvent.click(screen.getByText(/go back to sign in/i));
+        fireEvent.click(screen.getByText(/back to sign in/i));
         expect(screen.getByText(/sign in form/i)).toBeInTheDocument();
     });
 })

@@ -18,7 +18,7 @@ function SignIn({ setView, setSubmitErr, handleInputChange }) {
             !isValidSubmission(username, 'username') ||
             !isValidSubmission(password, 'password')
         ) {
-            setSubmitErr('invalid username or password');
+            setSubmitErr('Invalid username or password');
             setPassword('');
             return;
         }

@@ -5,31 +5,33 @@
     position: fixed;
     inset: 0;
     z-index: 9000;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.AccountModal {
+.MainModal {
     position: fixed;
-    z-index: 9999;
+    z-index: 9100;
     height: fit-content;
     width: fit-content;
     @extend %border;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 280px;
-    @include flex;
-    gap: 3.2rem;
-    padding: 1.6rem 2rem 1rem 2rem;
     background-color: var(--main);
+}
 
-    @media (orientation:landscape) and (max-height: 400px) {
-        max-height: 300px;
-        padding: 1rem 2rem;
-    };
+.InnerModal {
+    @extend .MainModal;
+    z-index: 9200;
+}
 
-     @media (min-width: 700px) and (min-height: 700px) {
-        height: 500px;
-        width: 400px;
-    };
+.FeedbackModal {
+    @extend .MainModal;
+    z-index: 9300;
+
+    min-width: 200px;
+    min-height: 150px;
+
+    padding: 1rem 2rem;
+    @include flex;
 }

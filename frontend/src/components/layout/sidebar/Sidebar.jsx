@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../../context/AuthContext';
-import { displayAccountModal } from '../modals/AccountModal';
 import { useModal } from '../../../context/ModalContext';
+import Account from '../account/Account';
 import Burger from '../../utils/burger/Burger';
 import ThemeBtn from '../../utils/themeBtn/ThemBtn';
 import styles from './Sidebar.module.scss';
@@ -9,7 +9,7 @@ import styles from './Sidebar.module.scss';
 function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
     const { signOut } = useAuth();
-    const { setAccountModalContent } = useModal();
+    const { renderMainModal } = useModal();
 
     useEffect(() => {
         const closeOnEsc = (e) => { if (e.key === 'Escape') setIsOpen(false); }
@@ -49,7 +49,7 @@ function Sidebar() {
 
                 <button
                     onClick={() => {
-                        displayAccountModal(setAccountModalContent);
+                        renderMainModal(<Account />);
                         setIsOpen(false)
                     }}
                     data-testid='account-btn'
