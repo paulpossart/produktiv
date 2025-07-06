@@ -68,9 +68,21 @@ const callUpdatePassword = async (currentPassword, newPassword, confirmPassword)
     return data;
 }
 
+const callDeleteUser = async () => {
+    const response = await fetch('/api/users', {
+        method: 'DELETE',
+        credentials: 'include'
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error('Unable to delete user. Please try again later');
+    return data;
+}
+
 export {
     callCreateUser,
     callGetUser,
     callUpdateUsername,
-    callUpdatePassword
+    callUpdatePassword,
+    callDeleteUser
 };

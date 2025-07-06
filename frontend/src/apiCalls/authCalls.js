@@ -20,7 +20,7 @@ const callSignOut = async () => {
         credentials: 'include'
     });
 
-    if (!response.ok) throw new Error('Could not sign out, please try again');
+    if (!response.ok) throw new Error('Could not sign out, please try again later');
     return null;
 }
 

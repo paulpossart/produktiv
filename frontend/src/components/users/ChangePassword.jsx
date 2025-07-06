@@ -18,7 +18,6 @@ function ChangePassword() {
 
     const { hideInnerModal, hideMainModal, renderFeedbackModal, setOnAllClose } = useModal();
     const { setUser } = useAuth();
-
     const navigate = useNavigate();
 
     useEffect(() => {

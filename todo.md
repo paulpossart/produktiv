@@ -1,4 +1,6 @@
 add Not Found page
+modals close on Esc
+clearCookie helper
 
 tests:
    BE:
