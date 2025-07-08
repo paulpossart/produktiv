@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useModal } from '../../../context/ModalContext';
 import InnerModal from './InnerModal';
 import styles from './Modal.module.scss';
@@ -5,8 +6,14 @@ import styles from './Modal.module.scss';
 function MainModal({ children }) {
     const {
         innerModalContent,
+        feedbackModalContent,
         hideMainModal,
+        closeModalOnEsc
     } = useModal();
+
+    useEffect(() => {
+        return closeModalOnEsc();
+    }, [innerModalContent, feedbackModalContent]);
 
     return (
         <>

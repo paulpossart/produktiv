@@ -1,10 +1,18 @@
+import { useEffect } from 'react';
 import { useModal } from '../../../context/ModalContext';
 import styles from './Modal.module.scss';
 
 function FeedbackModal({ children }) {
     const {
+        innerModalContent,
+        feedbackModalContent,
         hideFeedbackModal,
+        closeModalOnEsc
     } = useModal();
+
+   /* useEffect(() => {
+        closeModalOnEsc();
+    }, [innerModalContent, feedbackModalContent]);*/
 
     return (
         <>

@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import AuthPage from './components/auth/AuthPage';
 import Home from './components/layout/Home';
+import NotFound from './components/auth/notFound/NotFound';
 import Loader from './components/utils/loader/Loader';
 
 
@@ -21,6 +22,8 @@ function App() {
         <Route path='/auth' element={
           !user ? <AuthPage /> : <Navigate to='/' />
         } />
+
+        <Route path='*' element={<NotFound />} />
 
       </Routes>
     </BrowserRouter>

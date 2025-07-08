@@ -13,6 +13,15 @@ const setCookie = (res, name, value, age) => {
     res.cookie(name, value, {...options, ...age});
 };
 
+const delCookie = (res, name) => {
+    const options = {
+        httpOnly: true,
+        secure: isProd(),
+        sameSite: 'lax',
+    };
+    res.clearCookie(name, {...options});
+};
+
 const newErr = (message, status = 500, name = 'Error') => {
     const err = new Error(message);
     err.status = status;
@@ -59,6 +68,7 @@ const rateCheck = rateLimit({
 module.exports = {
     isProd,
     setCookie,
+    delCookie,
     newErr,
     signAccessToken,
     signRefreshToken,

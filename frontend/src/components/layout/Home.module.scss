@@ -1,35 +1,43 @@
 .Home {
     width: 100%;
     min-height: 100vh;
-    display: grid;
-    grid-template-areas: 'Header' 'AddTask' 'TaskList';
-    grid-template-rows: auto 1fr 1fr;
 
+    display: grid;
+    grid-template-areas: 'Header' 'main';
+    grid-template-rows: auto 1fr;
     gap: 10px;
     padding: 10px;
-   // background-color: yellow;
 
-   /* @media only screen and (orientation: landscape) {
+     @media (orientation: landscape) {
         max-height: 100vh;
-    }*/
+     }
 }
 
 .Header {
     grid-area: Header;
-   // background-color: blue;
-  
 }
 
+.main {
+    grid-area: main;
+
+    display: grid;
+    grid-template-areas: 'AddTask' 'TaskList';
+    grid-template-rows: auto 1fr;
+    gap: 10px;
+
+    @media (orientation: landscape) {
+         grid-template-areas: 'AddTask TaskList';
+         grid-template-columns: auto 1fr;
+    }
+}
+
+
 .AddTask {
-   grid-area: AddTask;
-   // background-color: green
+    grid-area: AddTask;
     border: solid red 1px;
 }
 
 .TaskList {
-  grid-area: TaskList;
-   // background-color: red;
-   // height: calc(100vh - Header);
+    grid-area: TaskList;
     border: solid red 1px;
 }
-    

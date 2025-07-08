@@ -2,8 +2,8 @@ const { v4: uuid4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const pool = require('../db/config');
 const {
-    isProd,
     setCookie,
+    delCookie,
     newErr,
     signAccessToken,
     signRefreshToken,
@@ -195,21 +195,12 @@ const updatePasword = async (req, res, next) => {
             [hashedPassword, userId]
         );
 
-        res
-            .clearCookie('accessToken', {
-                httpOnly: true,
-                secure: isProd(),
-                sameSite: 'lax',
-            })
-            .clearCookie('refreshToken', {
-                httpOnly: true,
-                secure: isProd(),
-                sameSite: 'lax',
-            })
-            .status(200).json({
-                success: true,
-                message: 'Password updated. Please sign in again',
-            });
+        delCookie(res, 'accessToken');
+        delCookie(res, 'refreshToken');
+        res.status(200).json({
+            success: true,
+            message: 'Password updated. Please sign in again',
+        });
     } catch (err) {
         next(err);
     }
@@ -224,24 +215,15 @@ const deleteUser = async (req, res, next) => {
             [userId]
         );
 
-        res
-            .clearCookie('accessToken', {
-                httpOnly: true,
-                secure: isProd(),
-                sameSite: 'lax',
-            })
-            .clearCookie('refreshToken', {
-                httpOnly: true,
-                secure: isProd(),
-                sameSite: 'lax',
-            })
-            .status(200).json({
-                success: true,
-                message: 'user successfully deleted'
-            });
+        delCookie(res, 'accessToken');
+        delCookie(res, 'refreshToken');
+        res.status(200).json({
+            success: true,
+            message: 'user successfully deleted'
+        });
     } catch (err) {
         next(err);
     }
 }
 
-module.exports = { createUser, getUser, updateUsername, updatePasword, deleteUser};
+module.exports = { createUser, getUser, updateUsername, updatePasword, deleteUser };

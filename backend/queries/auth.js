@@ -2,8 +2,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const pool = require('../db/config');
 const {
-    isProd,
     setCookie,
+    delCookie,
     newErr,
     signAccessToken,
     signRefreshToken,
@@ -56,18 +56,9 @@ const signIn = async (req, res, next) => {
 }
 
 const signOut = (req, res) => {
-    res
-        .clearCookie('accessToken', {
-            httpOnly: true,
-            secure: isProd(),
-            sameSite: 'lax',
-        })
-        .clearCookie('refreshToken', {
-            httpOnly: true,
-            secure: isProd(),
-            sameSite: 'lax',
-        })
-        .sendStatus(204);
+    delCookie(res, 'accessToken');
+    delCookie(res, 'refreshToken');
+    res.sendStatus(204);
 };
 
 const verifyUser = (req, res, next) => {
@@ -90,7 +81,7 @@ const verifyUser = (req, res, next) => {
         // attempt to get new access token if refresh token present
         return jwt.verify(refreshToken, refreshTokenSecret, (err, payload) => {
             if (err) {
-                 return next(newErr('Invalid refresh token', 401, 'verificationError'));
+                return next(newErr('Invalid refresh token', 401, 'verificationError'));
             }
             const newAccessToken = signAccessToken({ sub: payload.sub });
 

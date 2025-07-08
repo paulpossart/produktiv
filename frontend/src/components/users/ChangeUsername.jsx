@@ -11,7 +11,7 @@ function ChangeUsername() {
     const [password, setPassword] = useState('');
     const [usernameErr, setUsernameErr] = useState('');
     const [passwordErr, setPasswordErr] = useState('');
-    const { hideInnerModal, renderFeedbackModal, setOnFeedbackClose} = useModal();
+    const { hideInnerModal, renderFeedbackModal, setOnClose } = useModal();
     const { setUser } = useAuth();
 
     const handleSubmit = async (e) => {
@@ -29,7 +29,7 @@ function ChangeUsername() {
         try {
             const data = await callUpdateUsername(newUsername, password);
             renderFeedbackModal(data.message);
-            setOnFeedbackClose(()=>hideInnerModal)
+            setOnClose(() => hideInnerModal)
             setUser(data.user);
             setNewUsername('');
         } catch (err) {
