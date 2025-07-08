@@ -1,0 +1,18 @@
+@use '../../styles/global' as *;
+@use '../../styles/buttons';
+
+.CreateTask {
+    width: clamp(280px, 80vw, 500px);
+    height: clamp(300px, 80vh, 500px);
+    padding: 2rem 2rem 1rem;
+
+    @include formInputStyle;
+    gap: 20px;
+
+    .buttons {
+        @include flex(row);
+        gap: 10px;
+        width: 100%;
+        padding-left: 40%;
+    }
+}

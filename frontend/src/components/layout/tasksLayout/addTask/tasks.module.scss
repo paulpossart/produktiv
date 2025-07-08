@@ -1,0 +1,23 @@
+@use '../../../../styles/buttons';
+@use '../../../../styles/global' as *;
+
+.AddTask {
+    @include flex(column, center, center);
+    gap: 40px;
+    @extend %border;
+    height: clamp(150px, 35vh, 300px);
+
+    & button {
+        @include flex(row, space-between);
+        padding-left: 16px;
+        padding-right: 16px;
+        width: clamp(150px, 60%, 250px);
+
+        & img {
+            width: 24px;
+            background-color: var(--btn1);
+            padding: 4px;
+            border-radius: 50%;
+        }
+    }
+}

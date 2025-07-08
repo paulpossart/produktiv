@@ -1,27 +1,15 @@
-import { useEffect } from 'react';
 import { useModal } from '../../../context/ModalContext';
 import styles from './Modal.module.scss';
 
 function FeedbackModal({ children }) {
-    const {
-        innerModalContent,
-        feedbackModalContent,
-        hideFeedbackModal,
-        closeModalOnEsc
-    } = useModal();
-
-   /* useEffect(() => {
-        closeModalOnEsc();
-    }, [innerModalContent, feedbackModalContent]);*/
+    const { hideFeedbackModal } = useModal();
 
     return (
-        <>
-            <div className={styles.overlay} onClick={hideFeedbackModal}></div>
-            <div className={styles.FeedbackModal}>
-                {children}
-                <button onClick={hideFeedbackModal} className={styles.btn1}>OK</button>
-            </div>
-        </>
+        <section role='alert' aria-labelledby='feedback-title' className={styles.FeedbackModal}>
+            <h2 id='feedback-title' className={styles.srOnly}>Feedback</h2>
+            {children}
+            <button onClick={hideFeedbackModal} className={styles.btn1}>OK</button>
+        </section>
     );
 };
 

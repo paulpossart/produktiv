@@ -38,7 +38,7 @@ $borderColor: rgb(136, 136, 136);
         border-radius: 8px;
         padding: 0.4em;
         line-height: 1;
-
+   
         &:focus-visible {
             @extend %focusVisible;
         }
@@ -52,6 +52,12 @@ $borderColor: rgb(136, 136, 136);
             color: var(--greyText);
             font-style: italic;
         }
+    }
+
+    & textarea {
+        @extend input;
+        height: 100%;
+        resize: none;
     }
 }
 
