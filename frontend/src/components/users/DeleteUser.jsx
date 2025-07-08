@@ -8,7 +8,7 @@ function DeleteUser() {
     const { hideInnerModal,
         renderInnerModal,
         renderFeedbackModal,
-        setOnAllClose,
+        setOnClose,
         hideMainModal
     } = useModal();
 
@@ -27,7 +27,7 @@ function DeleteUser() {
         try {
             const data = await callDeleteUser();
             renderFeedbackModal(data?.message);
-            setOnAllClose(() => removeUser)
+            setOnClose(() => removeUser)
         } catch (err) {
             renderFeedbackModal(err.message);
         }

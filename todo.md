@@ -1,6 +1,6 @@
-add Not Found page
-modals close on Esc
-clearCookie helper
+
+
+account & account options tests
 
 tests:
    BE:

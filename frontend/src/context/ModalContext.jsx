@@ -7,41 +7,48 @@ function ModalProvider({ children }) {
 	const [mainModalContent, setMainModalContent] = useState(null);
 	const [innerModalContent, setInnerModalContent] = useState(null);
 	const [feedbackModalContent, setFeedbackModalContent] = useState(null);
-	const [onFeedbackClose, setOnFeedbackClose] = useState(() => () => { });
-	const [onAllClose, setOnAllClose] = useState(() => () => { });
+	const [onClose, setOnClose] = useState(() => () => { });
 
 	const renderMainModal = (content) => {
 		setMainModalContent(content);
-		setOnAllClose(() => () => { });
+		setOnClose(() => () => { });
 	}
 	const hideMainModal = () => {
 		setMainModalContent(null)
 		setInnerModalContent(null);
 		setFeedbackModalContent(null);
-		onAllClose();
+		onClose();
 	}
 
 	const renderInnerModal = (content) => {
 		setInnerModalContent(content);
-		setOnAllClose(() => () => { });
+		setOnClose(() => () => { });
 	}
 	const hideInnerModal = () => {
 		setInnerModalContent(null)
 		setFeedbackModalContent(null);
-		onAllClose();
+		onClose();
 	}
 
 	const renderFeedbackModal = (content) => {
 		setFeedbackModalContent(content);
-		setOnFeedbackClose(() => () => { });
-		setOnAllClose(() => () => { });
+		setOnClose(() => () => { });
 	}
 
 	const hideFeedbackModal = () => {
 		setFeedbackModalContent(null);
-		onFeedbackClose();
-		onAllClose();
+		onClose();
 	}
+
+	const closeModalOnEsc = () => {
+		const hideFunc = feedbackModalContent ? hideFeedbackModal
+			: innerModalContent ? hideInnerModal
+				: hideMainModal
+
+		const closeOnEsc = (e) => { if (e.key === 'Escape') hideFunc(); console.log("Pressed:", e.key); }
+		document.addEventListener('keydown', closeOnEsc);
+		return () => document.removeEventListener('keydown', closeOnEsc);
+	};
 
 	return (
 		<ModalContext.Provider value={{
@@ -49,7 +56,7 @@ function ModalProvider({ children }) {
 			renderMainModal, hideMainModal,
 			renderInnerModal, hideInnerModal,
 			renderFeedbackModal, hideFeedbackModal,
-			setOnFeedbackClose, setOnAllClose
+			setOnClose, closeModalOnEsc
 		}}>
 			{children}
 		</ModalContext.Provider>

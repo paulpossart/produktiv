@@ -19,7 +19,7 @@ function Home() {
 
             <Header className={styles.Header} />
 
-            <main>
+            <main className={styles.main}>
                 <AddTask className={styles.AddTask} />
                 <TaskList className={styles.TaskList} />
             </main>

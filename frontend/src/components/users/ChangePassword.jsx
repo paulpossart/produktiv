@@ -16,7 +16,7 @@ function ChangePassword() {
     const [newPassErr, setNewPassErr] = useState('');
     const [confirmPassErr, setConfirmPassErr] = useState('');
 
-    const { hideInnerModal, hideMainModal, renderFeedbackModal, setOnAllClose } = useModal();
+    const { hideInnerModal, hideMainModal, renderFeedbackModal, setOnClose } = useModal();
     const { setUser } = useAuth();
     const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ function ChangePassword() {
         try {
             const data = await callUpdatePassword(currentPassword, newPassword, confirmPassword);
             renderFeedbackModal(data.message);
-            setOnAllClose(() => removeUser)
+            setOnClose(() => removeUser)
         } catch (err) {
             renderFeedbackModal(err.message);
         } finally {
