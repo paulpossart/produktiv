@@ -43,7 +43,6 @@
 
 .TaskList {
     grid-area: TaskList;
-    border: solid red 1px;
     box-shadow: var(--divShadow);
     transition: box-shadow 0.6s ease-in-out;
 }

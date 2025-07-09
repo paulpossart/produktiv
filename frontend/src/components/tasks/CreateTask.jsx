@@ -1,15 +1,39 @@
 import { useState } from 'react';
 import { useModal } from '../../context/ModalContext';
+import { useTasks } from '../../context/TasksContext';
+import { callCreateTask } from '../../apiCalls/tasksCalls';
 import styles from './tasks.module.scss';
 
-function CreateTask() {
+function CreateTask({ prevTask = null }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const { renderFeedbackModal, hideMainModal } = useModal();
+    const { renderFeedbackModal, hideMainModal, setOnClose } = useModal();
+    const { fetchTasks } = useTasks();
+    const prevId = prevTask ? prevTask.id : 0;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        renderFeedbackModal('test...')
+
+        if (!title.trim()) {
+            renderFeedbackModal('Title cannot be empty');
+            return;
+        }
+
+        try {
+            const data = await callCreateTask(title, description, prevId);
+            if (data?.success) {
+                renderFeedbackModal(data.message);
+                setOnClose(() => hideMainModal);
+            }
+        } catch (err) {
+            renderFeedbackModal(err.message);
+            
+        } finally {
+            setTitle('');
+            setDescription('');
+            fetchTasks();
+        }
+
     };
 
     return (

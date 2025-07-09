@@ -1,7 +1,7 @@
 import { useAuth } from '../../../../context/AuthContext';
 import { useModal } from '../../../../context/ModalContext';
 import CreateTask from '../../../tasks/CreateTask';
-import styles from './tasks.module.scss';
+import styles from './AddTask.module.scss';
 import addIcon from '../../../../assets/plus-sign.svg';
 
 function AddTask({ className }) {

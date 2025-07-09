@@ -38,14 +38,14 @@ $borderColor: rgb(136, 136, 136);
         border-radius: 8px;
         padding: 0.4em;
         line-height: 1;
-   
-        &:focus-visible {
-            @extend %focusVisible;
-        }
 
         font: {
             family: $body;
             size: 1.6rem;
+        }
+
+        &:focus-visible {
+            @extend %focusVisible;
         }
 
         &::placeholder {

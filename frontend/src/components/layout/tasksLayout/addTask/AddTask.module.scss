@@ -20,4 +20,8 @@
             border-radius: 50%;
         }
     }
+
+    @media (orientation: landscape) {
+        height: 100%;
+    }
 }
