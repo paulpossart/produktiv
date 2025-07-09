@@ -51,9 +51,10 @@ const signRefreshToken = (payload) => {
 const isValidInput = (type, input, min, max) => {
     const safeRegex = /^[^<>{};\\]*$/;
     if (typeof input !== 'string' || !validator.isLength(input, { min, max })) return false;
-    if (type === 'password') return true;
-    if (!input.trim() || !validator.matches(input, safeRegex)) return false;
-    if (type === 'username') return true;
+    if (type === 'password' || type === 'description') return true;
+    if (!input.trim()) return false;
+    if (type === 'title') return true;
+    if (type === 'username') return validator.matches(input, safeRegex);
     return false
 };
 

@@ -40,23 +40,13 @@ function ModalProvider({ children }) {
 		onClose();
 	}
 
-	const closeModalOnEsc = () => {
-		const hideFunc = feedbackModalContent ? hideFeedbackModal
-			: innerModalContent ? hideInnerModal
-				: hideMainModal
-
-		const closeOnEsc = (e) => { if (e.key === 'Escape') hideFunc(); console.log("Pressed:", e.key); }
-		document.addEventListener('keydown', closeOnEsc);
-		return () => document.removeEventListener('keydown', closeOnEsc);
-	};
-
 	return (
 		<ModalContext.Provider value={{
 			mainModalContent, innerModalContent, feedbackModalContent,
 			renderMainModal, hideMainModal,
 			renderInnerModal, hideInnerModal,
 			renderFeedbackModal, hideFeedbackModal,
-			setOnClose, closeModalOnEsc
+			setOnClose
 		}}>
 			{children}
 		</ModalContext.Provider>

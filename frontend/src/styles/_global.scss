@@ -39,19 +39,25 @@ $borderColor: rgb(136, 136, 136);
         padding: 0.4em;
         line-height: 1;
 
-        &:focus-visible {
-            @extend %focusVisible;
-        }
-
         font: {
             family: $body;
             size: 1.6rem;
+        }
+
+        &:focus-visible {
+            @extend %focusVisible;
         }
 
         &::placeholder {
             color: var(--greyText);
             font-style: italic;
         }
+    }
+
+    & textarea {
+        @extend input;
+        height: 100%;
+        resize: none;
     }
 }
 
