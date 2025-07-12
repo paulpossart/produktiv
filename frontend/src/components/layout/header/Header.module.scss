@@ -8,14 +8,11 @@
             rgba($col1, $col2, $col3, 0.1) 100%);
 }
 
-.header {
-    position: relative;
-    z-index: 1;
+.header {   
+    z-index: 1500;
     @extend %border;
-    width: 100%;
     padding: 4px 8px;
-
-
+   
     background-image: url('../../../assets/duk-img.jpg');
     background-size: 60%;
     background-position: 100% 45%;
@@ -49,6 +46,7 @@
     line-height: 1;
     background-color: yellow;
     border: solid black 3px;
+    @include flex(row, center);
 
 
     &:focus-visible {

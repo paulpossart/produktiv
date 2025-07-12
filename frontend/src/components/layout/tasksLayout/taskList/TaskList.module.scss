@@ -3,11 +3,11 @@
 
 .TaskList {
     @include flex();
-   
+
     @extend %border;
-   // height: clamp(150px, 35vh, 300px);
+    background-color: var(--div);
 
     @media (orientation: landscape) {
-       // height: 100%;
+        max-height: 100%;
     }
 }

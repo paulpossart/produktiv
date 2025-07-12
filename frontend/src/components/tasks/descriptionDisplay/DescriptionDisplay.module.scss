@@ -1,0 +1,13 @@
+.Display {
+    height: 180px;
+    overflow-y: auto;
+    overflow-wrap: anywhere;
+    background-color: var(--textInput);
+    padding: 10px;
+}
+
+.fullscreenDisplay {
+    position: fixed;
+    top: 0;
+    left: 0;
+}

@@ -13,7 +13,7 @@ function Header({ className }) {
     }
 
     return (
-        <header aria-labelledby='site-title' className={`${className} ${styles.header}`} >
+        <header id='header' aria-labelledby='site-title' className={`${className} ${styles.header}`} >
 
             <div className={`${styles.overlay} ${theme === 'dark' ? styles.darkOn : styles.darkOff}`}></div>
             <div className={`${styles.overlay} ${theme === 'light' ? styles.lightOn : styles.lightOff}`}></div>
@@ -22,10 +22,7 @@ function Header({ className }) {
                 <button
                     className={styles.duk}
                     aria-label='Duck image, the site logo - click to hear it squeak!'
-                    onClick={() => {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                        handleClick();
-                    }}
+                    onClick={handleClick}
                 >
                     <img src={dukIcon} alt='' />
                 </button>

@@ -44,17 +44,27 @@
 }
 
 .homeBtn {
-    @extend .btn1;
-    position: relative;
-    border-radius: 50%;
+    @extend .btn3;
+    background-color: var(--btn1);
     width: 40px;
     height: 40px;
 
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            transform: scale(1);
+            background-color: var(--btn1Hover);
+        }
+    }
+
+    &:active {
+        background-color: var(--btn1Hover);
+        transform: scale(0.9);
+    }
+
     & img {
-        position: absolute;
+        position: relative;
         width: 25px;
         top: 46%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translateY(-50%);
     }
 }

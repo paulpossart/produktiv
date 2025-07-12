@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useModal } from "../../context/ModalContext";
+import { callGetTasks } from "../../apiCalls/tasksCalls";
 import MainModal from "./modals/MainModal";
 import InnerModal from "./modals/InnerModal";
 import FeedbackModal from "./modals/FeedbackModal";
@@ -17,6 +18,9 @@ function Home() {
         hideInnerModal,
         hideFeedbackModal
     } = useModal();
+    const [tasks, setTasks] = useState([]);
+    const [fetchErr, setFetchErr] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const hideFunc = feedbackModalContent ? hideFeedbackModal
@@ -27,6 +31,23 @@ function Home() {
         document.addEventListener('keydown', closeOnEsc);
         return () => document.removeEventListener('keydown', closeOnEsc);
     })
+
+    const fetchTasks = async () => {
+        try {
+            const data = await callGetTasks();
+            setFetchErr('');
+            setTasks(data);
+        } catch (err) {
+            setTasks([]);
+            setFetchErr(err.message)
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchTasks();
+    }, []);
 
     return (
         <div className={styles.Home}>
@@ -56,8 +77,18 @@ function Home() {
             <Header className={styles.Header} />
 
             <main className={styles.main}>
-                <AddTask className={styles.AddTask} />
-                <TaskList className={styles.TaskList} />
+                <AddTask
+                    className={styles.AddTask}
+                    tasks={tasks}
+                    fetchTasks={fetchTasks}
+                />
+                <TaskList
+                    className={styles.TaskList}
+                    tasks={tasks}
+                    fetchErr={fetchErr}
+                    isLoading={isLoading}
+                    fetchTasks={fetchTasks}
+                />
             </main>
 
         </div>

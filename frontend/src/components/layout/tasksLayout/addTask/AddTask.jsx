@@ -1,10 +1,10 @@
 import { useAuth } from '../../../../context/AuthContext';
 import { useModal } from '../../../../context/ModalContext';
-import CreateTask from '../../../tasks/CreateTask';
+import CreateTask from '../../../tasks/createAndEditTasks/CreateTask';
 import styles from './AddTask.module.scss';
 import addIcon from '../../../../assets/plus-sign.svg';
 
-function AddTask({ className }) {
+function AddTask({ className, tasks, fetchTasks }) {
     const { user } = useAuth();
     const { renderMainModal } = useModal();
     const username = user.username
@@ -16,7 +16,12 @@ function AddTask({ className }) {
         >
             <h2 id='add-task-title' className={styles.srOnly}>Add task</h2>
             <p>Welcome {username}!</p>
-            <button className={styles.btn2} onClick={() => renderMainModal(<CreateTask />)}>
+            <button className={styles.btn2} onClick={() =>
+                renderMainModal(<CreateTask
+                    tasks={tasks}
+                    fetchTasks={fetchTasks}
+                />)}
+            >
                 Add Task
                 <img src={addIcon} alt='' />
             </button>

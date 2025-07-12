@@ -60,7 +60,6 @@
 
     @media (hover: hover) and (pointer: fine) {
         &:hover {
-            transform: scale(1.02);
             background-color: red;
             border-color: var(--main);
             outline: solid red 3px;
@@ -69,7 +68,6 @@
     }
 
     &:active {
-        transform: scale(0.98);
         background-color: red;
     }
 }

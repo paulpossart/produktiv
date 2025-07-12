@@ -1,0 +1,21 @@
+@use '../../../styles/buttons';
+@use '../../../styles/global' as *;
+
+.DeleteUser {
+    width: fit-content;
+    height: fit-content;
+    min-width: 280px;
+    min-height: 200px;
+    padding: 1.6rem 2rem 1rem 2rem;
+
+    @include flex(column, space-around);
+
+    & h2 {
+        line-height: 2;
+
+        font: {
+            size: 2rem;
+            weight: 600;
+        }
+    }
+}

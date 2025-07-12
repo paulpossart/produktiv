@@ -1,10 +1,10 @@
-const callCreateTask = async (title, description, prevId) => {
+const callCreateTask = async (title, description, firstTaskId) => {
     const response = await fetch('/api/tasks', {
         method: 'POST',
         body: JSON.stringify({
             title,
             description,
-            prevId
+            firstTaskId
         }),
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
@@ -23,7 +23,7 @@ const callGetTasks = async () => {
 
     const data = await response.json();
     if (!response.ok) throw new Error('Unable to retrieve tasks');
-    return data
+    return data;
 }
 
 const callEditTaskById = async (taskId, newTitle, newDescription) => {
@@ -54,7 +54,7 @@ const callPrioritiseTasksById = async (taskId, operator,
         credentials: 'include'
     });
 
-    if (!response.ok) throw new Error('Unable to update task priority, please try again')
+    if (!response.ok) throw new Error('Unable to update task priority, please try again later')
     return;
 }
 
@@ -63,8 +63,10 @@ const callDeleteTaskById = async (taskId) => {
         method: 'DELETE',
         credentials: 'include'
     });
-    if (!response.ok) throw new Error('Unable to delete task, please try again');
-    return true;
+
+    if (!response.ok) throw new Error('Unable to delete task, please try again later');
+    const data = await response.json();
+    return data;
 }
 
 export {
