@@ -1,0 +1,16 @@
+@use '../../../styles/buttons';
+@use '../../../styles/global' as *;
+
+.PrioritiseTasks {
+    @include flex;
+
+    & button {
+        width: 25px;
+        height: 25px;
+
+        & img {
+            width: 50px;
+            position: relative;
+        }
+    }
+}

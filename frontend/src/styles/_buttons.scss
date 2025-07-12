@@ -2,6 +2,7 @@
 
 .btn1 {
     cursor: pointer;
+    position: relative;
     line-height: 1.5;
     width: 100%;
     padding: 0.8rem 0.16rem;
@@ -54,5 +55,41 @@
 
     &:active {
         background-color: $mainGreyHover;
+    }
+}
+
+.btn3 {
+    @extend .btn1;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    @include flex(row, center, center);
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            transform: scale(1);
+            background-color: rgba(0, 0, 0, 0.25);
+        }
+    }
+
+    &:active {
+        transform: scale(0.9);
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+}
+
+.circleBtn {
+    @extend .btn3;
+    background-color: var(--btn1);
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            transform: scale(1);
+            background-color: var(--btn1Hover);
+        }
+    }
+
+    &:active {
+        background-color: var(--btn1Hover);
+        transform: scale(0.9);
     }
 }

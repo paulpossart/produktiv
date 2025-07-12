@@ -6,22 +6,22 @@ const {
 
 const createTask = async (req, res, next) => {
     const userId = req.userId;
-    const { title, description, prevId } = req.body;
+    const { title, description, firstTaskId } = req.body;
     let newPriority = 100;
     
     if (
-        !isValidInput('title', title, 1, 100)
-        || !isValidInput('description', description, 1, 100)
+        !isValidInput('title', title, 1, 50)
+        || !isValidInput('description', description, 0, 500)
     ) {
         throw newErr('Invalid title or description', 400, 'createTasksErr');
     }
 
     try {
-        if (prevId) {
+        if (firstTaskId) {
             const priorityCheck = await pool.query(
                 `SELECT priority FROM produktiv.tasks
                  WHERE id = $1 AND user_id = $2`,
-                [prevId, userId]
+                [firstTaskId, userId]
             );
 
             if (priorityCheck.rows.length > 0) {
@@ -166,7 +166,10 @@ const deleteTasksById = async (req, res, next) => {
              WHERE id = $1 AND user_id = $2`,
             [taskId, userId]
         );
-        res.sendStatus(204);
+         res.status(200).json({
+            success: true,
+            message: 'Task deleted'
+        });
     } catch (err) {
         next(err)
     }

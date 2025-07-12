@@ -6,12 +6,15 @@
     gap: 40px;
     @extend %border;
     height: clamp(150px, 35vh, 300px);
+    background-color: var(--div);
+
 
     & button {
         @include flex(row, space-between);
         padding-left: 16px;
         padding-right: 16px;
-        width: clamp(150px, 60%, 250px);
+       width: clamp(130px, 60%, 250px);
+        white-space: nowrap;
 
         & img {
             width: 24px;

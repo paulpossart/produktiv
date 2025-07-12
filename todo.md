@@ -1,13 +1,9 @@
-prevTaskId in CreateTaskclear
+priority component
 
-account & account options tests
+formatting info
 
-tests:
-   BE:
-    users.js: updateUsername
+all tests
+add 'done' and completed tasks
 
-
-   FE:
-    apiCalls/usersCalls.js: callUpdateUsername,
-    Account.jsx,
-    ChangeUsername.jsx,
+add JWT refresh rotation?
+update some context to rtk?

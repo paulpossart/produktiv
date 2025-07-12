@@ -1,12 +1,12 @@
 .Home {
+    position: relative;
     width: 100%;
     min-height: 100vh;
 
     display: grid;
     grid-template-areas: 'Header' 'main';
     grid-template-rows: auto 1fr;
-    gap: 10px;
-    padding: 10px;
+    grid-template-columns: auto;
 
     @media (orientation: landscape) {
         max-height: 100vh;
@@ -14,24 +14,31 @@
 }
 
 .Header {
+    position: relative;
     grid-area: Header;
     box-shadow: var(--divShadow);
     transition: box-shadow 0.6s ease-in-out;
+    z-index: 1500;
+    margin: 10px;
 }
 
 .main {
     grid-area: main;
-    height: 100%;
+    z-index: 500;
 
     display: grid;
     grid-template-areas: 'AddTask' 'TaskList';
     grid-template-rows: auto 1fr;
     gap: 10px;
 
+    padding: 0 10px 10px 10px;
+
     @media (orientation: landscape) {
         grid-template-areas: 'AddTask TaskList';
         grid-template-columns: 40% 1fr;
         grid-template-rows: auto;
+        overflow: auto;
+
     }
 }
 
@@ -39,12 +46,16 @@
     grid-area: AddTask;
     box-shadow: var(--divShadow);
     transition: box-shadow 0.6s ease-in-out;
+    z-index: 500;
 }
 
 .TaskList {
     grid-area: TaskList;
     box-shadow: var(--divShadow);
     transition: box-shadow 0.6s ease-in-out;
+    z-index: 500;
+    max-height: 96vh;
+    overflow: auto;
 }
 
 .overlay {
