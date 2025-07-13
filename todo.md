@@ -1,7 +1,5 @@
 formatting info
 
-aria on Tasks, Priority, DescriptionDisplay
-
-all tests
+all tests // add tests to readme
 
 add JWT refresh rotation?
