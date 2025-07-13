@@ -5,7 +5,7 @@ import EditTask from './createAndEditTasks/EditTask';
 import DeleteTask from './deleteTask/DeleteTask';
 import PrioritiseTasks from './prioritiseTasks/PrioritiseTasks';
 import DescriptionDisplay from './descriptionDisplay/DescriptionDisplay';
-import styles from './Tasks.module.scss';
+import styles from './tasks.module.scss';
 import expandTaskIcon from '../../assets/expand.svg';
 import editIcon from '../../assets/edit.svg';
 import deleteIcon from '../../assets/delete.svg';
