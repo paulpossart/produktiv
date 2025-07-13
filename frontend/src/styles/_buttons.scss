@@ -92,4 +92,14 @@
         background-color: var(--btn1Hover);
         transform: scale(0.9);
     }
+
+    & img {
+        transition: translate 0.4s ease;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
 }

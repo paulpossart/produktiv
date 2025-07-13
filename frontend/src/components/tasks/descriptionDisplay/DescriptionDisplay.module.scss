@@ -1,13 +1,96 @@
-.Display {
-    height: 180px;
+@use '../../../styles/global' as *;
+@use '../../../styles/buttons';
+
+.Display,
+.modalDisplay {
+    position: relative;
+    text-align: left;
+    height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
+    border: solid 1px $mainGrey;
+    border-radius: 8px;
     overflow-wrap: anywhere;
     background-color: var(--textInput);
     padding: 10px;
+    transition: background-color 0.6s ease-in-out;
+
+    .ltBtn,
+    .dkBtn {
+        @extend .circleBtn;
+        @include flex(row, center, center);
+        background-color: transparent;
+        position: sticky;
+        top: 4px;
+        left: calc(100% - 4px);
+        margin-top: -30px;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background-color: rgba(125, 125, 125, 0.5);
+            }
+        }
+
+        &:active {
+            background-color: rgba(125, 125, 125, 0.5);
+        }
+
+        & img {
+            width: 20px;
+        }
+
+        @media (min-width: 800px) {
+            width: 50px;
+            height: 50px;
+             margin-top: -50px;
+
+            & img {
+                width: 30px;
+            }
+
+        }
+    }
+
+    .ltBtn {
+        border: solid black 2px;
+    }
+
+    .dkBtn {
+        border: solid white 2px;
+    }
 }
 
-.fullscreenDisplay {
-    position: fixed;
-    top: 0;
-    left: 0;
+.modalDisplay {
+    @include flex(column, space-between);
+    width: clamp(280px, 80vw, 800px);
+    height: clamp(300px, 80vh, 1000px);
+    padding: 1.6rem 2rem 1rem 2rem;
+    border-radius: 0;
+
+    & div {
+        width: 100%;
+    }
+
+    .desc {
+        overflow: auto;
+    }
+
+    & h2 {
+        text-align: center;
+        border-bottom: solid 1px var(--alt);
+        margin-bottom: 2rem;
+
+
+        font: {
+            weight: 700;
+            size: 3rem;
+        }
+    }
+
+    & button {
+        margin-top: 1rem;
+    }
 }

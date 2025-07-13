@@ -1,9 +1,7 @@
-priority component
-
 formatting info
 
+aria on Tasks, Priority, DescriptionDisplay
+
 all tests
-add 'done' and completed tasks
 
 add JWT refresh rotation?
-update some context to rtk?

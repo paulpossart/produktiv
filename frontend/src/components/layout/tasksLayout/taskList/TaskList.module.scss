@@ -6,6 +6,13 @@
 
     @extend %border;
     background-color: var(--div);
+    box-shadow: var(--divShadow);
+    z-index: 500;
+    max-height: 96vh;
+    overflow: auto;
+    transition:
+        box-shadow 0.6s ease-in-out,
+        background-color 0.6s ease-in-out;
 
     @media (orientation: landscape) {
         max-height: 100%;

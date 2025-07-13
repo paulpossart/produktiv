@@ -51,7 +51,7 @@ function Tasks({ tasks, fetchTasks }) {
                             >
                                 <article>
 
-                                    <header>
+                                    <header className={styles.Header}>
                                         <div className={styles.priority}>
                                             <PrioritiseTasks
                                                 taskId={task.id}
@@ -80,10 +80,9 @@ function Tasks({ tasks, fetchTasks }) {
                                         </div>
                                     </header>
 
-                                    <section className={openTasks[task.id] ? styles.openSection : styles.closedSection}>
+                                    <section className={`${styles.Section} ${openTasks[task.id] ? styles.openSection : styles.closedSection}`}>
                                         <div className={styles.descBox}>
                                             <DescriptionDisplay
-                                                className={styles.desc}
                                                 description={task.description}
                                                 title={task.title}
                                             />

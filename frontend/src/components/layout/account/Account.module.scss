@@ -44,14 +44,13 @@
 }
 
 .homeBtn {
-    @extend .btn3;
+    @extend .circleBtn;
     background-color: var(--btn1);
     width: 40px;
     height: 40px;
 
     @media (hover: hover) and (pointer: fine) {
         &:hover {
-            transform: scale(1);
             background-color: var(--btn1Hover);
         }
     }
@@ -66,5 +65,12 @@
         width: 25px;
         top: 46%;
         transform: translateY(-50%);
+        transition: translate 0.2s ease;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                transform: translateY(-50%) scale(1.1);
+            }
+        }
     }
 }

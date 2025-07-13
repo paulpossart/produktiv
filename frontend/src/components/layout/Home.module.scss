@@ -44,18 +44,10 @@
 
 .AddTask {
     grid-area: AddTask;
-    box-shadow: var(--divShadow);
-    transition: box-shadow 0.6s ease-in-out;
-    z-index: 500;
 }
 
 .TaskList {
     grid-area: TaskList;
-    box-shadow: var(--divShadow);
-    transition: box-shadow 0.6s ease-in-out;
-    z-index: 500;
-    max-height: 96vh;
-    overflow: auto;
 }
 
 .overlay {

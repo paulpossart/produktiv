@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useTheme } from '../../../context/ThemeContext';
+import { useModal } from '../../../context/ModalContext';
 import styles from './DescriptionDisplay.module.scss';
+import expandIconWht from '../../../assets/expand-screen-white.svg';
+import expandIconBlk from '../../../assets/expand-screen-black.svg';
+import collapseIconWht from '../../../assets/collapse-screen-white.svg';
+import collapseIconBlk from '../../../assets/collapse-screen-black.svg';
 
-function DescriptionDisplay({ className, description, title }) {
-    const [fullscreen, setFullscreen] = useState(false);
+function DescriptionDisplay({ description, title }) {
+    const { theme } = useTheme();
+    const { renderMainModal, hideMainModal } = useModal();
 
     const lines = description.split(/\n/);
 
@@ -10,7 +16,7 @@ function DescriptionDisplay({ className, description, title }) {
         const matchSubtitle = line.match(/^# (.*)/);
         if (matchSubtitle) {
             return (
-                <h3 style={{ fontWeight: 'bold', textDecoration: 'underline' }} key={idx}>
+                <h3 style={{ fontSize: '2rem', fontWeight: 'bold', textDecoration: 'underline' }} key={idx}>
                     {matchSubtitle[1]}
                 </h3>
             );
@@ -32,16 +38,42 @@ function DescriptionDisplay({ className, description, title }) {
         return <p key={idx}>{line}</p>;
     });
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        renderMainModal(
+            <div className={styles.modalDisplay}>
+                <div className={styles.desc}>
+                    <h2>{title}</h2>
+                    <div>{editedDescription}</div>
+                </div>
+
+                <div>
+                    <button
+                        className={styles.btn1}
+                        onClick={hideMainModal}>
+                        Close
+                    </button>
+                </div>
+            </div>
+        )
+
+    }
+
     return (
-        <div
-            className={
-                `${className}
-                 ${fullscreen ? styles.fullscreenDisplay : styles.Display}`
-            }>
-            <h2 style={{ display: 'none' }}>{title}</h2>
-            <hr />
-            <div style={{ textAlign: 'left' }}>{editedDescription}</div>
-            <button onClick={() => setFullscreen(prev => !prev)}>Expand</button>
+        <div className={styles.Display}>
+            <button
+                className={theme === 'light' ? styles.ltBtn : styles.dkBtn}
+                onClick={handleClick}>
+                <img
+                    src={
+                        theme === 'light'
+                            ? expandIconBlk
+                            : expandIconWht
+                    }
+                    alt='' />
+            </button>
+            <div>{editedDescription}</div>
+
         </div>
     )
 }
