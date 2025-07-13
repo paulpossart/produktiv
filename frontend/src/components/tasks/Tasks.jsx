@@ -49,7 +49,7 @@ function Tasks({ tasks, fetchTasks }) {
                                 exit={{ opacity: 0, scale: 0.95 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <article>
+                                <article aria-labelledby={`task-title-${task.id}`}>
 
                                     <header className={styles.Header}>
                                         <div className={styles.priority}>
@@ -62,9 +62,10 @@ function Tasks({ tasks, fetchTasks }) {
                                                 fetchTasks={fetchTasks}
                                             />
                                         </div>
-                                        <h3 className={styles.title}>{task.title}</h3>
+                                        <h3 id={`task-title-${task.id}`} className={styles.title}>{task.title}</h3>
                                         <div className={styles.expand}>
                                             <button
+                                                aria-label={openTasks[task.id] ? 'expand-task' : 'collapse-task'}
                                                 className={styles.btn3}
                                                 onClick={() => openTask(task.id)}>
                                                 <img
@@ -80,7 +81,7 @@ function Tasks({ tasks, fetchTasks }) {
                                         </div>
                                     </header>
 
-                                    <section className={`${styles.Section} ${openTasks[task.id] ? styles.openSection : styles.closedSection}`}>
+                                    <section aria-label='task-description-and-buttons' className={`${styles.Section} ${openTasks[task.id] ? styles.openSection : styles.closedSection}`}>
                                         <div className={styles.descBox}>
                                             <DescriptionDisplay
                                                 description={task.description}
@@ -89,10 +90,18 @@ function Tasks({ tasks, fetchTasks }) {
                                         </div>
 
                                         <div className={styles.buttons}>
-                                            <button className={styles.editBtn} onClick={() => handleClickEdit(task.id, task.title, task.description)}>
+                                            <button
+                                                aria-label={`edit-task-${task.id}`}
+                                                className={styles.editBtn}
+                                                onClick={() => handleClickEdit(task.id, task.title, task.description)}
+                                            >
                                                 <img src={editIcon} alt='' />
                                             </button>
-                                            <button className={styles.delBtn} onClick={() => handleClickDelete(task.id)}>
+                                            <button
+                                                aria-label={`delete-task-${task.id}`}
+                                                className={styles.delBtn}
+                                                onClick={() => handleClickDelete(task.id)}
+                                            >
                                                 <img src={deleteIcon} alt='' />
                                             </button>
                                         </div>

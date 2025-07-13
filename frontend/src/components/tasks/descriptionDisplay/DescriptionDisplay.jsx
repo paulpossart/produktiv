@@ -41,9 +41,9 @@ function DescriptionDisplay({ description, title }) {
     const handleClick = (e) => {
         e.preventDefault();
         renderMainModal(
-            <div className={styles.modalDisplay}>
+            <section aria-labelledby='task-modal-title' className={styles.modalDisplay}>
                 <div className={styles.desc}>
-                    <h2>{title}</h2>
+                    <h2 id='task-modal-title'>{title}</h2>
                     <div>{editedDescription}</div>
                 </div>
 
@@ -54,7 +54,7 @@ function DescriptionDisplay({ description, title }) {
                         Close
                     </button>
                 </div>
-            </div>
+            </section>
         )
 
     }
@@ -62,6 +62,7 @@ function DescriptionDisplay({ description, title }) {
     return (
         <div className={styles.Display}>
             <button
+                aria-label='expand-task-description'
                 className={theme === 'light' ? styles.ltBtn : styles.dkBtn}
                 onClick={handleClick}>
                 <img

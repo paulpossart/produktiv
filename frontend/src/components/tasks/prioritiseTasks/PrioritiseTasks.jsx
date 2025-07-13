@@ -23,7 +23,7 @@ function PrioritiseTasks({
 
         try {
             await callPrioritiseTasksById(taskId, operator, adjacent.id, adjacentAdjacentTaskId)
-          fetchTasks();
+            fetchTasks();
         } catch (err) {
             renderFeedbackModal(err.message);
         }
@@ -31,11 +31,20 @@ function PrioritiseTasks({
 
     return (
         <div className={styles.PrioritiseTasks}>
-            <button onClick={() => handleClick('+')} className={styles.btn3}>
-                <img style={{bottom: '20%'}} src={priorityUpIcon} alt='' />
+            <button
+                aria-label='increase-task-priority'
+                onClick={() => handleClick('+')}
+                className={styles.btn3}
+            >
+                <img style={{ bottom: '20%' }} src={priorityUpIcon} alt='' />
             </button>
-            <button onClick={() => handleClick('-')} className={styles.btn3}>
-                <img style={{top: '20%'}} src={priorityDownIcon} alt='' />
+
+            <button
+                aria-label='decrease-task-priority'
+                onClick={() => handleClick('-')}
+                className={styles.btn3}
+            >
+                <img style={{ top: '20%' }} src={priorityDownIcon} alt='' />
             </button>
         </div>
     )
