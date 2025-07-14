@@ -30,7 +30,7 @@
 .Header {
     @include flex(row, space-between);
     background-color: $mainGrey;
-    padding: 0.5rem;
+    padding: 0 0.5rem;
     color: white;
 
     display: grid;

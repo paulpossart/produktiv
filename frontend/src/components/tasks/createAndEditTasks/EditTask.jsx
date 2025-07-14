@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useModal } from '../../../context/ModalContext';
 import { callEditTaskById } from '../../../apiCalls/tasksCalls';
+import FormattingInfo from './FormattingInfo';
 import styles from './CreateAndEditTasks.module.scss';
 
 function EditTask({ taskId, originalTitle, originalDescription, fetchTasks }) {
@@ -34,7 +35,7 @@ function EditTask({ taskId, originalTitle, originalDescription, fetchTasks }) {
         } finally {
             setNewTitle('');
             setNewDescription('');
-           fetchTasks();
+            fetchTasks();
         }
     }
 
@@ -75,8 +76,13 @@ function EditTask({ taskId, originalTitle, originalDescription, fetchTasks }) {
             </p>
 
             <div className={styles.buttons}>
-                <button className={styles.btn2} onClick={hideMainModal} type='button'>Cancel</button>
-                <button className={styles.btn1} type='submit'>Add</button>
+
+                <FormattingInfo />
+
+                <div>
+                    <button className={styles.btn2} onClick={hideMainModal} type='button'>Cancel</button>
+                    <button className={styles.btn1} type='submit'>Add</button>
+                </div>
             </div>
 
         </form>
