@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useModal } from '../../../context/ModalContext';
 import { callCreateTask } from '../../../apiCalls/tasksCalls';
+import FormattingInfo from './FormattingInfo';
 import styles from './CreateAndEditTasks.module.scss';
 
-function CreateTask({tasks, fetchTasks}) {
+function CreateTask({ tasks, fetchTasks }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [titleCharCount, setTitleCharCount] = useState(0);
@@ -42,7 +43,7 @@ function CreateTask({tasks, fetchTasks}) {
         } finally {
             setTitle('');
             setDescription('');
-           fetchTasks();
+            fetchTasks();
         }
     };
 
@@ -83,9 +84,16 @@ function CreateTask({tasks, fetchTasks}) {
                 {description && (`${descCharCount} ${descCharCount === 1 ? 'character' : 'characters'} left`)}
             </p>
 
+
+
             <div className={styles.buttons}>
-                <button className={styles.btn2} onClick={hideMainModal} type='button'>Cancel</button>
-                <button className={styles.btn1} type='submit'>Add</button>
+
+                <FormattingInfo />
+
+                <div>
+                    <button className={styles.btn2} onClick={hideMainModal} type='button'>Cancel</button>
+                    <button className={styles.btn1} type='submit'>Add</button>
+                </div>
             </div>
         </form>
     );
