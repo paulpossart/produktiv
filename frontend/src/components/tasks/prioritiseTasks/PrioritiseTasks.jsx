@@ -36,7 +36,7 @@ function PrioritiseTasks({
                 onClick={() => handleClick('+')}
                 className={styles.btn3}
             >
-                <img style={{ bottom: '20%' }} src={priorityUpIcon} alt='' />
+                <img style={{ bottom: '10%' }} src={priorityUpIcon} alt='' />
             </button>
 
             <button
@@ -44,7 +44,7 @@ function PrioritiseTasks({
                 onClick={() => handleClick('-')}
                 className={styles.btn3}
             >
-                <img style={{ top: '20%' }} src={priorityDownIcon} alt='' />
+                <img style={{ top: '10%' }} src={priorityDownIcon} alt='' />
             </button>
         </div>
     )
