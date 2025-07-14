@@ -7,7 +7,7 @@ function NotFound() {
             <h1 id='not-found-title' className={styles.srOnly}>Page not found</h1>
 
             <div className={styles.userMsg}>
-                <p>This page does not exist.</p>
+                <p>Lost?</p>
                 <p>Click OK to return.</p>
                 <Link className={styles.btn1} to='/auth'>OK</Link>
             </div>
