@@ -56,5 +56,3 @@ Produktiv supports simple, markdown-style formatting for task content:
 
 [Figma prototype](https://www.figma.com/proto/bITCZrFdR3oE4tM2RG0X3C/productiv?node-id=0-1&t=Yr9n4aa2vl5wrUWM-1)
 
-
-Jest unit and integration tests.
