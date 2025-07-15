@@ -24,8 +24,8 @@ function FormattingInfo() {
                     <h4>Lists</h4>
                     <p>Lists will be left-indented. To make a list,
                         start a new line with:
-                        <span style={{ paddingLeft: '20px' }}>Ordered List: A number, a full-stop, and a space, followed by text.</span>
-                        <span style={{ paddingLeft: '20px' }}>Unordered List: A hyphen and a space, followed by text:</span>
+                        <span style={{ paddingLeft: '20px' }}>- Ordered List: a number, a full-stop, and a space, followed by text</span>
+                        <span style={{ paddingLeft: '20px' }}>- Unordered List: a hyphen and a space, followed by text</span>
                     </p>
 
                     <br />
