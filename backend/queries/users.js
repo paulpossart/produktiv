@@ -25,8 +25,12 @@ const createUser = async (req, res, next) => {
         throw newErr('Passwords do not match', 400, 'regUserError');
     }
 
+    const client = await pool.connect();
+
     try {
-        const checkUsername = await pool.query(
+        await client.query('BEGIN');
+
+        const checkUsername = await client.query(
             `SELECT * from produktiv.users WHERE username = $1`,
             [newUsername]
         );
@@ -40,12 +44,26 @@ const createUser = async (req, res, next) => {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
 
-        const result = await pool.query(
+        const result = await client.query(
             `INSERT INTO produktiv.users (id, username, password_hash)
 	         VALUES ($1, $2, $3) RETURNING id, username, created_at`,
             [id, newUsername, hashedPassword]
         )
 
+        // Add an example task on sign up
+        await client.query(
+            `INSERT INTO produktiv.tasks
+             (user_id, title, description, priority)
+             VALUES ($1, $2, $3, $4)`,
+            [
+                id,
+                'Example Task',
+                `# Subtitle\nFormatting examples.\nClick the edit (pencil) button to see how it works\n1. Ordered\n2. List\n \n- Unordered\n- List`,
+                0
+            ]
+        )
+
+        await client.query('COMMIT');
         const user = result.rows[0];
         const accessToken = signAccessToken({ sub: id });
         const refreshToken = signRefreshToken({ sub: id });
@@ -60,7 +78,10 @@ const createUser = async (req, res, next) => {
             }
         });
     } catch (err) {
+        await client.query('ROLLBACK');
         next(err);
+    } finally {
+        client.release();
     }
 }
 
