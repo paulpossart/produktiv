@@ -34,8 +34,7 @@ describe('signIn', () => {
                 id: 1,
                 username: 'username',
                 password_hash: 'hashed_password',
-                created_at: new Date(),
-                updated_at: new Date()
+                created_at: 'date',
             }]
         });
         bcrypt.compare.mockResolvedValue(true);
@@ -46,7 +45,10 @@ describe('signIn', () => {
         expect(res.cookie).toHaveBeenCalledTimes(2);
         expect(res.json).toHaveBeenCalledWith(
             expect.objectContaining({
-                user: expect.objectContaining({ username: 'username' })
+                user: expect.objectContaining({
+                    username: 'username',
+                    created_at: 'date'
+                })
             })
         )
     })
