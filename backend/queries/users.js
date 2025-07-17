@@ -58,7 +58,7 @@ const createUser = async (req, res, next) => {
             [
                 id,
                 'Example Task',
-                `# Subtitle\nFormatting examples.\nClick the edit (pencil) button to see how it works\n1. Ordered\n2. List\n \n- Unordered\n- List`,
+                `# Subtitle\nFormatting examples.\nClick the edit (pencil) button to see how it works\n1. Ordered\n2. List\n \n- Unordered\n- List\n\nClick the info button in the task editor for a detailed guide. `,
                 0
             ]
         )
