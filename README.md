@@ -10,6 +10,8 @@ Produktiv is a full-stack task management app that uses the PERN stack. It allow
 
 - **Auth:** JWTs with refresh/access token rotation
 
+- **Jest** for testing
+
 ## Authentication Flow
 - On login, the server returns both access and refresh tokens.
 
@@ -49,6 +51,10 @@ Produktiv supports simple, markdown-style formatting for task content:
 - **Custom animations** for settings burger and theme slider
 
 - **Rate limit:**  login/signup attempts are throttled: a 10-minute lockout after 5 failed login attempts or multiple rapid signups
+
+## Testing
+I am currently writing a lightweight suite of unit and integration tests, focusing on auth, routes, and UI interaction.
+
 
 [Visit Site](https://produktiv.netlify.app/)
 
