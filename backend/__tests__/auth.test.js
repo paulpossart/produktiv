@@ -31,9 +31,7 @@ describe('signIn', () => {
 
         pool.query.mockResolvedValue({
             rows: [{
-                id: 1,
                 username: 'username',
-                password_hash: 'hashed_password',
                 created_at: 'date',
             }]
         });
@@ -159,5 +157,19 @@ describe('verifyUser', () => {
         );
         expect(req.userId).toBe('userId')
         expect(next).toHaveBeenCalled();
+    })
+
+    it(`passes the error to next if the tokens are bad`, async () => {
+        process.env.ACCESS_TOKEN_SECRET = 'test-secret';
+        req = { cookies: { accessToken: 'bad-access-token' } };
+        jwt.verify.mockImplementation((token, secret, callback) => {
+            callback(Error('mock-error'), null);
+        });
+
+        await verifyUser(req, res, next);
+
+        expect(next).toHaveBeenCalledWith(expect.objectContaining({
+            message: 'Invalid tokens'
+        }));
     })
 })
