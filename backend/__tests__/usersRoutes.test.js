@@ -9,44 +9,6 @@ jest.mock('../utils/helpers');
 jest.mock('bcrypt');
 jest.mock('jsonwebtoken');
 
-//================================================================================
-// AUTH ROUTES
-//================================================================================
-
-describe('auth routes', () => {
-    it('returns 200 on sign in and returns user', async () => {
-        pool.query.mockResolvedValue({
-            rows: [{
-                id: 1,
-                username: 'username',
-                password_hash: 'hashed_password',
-                created_at: 'date',
-            }]
-        });
-        bcrypt.compare.mockResolvedValue(true);
-
-        const response = await request(app)
-            .post('/api/auth/sign-in')
-            .send({ username: 'username', password: 'password' })
-            .expect(200);
-
-        expect(response.body.user).toEqual({
-            username: 'username',
-            created_at: 'date'
-        });
-    })
-
-    it('returns 204 on sign out', async () => {
-        await request(app)
-            .post('/api/auth/sign-out')
-            .expect(204);
-    })
-})
-
-//================================================================================
-// USERS ROUTES
-//================================================================================
-
 describe('users routes', () => {
     let req;
     let res;
@@ -73,23 +35,16 @@ describe('users routes', () => {
         pool.connect = jest.fn().mockResolvedValue(mockClient);
 
         mockClient.query
-            // mock BEGIN
-            .mockResolvedValueOnce()
-            // mock username check
-            .mockResolvedValueOnce({ rows: [] })
-            //mock new user INSERT
-            .mockResolvedValueOnce({
+            .mockResolvedValueOnce() // mock BEGIN
+            .mockResolvedValueOnce({ rows: [] })  // mock username check
+            .mockResolvedValueOnce({  //mock new user INSERT
                 rows: [{
-                    id: 1,
                     username: 'username',
-                    password_hash: 'hashed_password',
                     created_at: 'date',
                 }]
             })
-            // mock task INSERT
-            .mockResolvedValueOnce({ rows: [] })
-            // mock COMMIT
-            .mockResolvedValueOnce();
+            .mockResolvedValueOnce({ rows: [] })  // mock task INSERT
+            .mockResolvedValueOnce();   // mock COMMIT
 
         const response = await request(app)
             .post('/api/users')
@@ -113,7 +68,6 @@ describe('users routes', () => {
 
         pool.query.mockResolvedValue({
             rows: [{
-                id: 1,
                 username: 'username',
                 created_at: 'date',
             }]
@@ -214,7 +168,3 @@ describe('users routes', () => {
         )
     })
 })
-
-//================================================================================
-// TASKS ROUTES
-//================================================================================
