@@ -54,6 +54,8 @@ Produktiv supports simple, markdown-style formatting for task content:
 
 ## Testing
 I am currently writing a lightweight suite of unit and integration tests, focusing on auth, routes, and UI interaction.
+The tests focus mainy on the 'happy path', except for authorisation, where both success and failure is tested.
+
 
 
 [Visit Site](https://produktiv.netlify.app/)
