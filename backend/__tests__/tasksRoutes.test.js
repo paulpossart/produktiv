@@ -1,12 +1,10 @@
 const request = require('supertest');
 const app = require('../app');
 const pool = require('../db/config');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 jest.mock('../db/config');
 jest.mock('../utils/helpers');
-jest.mock('bcrypt');
 jest.mock('jsonwebtoken');
 
 describe('tasks routes', () => {
@@ -47,7 +45,11 @@ describe('tasks routes', () => {
              VALUES ($1, $2, $3, $4)
              RETURNING title`,
             ['mock-user-id', 'mock-title', 'mock-desc', 100]
-        )
+        );
+        expect(response.body).toEqual({
+            success: true,
+            message: `Task 'mock-title' successfully created`
+        })
     })
 
     it('gets tasks', async () => {
@@ -118,7 +120,7 @@ describe('tasks routes', () => {
             .mockResolvedValueOnce({ rows: [{ priority: 200 }] })
             .mockResolvedValueOnce()
 
-        const response = await request(app)
+        await request(app)
             .patch(`/api/tasks/${taskId}`)
             .set('Cookie', ['accessToken=mock-access-token'])
             .send({
@@ -146,7 +148,7 @@ describe('tasks routes', () => {
 
         pool.query.mockResolvedValueOnce();
 
-        const response = await request(app)
+        await request(app)
             .delete(`/api/tasks/${taskId}`)
             .set('Cookie', ['accessToken=mock-access-token'])
             .expect(200);
