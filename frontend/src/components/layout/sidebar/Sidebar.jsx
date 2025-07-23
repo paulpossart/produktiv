@@ -63,7 +63,6 @@ function Sidebar() {
                         renderMainModal(<Account />);
                         setIsOpen(false)
                     }}
-                   // data-testid='account-btn'
                     style={{ overflow: 'hidden' }}
                     className={styles.btn1}
                 >
@@ -71,7 +70,6 @@ function Sidebar() {
                 </button>
 
                 <button 
-                //data-testid='sign-out-btn' 
                 style={{ whiteSpace: 'nowrap', overflow: 'hidden' }} className={styles.btn2} onClick={logOut}>Sign Out</button>
 
                 {

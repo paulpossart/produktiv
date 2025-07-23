@@ -27,9 +27,10 @@ function ChangeUsername() {
         }
 
         try {
+           
             const data = await callUpdateUsername(newUsername, password);
             renderFeedbackModal(data.message);
-            setOnClose(() => hideInnerModal)
+            setOnClose(() => hideInnerModal);
             setUser(data.user);
             setNewUsername('');
         } catch (err) {
