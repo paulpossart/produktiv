@@ -68,6 +68,7 @@ function FormattingInfo() {
 
     return (
         <button
+            data-testid='info-btn'
             onClick={handleClick}
             type='button'
             className={styles.infoBtn}

@@ -66,7 +66,7 @@ function CreateTask({ tasks, fetchTasks }) {
                 aria-describedby='title-count'
             />
 
-            <p id='title-count' aria-live='polite' className={styles.charCount}>
+            <p data-testid='title-count' id='title-count' aria-live='polite' className={styles.charCount}>
                 {title && (`${titleCharCount} ${titleCharCount === 1 ? 'character' : 'characters'} left`)}
             </p>
 
@@ -80,7 +80,7 @@ function CreateTask({ tasks, fetchTasks }) {
                 aria-describedby='description-count'
             />
 
-            <p id='description-count' aria-live='polite' className={styles.charCount}>
+            <p data-testid='description-count' id='description-count' aria-live='polite' className={styles.charCount}>
                 {description && (`${descCharCount} ${descCharCount === 1 ? 'character' : 'characters'} left`)}
             </p>
 

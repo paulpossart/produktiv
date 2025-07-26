@@ -32,6 +32,7 @@ function PrioritiseTasks({
     return (
         <div className={styles.PrioritiseTasks}>
             <button
+                data-testid='priority-up'
                 aria-label='increase-task-priority'
                 onClick={() => handleClick('+')}
                 className={styles.btn3}
