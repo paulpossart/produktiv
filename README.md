@@ -21,32 +21,14 @@ Produktiv is a full-stack task management app that uses the PERN stack. It allow
 
 - Backend verifies tokens before sensitive actions.
 
-## Accessibility
-- **Semantic HTML** for a logical, navigable structure
-
-- **Aria-labelling** to improve screen reader support
-
-- **Colour contrast** meets or exceeds WCAG AA standards
-
-- **Keyboard Navigation** with a custom focus mode — all modals and menus are accessible via keyboard and close on Escape
-
-## Formatting
-Produktiv supports simple, markdown-style formatting for task content:
-- **Subtitle** hashtag, space, text for subtitles: `# Subtitle`
-
-- **Ordered list** number, full-stop, space, text: `1. Item one`
-
-- **Unordered list** hyphen, space, text: `- My list item`
-
-- **Line break** press Enter twice to insert a line break
-
-
 ## Features
+- **Accessibility** through use of semantic HTML, aria labels, colour contrast that meets or exceeds WCAG AA standards, and keyboard navigation support: all menus and modals close on Escape, and all interactive elements have a custom tab-focus mode. 
+
+- **Format tasks** Produktiv supports simple, markdown-style formatting for task content, with subtitles, ordered and unordered lists, and line breaks. An example task is provided on sign up.
+
 - **Prioritise tasks** rather than relying on a drag-and-drop library, I implemented custom logic to reorder tasks manually. When a task is moved, the server sets its new priority to the midpoint between the two adjacent tasks’ priorities. To prevent priority numbers from becoming too large or imprecise over time, all task priorities are normalized on fetch using a row-based recalculation.
 
 - **Light/dark themes** toggled via Context API and saved in session (not local storage, to avoid browser clutter)
-
-- **Clean interface** using modals, managed via Context API for key actions
 
 - **Custom animations** for settings burger and theme slider
 
@@ -59,6 +41,101 @@ The tests focus mainy on the 'happy path', except for authorisation, where both 
 
 Backend tests are in the `__tests__` folder, frontend tests are located next to the component they are testing.
 
+## Installation
+### Prerequisites:
+- Node.js and npm ([download here](https://nodejs.org/))
+- PostgreSQL ([download here](https://www.postgresql.org/download/))
+
+### Setup
+1. Clone the repo
+
+```bash
+git clone https://github.com/paulpossart/produktiv.git
+
+cd produktiv
+```
+
+2. Install Dependencies
+
+```bash
+cd backend
+
+npm install
+
+cd ../frontend
+
+npm install
+```
+3. Set Up the Database
+
+- Install PostgreSQL
+
+- Open a terminal and run `psql -U postgres` to open the PostgreSQL CLI as the default superuser 'postgres'
+
+- Then run the following:
+
+```bash
+CREATE DATABASE produktiv_db;
+
+\c produktiv_db
+
+CREATE SCHEMA produktiv;
+
+CREATE TABLE produktiv.users(
+id UUID PRIMARY KEY,
+username VARCHAR(30) UNIQUE,
+password_hash TEXT,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE produktiv.tasks (
+id SERIAL PRIMARY KEY,
+user_id UUID NOT NULL REFERENCES produktiv.users(id) ON DELETE CASCADE,
+title VARCHAR(500),
+priority INTEGER,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+```
+
+4. Create a `.env` File in `/backend`, and add:
+
+```bash
+PORT=3000
+ALLOWED_URL=http://localhost:5173
+
+DB_URL=postgres://postgres:your_password@localhost:5432/produktiv_db
+
+ACCESS_TOKEN_SECRET=token_secret
+REFRESH_TOKEN_SECRET=refresh_secret
+
+NODE_ENV=development
+
+```
+
+5. Run Project Locally
+- Terminal 1:
+```bash
+cd backend
+npm run dev
+```
+
+- Terminal 2:
+```bash
+cd frontend
+npm run dev
+```
+
+6. Run Tests
+```bash
+cd backend
+npm test
+
+cd frontend
+npm test
+```
 
 
 [Visit Site](https://produktiv.netlify.app/)
