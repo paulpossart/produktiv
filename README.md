@@ -38,7 +38,7 @@ Produktiv is a full-stack task management app that uses the PERN stack. It allow
 
 - **Custom animations:** for settings burger and theme slider.
 
-- **Rate limit:**  login/signup attempts are throttled: a 10-minute lockout after 5 failed login attempts or multiple rapid signups.
+- **Rate limit:**  login/signup attempts are throttled: a 10-minute lockout after 10 failed login attempts or multiple rapid signups.
 
 ## Testing
 This project features a suite of unit and integration tests, focusing on auth, routes, and UI interaction.  
