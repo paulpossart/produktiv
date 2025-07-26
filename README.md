@@ -47,7 +47,7 @@ Backend tests are in the `__tests__` folder, frontend tests are located next to 
 - PostgreSQL ([download here](https://www.postgresql.org/download/))
 
 ### Setup
-1. Clone the repo
+#### 1. Clone the repo
 
 ```bash
 git clone https://github.com/paulpossart/produktiv.git
@@ -55,7 +55,7 @@ git clone https://github.com/paulpossart/produktiv.git
 cd produktiv
 ```
 
-2. Install Dependencies
+#### 2. Install Dependencies
 
 ```bash
 cd backend
@@ -66,7 +66,7 @@ cd ../frontend
 
 npm install
 ```
-3. Set Up the Database
+#### 3. Set Up the Database
 
 - Install PostgreSQL
 
@@ -100,7 +100,7 @@ updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 ```
 
-4. Create a `.env` File in `/backend`, and add:
+#### 4. Create a `.env` File in `/backend`, and add:
 
 ```bash
 PORT=3000
@@ -115,7 +115,7 @@ NODE_ENV=development
 
 ```
 
-5. Run Project Locally
+#### 5. Run Project Locally
 - Terminal 1:
 ```bash
 cd backend
@@ -128,7 +128,7 @@ cd frontend
 npm run dev
 ```
 
-6. Run Tests
+#### 6. Run Tests
 ```bash
 cd backend
 npm test
