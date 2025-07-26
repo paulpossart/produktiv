@@ -53,8 +53,11 @@ Produktiv supports simple, markdown-style formatting for task content:
 - **Rate limit:**  login/signup attempts are throttled: a 10-minute lockout after 5 failed login attempts or multiple rapid signups
 
 ## Testing
-I am currently writing a lightweight suite of unit and integration tests, focusing on auth, routes, and UI interaction.
+This project features a suite of unit and integration tests, focusing on auth, routes, and UI interaction.
+
 The tests focus mainy on the 'happy path', except for authorisation, where both success and failure is tested.
+
+Backend tests are in the `__tests__` folder, frontend tests are located next to the component they are tesing.
 
 
 
