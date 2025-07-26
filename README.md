@@ -122,13 +122,13 @@ NODE_ENV=development
 ```
 
 #### 5. Run Project Locally
-- Terminal 1:
+Terminal 1:
 ```bash
 cd backend
 npm run dev
 ```
 
-- Terminal 2:
+Terminal 2:
 ```bash
 cd frontend
 npm run dev
