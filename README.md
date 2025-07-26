@@ -57,7 +57,7 @@ This project features a suite of unit and integration tests, focusing on auth, r
 
 The tests focus mainy on the 'happy path', except for authorisation, where both success and failure is tested.
 
-Backend tests are in the `__tests__` folder, frontend tests are located next to the component they are tesing.
+Backend tests are in the `__tests__` folder, frontend tests are located next to the component they are testing.
 
 
 
