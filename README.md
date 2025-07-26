@@ -22,15 +22,15 @@ Produktiv is a full-stack task management app that uses the PERN stack. It allow
 - Backend verifies tokens before sensitive actions.
 
 ## Features
-- **Accessibility** through use of semantic HTML, aria labels, colour contrast that meets or exceeds WCAG AA standards, and keyboard navigation support: all menus and modals close on Escape, and all interactive elements have a custom tab-focus mode. 
+- **Accessibility:** semantic HTML, aria labels, colour contrast that meets or exceeds WCAG AA standards, and keyboard navigation support - all menus and modals close on Escape, and all interactive elements have a custom tab-focus mode. 
 
-- **Format tasks** Produktiv supports simple, markdown-style formatting for task content, with subtitles, ordered and unordered lists, and line breaks. An example task is provided on sign up.
+- **Format tasks:** Produktiv supports simple, markdown-style formatting for task content, with subtitles, ordered and unordered lists, and line breaks. An example task is provided on sign up.
 
-- **Prioritise tasks** rather than relying on a drag-and-drop library, I implemented custom logic to reorder tasks manually. When a task is moved, the server sets its new priority to the midpoint between the two adjacent tasks’ priorities. To prevent priority numbers from becoming too large or imprecise over time, all task priorities are normalized on fetch using a row-based recalculation.
+- **Prioritise tasks:** rather than relying on a drag-and-drop library, I implemented custom logic to reorder tasks manually. When a task is moved, the server sets its new priority to the midpoint between the two adjacent tasks’ priorities. To prevent priority numbers from becoming too large or imprecise over time, all task priorities are normalized on fetch using a row-based recalculation.
 
-- **Light/dark themes** toggled via Context API and saved in session (not local storage, to avoid browser clutter)
+- **Light/dark themes:** toggled via Context API and saved in session (not local storage, to avoid browser clutter)
 
-- **Custom animations** for settings burger and theme slider
+- **Custom animations:** for settings burger and theme slider
 
 - **Rate limit:**  login/signup attempts are throttled: a 10-minute lockout after 5 failed login attempts or multiple rapid signups
 
@@ -101,7 +101,7 @@ updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 ```
 
-#### 4. Create a `.env` File in `/backend`, and add:
+#### 4. Create a `.env` File in the `backend` folder, and add:
 
 ```bash
 PORT=3000
