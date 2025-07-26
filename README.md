@@ -1,6 +1,12 @@
 # produktiv
 Produktiv is a full-stack task management app that uses the PERN stack. It allows users to perform CRUD actions on the tasks and users tables of the database through a RESTful API with secure authentication.
 
+[Visit Site](https://produktiv.netlify.app/)
+
+[Figma](https://www.figma.com/design/bITCZrFdR3oE4tM2RG0X3C/productiv?node-id=0-1&t=Yr9n4aa2vl5wrUWM-1)
+
+[Figma prototype](https://www.figma.com/proto/bITCZrFdR3oE4tM2RG0X3C/productiv?node-id=0-1&t=Yr9n4aa2vl5wrUWM-1)
+
 ## Tech Stack
 - **Frontend:** React, React Context API, React Router, SCSS
 
@@ -137,10 +143,3 @@ npm test
 cd frontend
 npm test
 ```
-
-
-[Visit Site](https://produktiv.netlify.app/)
-
-[Figma](https://www.figma.com/design/bITCZrFdR3oE4tM2RG0X3C/productiv?node-id=0-1&t=Yr9n4aa2vl5wrUWM-1)
-
-[Figma prototype](https://www.figma.com/proto/bITCZrFdR3oE4tM2RG0X3C/productiv?node-id=0-1&t=Yr9n4aa2vl5wrUWM-1)
