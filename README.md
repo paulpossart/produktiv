@@ -41,10 +41,8 @@ Produktiv is a full-stack task management app that uses the PERN stack. It allow
 - **Rate limit:**  login/signup attempts are throttled: a 10-minute lockout after 5 failed login attempts or multiple rapid signups
 
 ## Testing
-This project features a suite of unit and integration tests, focusing on auth, routes, and UI interaction.
-
-The tests focus mainy on the 'happy path', except for authorisation, where both success and failure is tested.
-
+This project features a suite of unit and integration tests, focusing on auth, routes, and UI interaction.  
+The tests focus mainy on the 'happy path', except for authorisation, where both success and failure is tested.  
 Backend tests are in the `__tests__` folder, frontend tests are located next to the component they are testing.
 
 ## Installation
@@ -53,7 +51,7 @@ Backend tests are in the `__tests__` folder, frontend tests are located next to 
 - PostgreSQL ([download here](https://www.postgresql.org/download/))
 
 ### Setup
-#### 1. Clone the repo
+#### 1. Clone the repository
 
 ```bash
 git clone https://github.com/paulpossart/produktiv.git
@@ -78,7 +76,7 @@ npm install
 
 - Open a terminal and run `psql -U postgres` to open the PostgreSQL CLI as the default superuser 'postgres'
 
-- Then run the following:
+- Then enter the following:
 
 ```bash
 CREATE DATABASE produktiv_db;
@@ -108,6 +106,7 @@ updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ```
 
 #### 4. Create a `.env` File in the `backend` folder, and add:
+!! Don't forget to replace 'your_password' with the password you used when setting up PostgreSQL!
 
 ```bash
 PORT=3000
