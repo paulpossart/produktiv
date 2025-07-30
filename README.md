@@ -72,11 +72,14 @@ npm install
 ```
 #### 3. Set Up the Database
 
-- Install PostgreSQL
+Install PostgreSQL
 
-- Open a terminal and run `psql -U postgres` to open the PostgreSQL CLI as the default superuser 'postgres'
+Open a terminal and run `psql -U postgres` to open the PostgreSQL CLI as the default superuser 'postgres'
+> If the `psql` command is not recognised, enter the full path, eg (Windows):
+>
+> `"C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres`
 
-- Then enter the following:
+Then enter the following:
 
 ```bash
 CREATE DATABASE produktiv_db;
