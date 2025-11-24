@@ -10,7 +10,7 @@ function AuthPage() {
     const [view, setView] = useState('sign-in');
     const [submitErr, setSubmitErr] = useState('');
     const [viewedDisclaimer, setViewedDisclaimer] = useState(() => {
-        return sessionStorage.getItem('disclaimer') === 'seen';
+        return localStorage.getItem('disclaimer') === 'seen';
     });
 
     const handleInputChange = (inputType, setter, errSetter) => {
@@ -28,7 +28,7 @@ function AuthPage() {
                 <Disclaimer
                     onClick={() => {
                         setViewedDisclaimer(true);
-                        sessionStorage.setItem('disclaimer', 'seen')
+                        localStorage.setItem('disclaimer', 'seen')
                     }}
                 />
             }

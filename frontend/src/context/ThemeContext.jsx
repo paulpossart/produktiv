@@ -7,13 +7,13 @@ function ThemeProvider({ children }) {
     const [theme, setTheme] = useState('dark');
 
     useEffect(() => {
-        const mode = sessionStorage.getItem('theme');
+        const mode = localStorage.getItem('theme');
         if (mode) setTheme(mode);
     }, []);
 
     useEffect(() => {
         document.body.className = theme;
-        sessionStorage.setItem('theme', theme);
+        localStorage.setItem('theme', theme);
     }, [theme]);
 
     return (
