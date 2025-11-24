@@ -2,12 +2,16 @@ import { useState } from 'react';
 import { changeInput } from '../utils/helpers';
 import SignIn from './views/SignIn';
 import CreateUser from './views/CreateUser';
+import Disclaimer from './disclaimer/Disclaimer';
 import Duk from './logoAndErrMsg/Duk';
 import styles from './AuthPage.module.scss';
 
 function AuthPage() {
     const [view, setView] = useState('sign-in');
     const [submitErr, setSubmitErr] = useState('');
+    const [viewedDisclaimer, setViewedDisclaimer] = useState(() => {
+        return sessionStorage.getItem('disclaimer') === 'seen';
+    });
 
     const handleInputChange = (inputType, setter, errSetter) => {
         return (e) => {
@@ -18,6 +22,17 @@ function AuthPage() {
 
     return (
         <main className={styles.AuthPage}>
+
+            {
+                !viewedDisclaimer &&
+                <Disclaimer
+                    onClick={() => {
+                        setViewedDisclaimer(true);
+                        sessionStorage.setItem('disclaimer', 'seen')
+                    }}
+                />
+            }
+
             <section aria-labelledby='auth-title'>
 
                 <header>

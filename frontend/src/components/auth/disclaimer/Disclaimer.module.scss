@@ -1,0 +1,73 @@
+.DisclaimerOverlay {
+    backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    inset: 0;
+    z-index: 9500;
+}
+
+.Disclaimer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9900;
+    background-color: white;
+    color: rgb(20, 20, 20);
+    padding: 1em;
+    text-align: center;
+    border-radius: 4px;
+    width: clamp(3px, 90%, 460px);
+    height: fit-content;
+    line-height: 1.5;
+
+    font: {
+        size: 1.6rem;
+        family: 'Roboto';
+        weight: 500;
+    }
+
+    & p {
+        margin-bottom: 1.6rem;
+    }
+
+    & span {
+        font-weight: 900;
+    }
+
+    @media (orientation: landscape) {
+        width: 460px;
+    }
+}
+
+.DisclaimerBtn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    color: white;
+    background-color: rgb(20, 20, 20);
+    padding: 0.75em;
+    margin: 1em 0 0;
+    width: 100%;
+    display: block;
+
+    transition:
+        background-color 0.2s linear,
+        transform 0.2s linear;
+
+    font: {
+        size: 1.6rem;
+        family: 'Roboto';
+        weight: 600;
+    }
+
+    &:hover {
+        background-color: rgba(20, 20, 20, 0.8);
+    }
+
+    &:active {
+        transform: scale(0.99);
+        background-color: rgba(20, 20, 20, 0.8);
+    }
+}
