@@ -18,7 +18,7 @@ Produktiv is a full-stack task management app that uses the PERN stack. It allow
 
 - **Tests:** Jest, Supertest, @testing-library
 
-## Authentication Flow
+## Authentication
 - On login, the server returns both access and refresh tokens.
 
 - Access tokens are used for protected API requests.
