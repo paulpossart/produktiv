@@ -64,11 +64,11 @@ cd produktiv
 ```bash
 cd backend
 
-npm install
+npm ci
 
 cd ../frontend
 
-npm install
+npm ci
 ```
 #### 3. Set Up the Database
 
